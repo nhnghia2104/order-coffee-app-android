@@ -2,6 +2,7 @@ package com.cogeek.tncoffee.ui.order;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.cogeek.tncoffee.MenuItemActivity;
 import com.cogeek.tncoffee.R;
@@ -37,6 +37,9 @@ public class OrderFragment extends Fragment {
         fakeData();
         addEvent();
         adapterCategory = new CategoryAdapter(getActivity(),R.layout.category,arrayListCategory);
+
+        View header = getLayoutInflater().inflate(R.layout.header_category_listview, null, false);
+        listViewCategory.addHeaderView(header);
         listViewCategory.setAdapter(adapterCategory);
     }
 
@@ -46,6 +49,7 @@ public class OrderFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                NavHostFragment.findNavController(OrderFragment.this).navigate(R.id.action_Order_to_MenuItem);
                 startActivity(new Intent(getActivity(), MenuItemActivity.class));
+                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

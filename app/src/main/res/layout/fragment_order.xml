@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#F2F2F2"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <ListView
         android:id="@+id/lvCategory"
@@ -13,5 +13,6 @@
         android:divider="#00000000"
         android:scrollbars="none"
         android:dividerHeight="10dp"
-        android:background="#F2F2F2" />
+        android:background="#F2F2F2"
+        />
 </LinearLayout>
