@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.auth;
+package com.cogeek.tncoffee.ui.auth;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.cogeek.tncoffee.LaunchActivity;
 import com.cogeek.tncoffee.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;

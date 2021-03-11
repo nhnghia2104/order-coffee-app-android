@@ -5,23 +5,23 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:paddingLeft="@dimen/fragment_horizontal_margin"
     android:paddingTop="@dimen/fragment_vertical_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
     android:paddingBottom="@dimen/fragment_vertical_margin"
-    tools:context=".auth.LoginFragment">
+    tools:context=".ui.auth.LoginFragment">
 
     <Button
         android:id="@+id/btnLoginGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login With Google"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="358dp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Login With Google"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="358dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

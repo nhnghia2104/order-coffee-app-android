@@ -9,15 +9,42 @@
         android:id="@+id/navigation_home"
         android:name="com.cogeek.tncoffee.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="Home" />
+        android:label="Trang chính" />
     <fragment
         android:id="@+id/navigation_order"
         android:name="com.cogeek.tncoffee.ui.order.OrderFragment"
         tools:layout="@layout/fragment_order"
-        android:label="Order" />
+        android:label="Đặt hàng">
+        <action android:id="@+id/action_Order_to_MenuItem"
+            app:destination="@id/navigation_menu_item"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_store"
+        android:name="com.cogeek.tncoffee.ui.store.StoreFragment"
+        android:label="Cửa hàng" />
+
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.cogeek.tncoffee.ui.account.AccountFragment"
         tools:layout="@layout/fragment_account"
-        android:label="Client" />
+        android:label="Khác" />
+    <fragment
+        android:id="@+id/navigation_menu_item"
+        android:name="com.cogeek.tncoffee.ui.order.MenuItemFragment"
+        android:label="MenuItemFragment" >
+        <action android:id="@+id/action_MenuItem_to_Order"
+            app:destination="@id/navigation_order"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
 </navigation>
