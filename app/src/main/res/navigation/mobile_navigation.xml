@@ -9,12 +9,12 @@
         android:id="@+id/navigation_home"
         android:name="com.cogeek.tncoffee.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="Trang chính" />
+        android:label="Trang chủ" />
     <fragment
         android:id="@+id/navigation_order"
         android:name="com.cogeek.tncoffee.ui.order.OrderFragment"
         tools:layout="@layout/fragment_order"
-        android:label="Đặt hàng">
+        android:label="Đặt món">
         <action android:id="@+id/action_Order_to_MenuItem"
             app:destination="@id/navigation_menu_item"
             app:enterAnim="@anim/slide_in_right"

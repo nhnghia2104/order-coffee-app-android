@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="zcafe_orange">#F4792A</color>
+    <color name="zcafe_orange_65">#f69355</color>
+    <color name="zcafe_black">#323232</color>
+    <color name="zcafe_black_80">#4E4E50</color>
+    <color name="zcafe_light">#F5F5F5</color>
+    <color name="gray">#828282</color>
+    <color name="colorIconInActive">#4E4E50</color>
 </resources>

@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Trang chính" />
+        android:icon="@drawable/z_selector"
+        android:title="Trang Chủ" />
 
     <item
         android:id="@+id/navigation_order"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Đặt hàng" />
+        android:icon="@drawable/coffee_selector"
+        android:title="Đặt Món" />
     <item
         android:id="@id/navigation_store"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Cửa hàng" />
+        android:icon="@drawable/store_selector"
+        android:title="Cửa Hàng" />
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/menu_selector"
         android:title="Khác"/>
 
 </menu>

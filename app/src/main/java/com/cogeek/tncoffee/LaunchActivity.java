@@ -35,6 +35,7 @@ public class LaunchActivity extends AppCompatActivity implements LoginFragment.L
 
     private void onLoginCompleted() {
         startActivity(new Intent(this, MainActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 

@@ -6,57 +6,105 @@
     android:layout_height="match_parent"
     android:background="#F2F2F2F2"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:background="@drawable/shape">
+        android:background="@drawable/background_coffee_corner_border"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="246/5, Kp2, Thành phố Biên Hòa, Đồng Nai"
+            android:textColor="#ffffff"
+            app:layout_constraintEnd_toStartOf="@+id/btnChangeAddress"
+            app:layout_constraintStart_toStartOf="@+id/txtAddressTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddressTitle" />
+
+        <TextView
+            android:id="@+id/txtAddressTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.15"
+            android:text="Tại Z!Cafe"
+            android:textAllCaps="true"
+            android:textColor="@color/zcafe_light"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/tabOrder"
+            app:layout_constraintTop_toBottomOf="@+id/tabOrder" />
+
+        <android.widget.Button
+            android:id="@+id/btnChangeAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/button_outline_light"
+            android:text="Thay đổi"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtAddress"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabOrder"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:background="#00FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="#FFFFFF"
+            app:tabSelectedTextColor="#FFFFFF"
+            app:tabTextColor="#CBFFFFFF">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Monday" />
+                android:text="Giao tận nơi" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tuesday" />
+                android:text="Tự đến lấy" />
 
         </com.google.android.material.tabs.TabLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <SearchView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:background="@drawable/shape">
 
     </SearchView>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vCurrentOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/shape">
 
@@ -66,9 +114,10 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:src="@drawable/ic_recent_01"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:tint="#3F51B5" />
 
             <TextView
                 android:id="@+id/textView"
@@ -83,10 +132,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vFavorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@drawable/shape">
 
@@ -96,9 +147,10 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:src="@drawable/ic_z_favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:tint="@color/zcafe_orange" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -114,5 +166,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
 
 </LinearLayout>
