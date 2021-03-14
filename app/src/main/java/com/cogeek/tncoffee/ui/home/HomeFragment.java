@@ -25,6 +25,8 @@ import com.cogeek.tncoffee.models.SliderItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class HomeFragment extends Fragment {
     private ListView listView;
     private NotificationAdapter adapter;
@@ -32,6 +34,8 @@ public class HomeFragment extends Fragment {
     private List<SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     private Handler slideHandler;
+    private CircleIndicator3 indicator;
+    private View header;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -45,20 +49,27 @@ public class HomeFragment extends Fragment {
         fakeData();
         listView = view.findViewById(R.id.lvNotification);
         adapter = new NotificationAdapter(getActivity(), R.layout.notification,arrayList);
-        View header = getLayoutInflater().inflate(R.layout.header_home_listview, null, false);
+        this.header = getLayoutInflater().inflate(R.layout.header_home_listview, null, false);
         listView.addHeaderView(header);
         listView.setAdapter(adapter);
 
+        setUpSlider();
+    }
+
+    private void setUpSlider() {
         viewPager2 = header.findViewById(R.id.viewPagerInageSlider);
+        indicator = header.findViewById(R.id.indicator);
+
+        // fake data
         sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItem(R.drawable.image_1));
+        sliderItems.add(new SliderItem(R.drawable.image_6));
         sliderItems.add(new SliderItem(R.drawable.image_2));
         sliderItems.add(new SliderItem(R.drawable.image_3));
         sliderItems.add(new SliderItem(R.drawable.image_4));
         sliderItems.add(new SliderItem(R.drawable.image_5));
 
-        viewPager2.setAdapter(new SliderAdapter(sliderItems,viewPager2));
-
+        SliderAdapter sliderAdapter = new SliderAdapter(sliderItems,viewPager2);
+        viewPager2.setAdapter(sliderAdapter);
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(3);
@@ -84,9 +95,9 @@ public class HomeFragment extends Fragment {
                 slideHandler.postDelayed(sliderRunnable,4000);
             }
         });
-    }
 
-    private void setUpSlider() {
+        indicator.setViewPager(viewPager2);
+        sliderAdapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 
     }
 
