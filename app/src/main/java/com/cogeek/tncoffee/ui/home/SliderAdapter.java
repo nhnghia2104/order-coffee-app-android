@@ -12,8 +12,6 @@ import com.cogeek.tncoffee.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
     private String[] imageUrls;
     ViewPager2 viewPager2;
@@ -28,7 +26,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     public SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new SliderViewHolder(
                 LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.slide_ads_container,
+                        R.layout.slide_item_container,
                         parent,
                         false
                 )

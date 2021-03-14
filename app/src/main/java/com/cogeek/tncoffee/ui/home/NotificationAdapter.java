@@ -6,12 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Notification;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NotificationAdapter extends ArrayAdapter<Notification> {
@@ -31,6 +37,20 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         LayoutInflater inflater = this.context.getLayoutInflater();
         View row = inflater.inflate(this.resource,null);
 
+        TextView txtTitle = row.findViewById(R.id.txtTitle);
+        TextView txtTime = row.findViewById(R.id.txtTime);
+        RoundedImageView imageView = row.findViewById(R.id.img);
+
+        String dateAsText = new SimpleDateFormat("dd/MM/yyyy HH:mm")
+                .format(new Date(objects.get(position).getiTime() * 1000L));
+
+        txtTime.setText(dateAsText);
+
+        Picasso.get()
+                .load("https://firebasestorage.googleapis.com/v0/b/coffee-74fba.appspot.com/o/image_5.jpg?alt=media&token=0e201ce1-a251-45ca-88e6-8eb1ae1ee3e7")
+                .fit()
+                .centerCrop()
+                .into(imageView);
         return row;
     }
 }

@@ -121,5 +121,7 @@ public class HomeFragment extends Fragment {
     private void fakeData() {
         arrayList = new ArrayList<Notification>();
         arrayList.add(new Notification("non", "", "", (int) (new Date().getTime() / 1000)));
+        arrayList.add(new Notification("non", "", "", (int) (new Date().getTime() / 1000)));
+        arrayList.add(new Notification("non", "", "", (int) (new Date().getTime() / 1000)));
     }
 }
