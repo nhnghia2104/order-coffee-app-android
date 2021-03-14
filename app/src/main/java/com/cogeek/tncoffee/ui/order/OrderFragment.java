@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,9 +17,12 @@ import androidx.fragment.app.Fragment;
 
 import com.cogeek.tncoffee.MenuItemActivity;
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.SearchItemActivity;
 import com.cogeek.tncoffee.models.Category;
 
 import java.util.ArrayList;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class OrderFragment extends Fragment {
     private ListView listViewCategory;
@@ -25,6 +30,7 @@ public class OrderFragment extends Fragment {
     private ArrayList<Category> arrayListCategory;
     private View view;
     private View header;
+    private SearchView searchView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
@@ -49,6 +55,9 @@ public class OrderFragment extends Fragment {
         this.header = getLayoutInflater().inflate(R.layout.header_category_listview, null, false);
         listViewCategory.addHeaderView(header);
         listViewCategory.setAdapter(adapterCategory);
+
+        this.searchView = header.findViewById(R.id.searchView);
+
     }
 
 
@@ -66,6 +75,20 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.i("click", "ngon click Curretnt Order rồi");
+            }
+        });
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.clearFocus();
+                startActivity(new Intent(getActivity(), SearchItemActivity.class));
+            }
+        });
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchItemActivity.class));
             }
         });
     }

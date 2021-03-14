@@ -12,6 +12,7 @@
     <color name="zcafe_black">#323232</color>
     <color name="zcafe_black_80">#4E4E50</color>
     <color name="zcafe_light">#F5F5F5</color>
+    <color name="coffee">#967259</color>
     <color name="gray">#828282</color>
     <color name="colorIconInActive">#4E4E50</color>
 </resources>

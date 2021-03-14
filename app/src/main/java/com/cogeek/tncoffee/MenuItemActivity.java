@@ -12,18 +12,12 @@ public class MenuItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_menu_item);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Menu");
 
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        //Execute your code here
-        Log.i("ờ","ăn c");
     }
 
     @Override

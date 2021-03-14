@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_weight="1"
+    android:background="@drawable/background_coffee_corner_border"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp"
+    android:paddingTop="10dp"
+    >
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="246/5, Kp2, Thành phố Biên Hòa, Đồng Nai"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toStartOf="@+id/btnChangeAddress"
+        app:layout_constraintStart_toStartOf="@+id/txtAddressTitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddressTitle" />
+
+    <TextView
+        android:id="@+id/txtAddressTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="0.15"
+        android:text="Tại Z!Cafe"
+        android:textAllCaps="true"
+        android:textColor="@color/zcafe_light"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/tabOptions"
+        app:layout_constraintTop_toBottomOf="@+id/tabOptions" />
+
+    <android.widget.Button
+        android:id="@+id/btnChangeAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="@drawable/button_outline_light"
+        android:text="Thay đổi"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtAddress"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabOptions"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="#FFFFFF"
+        app:tabSelectedTextColor="#FFFFFF"
+        app:tabTextColor="#CBFFFFFF">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giao tận nơi" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabPickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tự đến lấy" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

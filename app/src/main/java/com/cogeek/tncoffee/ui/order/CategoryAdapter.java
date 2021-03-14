@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.cogeek.tncoffee.models.Category;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -46,8 +44,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         View row = inflater.inflate(this.resource,null);
 
         // Find view by Id
-        TextView txtTitle = (TextView) row.findViewById(R.id.txtCategoryTitle);
-        TextView txtDes = (TextView) row.findViewById(R.id.txtCategoryDescription);
+        TextView txtTitle = (TextView) row.findViewById(R.id.txtItemName);
+        TextView txtDes = (TextView) row.findViewById(R.id.txtItemDescription);
         ivResult = row.findViewById(R.id.imgCategory);
 
         // Get object from list

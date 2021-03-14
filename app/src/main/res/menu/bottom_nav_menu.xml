@@ -14,7 +14,7 @@
         android:icon="@drawable/store_selector"
         android:title="Cửa Hàng" />
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/navigation_person"
         android:icon="@drawable/menu_selector"
         android:title="Khác"/>
 

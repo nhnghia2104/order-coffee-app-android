@@ -22,7 +22,7 @@
         >
 
         <TextView
-            android:id="@+id/txtCategoryTitle"
+            android:id="@+id/txtItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -30,7 +30,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/txtCategoryDescription"
+            android:id="@+id/txtItemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
         />
