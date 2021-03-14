@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Category;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,6 +58,13 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 
 //        LoadImage loadImage = new LoadImage(ivResult);
 //        loadImage.execute(category.getImageUrl());
+
+        Picasso.get()
+                .load("https://firebasestorage.googleapis.com/v0/b/coffee-74fba.appspot.com/o/cogeek.png?alt=media&token=dd115330-4cf5-44f0-808d-766b1d886fd6")
+                .fit()
+                .centerCrop()
+                .error(R.drawable.image_1)
+                .into(ivResult);
 
         return row;
     }

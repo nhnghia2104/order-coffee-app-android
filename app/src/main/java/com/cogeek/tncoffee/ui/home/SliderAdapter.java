@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.SliderItem;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class SliderAdapter  extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
-    private List<SliderItem> sliderItemList;
+public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
+    private String[] imageUrls;
     ViewPager2 viewPager2;
 
-    public SliderAdapter(List<SliderItem> sliderItemList, ViewPager2 viewPager2) {
-        this.sliderItemList = sliderItemList;
+    public SliderAdapter(String[] imageUrls, ViewPager2 viewPager2) {
+        this.imageUrls = imageUrls;
         this.viewPager2 = viewPager2;
     }
 
@@ -37,7 +37,7 @@ public class SliderAdapter  extends RecyclerView.Adapter<SliderAdapter.SliderVie
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
-        holder.setImage(sliderItemList.get(position));
+        holder.setImage(imageUrls[position]);
 //        if (position == sliderItemList.size() - 2) {
 //            viewPager2.post(runnable);
 //        }
@@ -45,7 +45,7 @@ public class SliderAdapter  extends RecyclerView.Adapter<SliderAdapter.SliderVie
 
     @Override
     public int getItemCount() {
-        return sliderItemList.size();
+        return imageUrls.length;
     }
 
     class SliderViewHolder extends RecyclerView.ViewHolder {
@@ -55,11 +55,18 @@ public class SliderAdapter  extends RecyclerView.Adapter<SliderAdapter.SliderVie
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
         }
-        void setImage(SliderItem sliderItem){
-            imageView.setImageResource(sliderItem.getImage());
+
+        void setImage(String url) {
+            Picasso.get()
+                    .load(url)
+                    .fit()
+                    .centerCrop()
+                    .into(imageView);
+//            imageView.setImageBitmap(sliderItem.getBitmap());
         }
     }
-//
+
+    //
 //    private Runnable runnable = new Runnable() {
 //        @Override
 //        public void run() {
