@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingTop="20dp"
-    android:paddingRight="20dp">
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp">
 
     <fragment
         android:id="@+id/address_fragment"

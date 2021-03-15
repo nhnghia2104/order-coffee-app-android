@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.cogeek.tncoffee.utils.SharedHelper;

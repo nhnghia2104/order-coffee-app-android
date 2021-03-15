@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Notification;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,15 +29,16 @@ public class HomeFragment extends Fragment {
     private ListView listView;
     private NotificationAdapter adapter;
     private ArrayList<Notification> arrayList;
-//    private List<SliderItem> sliderItems;
+    //    private List<SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     private Handler slideHandler;
     private CircleIndicator3 indicator;
     private View header;
+
     String[] imageUrls = new String[]{
-            "https://firebasestorage.googleapis.com/v0/b/coffee-74fba.appspot.com/o/image_11.jpg?alt=media&token=bfc136f2-645a-4e58-8eda-6050426ce0d1",
-            "https://firebasestorage.googleapis.com/v0/b/coffee-74fba.appspot.com/o/image_5.jpg?alt=media&token=0e201ce1-a251-45ca-88e6-8eb1ae1ee3e7",
-            "https://firebasestorage.googleapis.com/v0/b/coffee-74fba.appspot.com/o/image_6.jpg?alt=media&token=f02f8999-dc4d-4b4b-bdac-e8fd8643f132"
+            "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
+            "https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.0-9/118649170_3715031765191045_3492615898358150308_o.jpg?_nc_cat=104&ccb=1-3&_nc_sid=730e14&_nc_ohc=lVA5xKfWiG0AX88fv2g&_nc_ht=scontent.fsgn2-5.fna&oh=10fed9463b84ba911499801a2ef5fe6c&oe=6073BFB4",
+            "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/147126357_4170418296319054_6493367843296217162_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=zoKybtgQOVIAX8ipMJq&_nc_ht=scontent.fsgn2-3.fna&oh=6513735cdfd1b28bfdc7e727c89dccf4&oe=6076447A"
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,12 +59,23 @@ public class HomeFragment extends Fragment {
         listView.setAdapter(adapter);
 
         setUpSlider();
+        addEvent();
+    }
+
+    private void addEvent() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                NotificationBottomSheetDialogFragment bottomSheetDialog = new NotificationBottomSheetDialogFragment();
+                bottomSheetDialog.show(getActivity().getSupportFragmentManager(),"Detail Notification");
+            }
+        });
     }
 
     private void setUpSlider() {
         viewPager2 = header.findViewById(R.id.viewPagerInageSlider);
         indicator = header.findViewById(R.id.indicator);
-
 
 
         SliderAdapter sliderAdapter = new SliderAdapter(imageUrls, viewPager2);

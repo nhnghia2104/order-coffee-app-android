@@ -60,7 +60,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 //        loadImage.execute(category.getImageUrl());
 
         Picasso.get()
-                .load("https://firebasestorage.googleapis.com/v0/b/coffee-74fba.appspot.com/o/cogeek.png?alt=media&token=dd115330-4cf5-44f0-808d-766b1d886fd6")
+                .load("https://raw.githubusercontent.com/nhnghia2104/order-coffee-app-android/master/app/src/main/res/drawable/image_1.jpg")
                 .fit()
                 .centerCrop()
                 .error(R.drawable.image_1)

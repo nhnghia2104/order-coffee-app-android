@@ -24,6 +24,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+<!--    Bottom Sheet Theme-->
+    <style name="BottomSheetTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
     <style name="Theme.TNCoffee.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.TNCoffee.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
@@ -37,7 +45,7 @@
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
-
+<!--    Bottom Navigation-->
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemTextAppearanceActive">@style/BottomNavigationViewStyle.TextAppearance</item>
     </style>
