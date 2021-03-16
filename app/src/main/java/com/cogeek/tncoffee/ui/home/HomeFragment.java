@@ -18,7 +18,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Notification;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +27,7 @@ import me.relex.circleindicator.CircleIndicator3;
 public class HomeFragment extends Fragment {
     private ListView listView;
     private NotificationAdapter adapter;
-    private ArrayList<Notification> arrayList;
+    private ArrayList<Notification> notificationList;
     //    private List<SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     private Handler slideHandler;
@@ -53,7 +52,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         fakeData();
         listView = view.findViewById(R.id.lvNotification);
-        adapter = new NotificationAdapter(getActivity(), R.layout.notification, arrayList);
+        adapter = new NotificationAdapter(getActivity(), R.layout.notification, notificationList);
         this.header = getLayoutInflater().inflate(R.layout.header_home_listview, null, false);
         listView.addHeaderView(header);
         listView.setAdapter(adapter);
@@ -68,6 +67,11 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 NotificationBottomSheetDialogFragment bottomSheetDialog = new NotificationBottomSheetDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("imageUrl", notificationList.get(position - 1 ).getImageUrl());
+                bundle.putString("title", notificationList.get(position - 1).getTitle());
+                bundle.putString("content", notificationList.get(position - 1).getBody());
+                bottomSheetDialog.setArguments(bundle);
                 bottomSheetDialog.show(getActivity().getSupportFragmentManager(),"Detail Notification");
             }
         });
@@ -133,9 +137,19 @@ public class HomeFragment extends Fragment {
     }
 
     private void fakeData() {
-        arrayList = new ArrayList<Notification>();
-        arrayList.add(new Notification("non", "", "", (int) (new Date().getTime() / 1000)));
-        arrayList.add(new Notification("non", "", "", (int) (new Date().getTime() / 1000)));
-        arrayList.add(new Notification("non", "", "", (int) (new Date().getTime() / 1000)));
+        notificationList = new ArrayList<Notification>();
+        notificationList.add(new Notification("Đang giảm giá nè",
+                "Đang giảm giá nè, mại zô mại zô giảm 40k cho đơn hàng từ 160k đâyyyyyy",
+                "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
+                (int) (new Date().getTime() / 1000)));
+
+        notificationList.add(new Notification("non",
+                "",
+                "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
+                (int) (new Date().getTime() / 1000)));
+        notificationList.add(new Notification("non",
+                "",
+                "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
+                (int) (new Date().getTime() / 1000)));
     }
 }

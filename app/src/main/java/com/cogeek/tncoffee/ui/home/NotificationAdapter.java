@@ -48,7 +48,7 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         txtTime.setText(dateAsText);
 
         Picasso.get()
-                .load("https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2")
+                .load(objects.get(position).getImageUrl())
                 .fit()
                 .centerCrop()
                 .into(imageView);
