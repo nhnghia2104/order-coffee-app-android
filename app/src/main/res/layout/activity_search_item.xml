@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="sans-serif"
         android:letterSpacing="0.1"
         android:text="Đóng"
-        android:textColor="@color/zcafe_black"
+        android:textColor="@color/zcafe_black_80"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchView" />

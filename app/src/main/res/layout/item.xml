@@ -25,7 +25,7 @@
             android:lines="2"
             android:text="Ngon vl asd abc xyz asaaaassss cc c c c c c c "
             android:textSize="13sp"
-            app:layout_constraintEnd_toStartOf="@+id/cardView"
+            app:layout_constraintEnd_toStartOf="@+id/imageNotification"
             app:layout_constraintStart_toStartOf="@+id/txtItemName"
             app:layout_constraintTop_toBottomOf="@+id/txtItemName" />
 
@@ -37,25 +37,9 @@
             android:fontFamily="sans-serif-medium"
             android:text="Cà phê Sữa"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/cardView"
+            app:layout_constraintEnd_toStartOf="@+id/imageNotification"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imgCategory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/default_image"
-                tools:srcCompat="@drawable/default_image" />
-        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/txtPriceUnit"
@@ -78,5 +62,15 @@
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/txtItemDescription"
             app:layout_constraintTop_toBottomOf="@+id/txtItemDescription" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
