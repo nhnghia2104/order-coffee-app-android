@@ -32,12 +32,6 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="DialogThemeFullScreen" parent="Theme.TNCoffee">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowIsFloating">false</item>
-    </style>
-
     <style name="Theme.TNCoffee.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.TNCoffee.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

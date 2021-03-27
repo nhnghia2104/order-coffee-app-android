@@ -1,14 +1,25 @@
 package com.cogeek.tncoffee.ui.item;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -23,18 +34,47 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_item_layout,container,false);
+        // retrieve display dimensions
+        Rect displayRectangle = new Rect();
+        Window window = getActivity().getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+
+        View view = inflater.inflate(R.layout.bottom_sheet_item_layout, container, false);
+
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+                FrameLayout bottomSheet = (FrameLayout)
+                        dialog.findViewById(R.id.design_bottom_sheet);
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+        return view;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL,R.style.BottomSheetTheme);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.BottomSheetTheme);
     }
 
-//    @Override
-//    public int getTheme() {
-//        return R.style.DialogThemeFullScreen;
+    //    @Override
+//    public Dialog onCreateDialog(final Bundle savedInstanceState) {
+//
+//        // the content
+//        final RelativeLayout root = new RelativeLayout(getActivity());
+//        root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//
+//        // creating the fullscreen dialog
+//        final Dialog dialog = new Dialog(getActivity());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(root);
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//
+//        return dialog;
 //    }
 
     @Override

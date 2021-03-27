@@ -16,7 +16,6 @@ public class MenuItemActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Menu");
-
         }
     }
 

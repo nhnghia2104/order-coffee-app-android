@@ -1,9 +1,11 @@
 package com.cogeek.tncoffee.ui.item;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -11,9 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cogeek.tncoffee.ItemActivity;
+import com.cogeek.tncoffee.MenuItemActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Item;
 import com.cogeek.tncoffee.ui.home.NotificationBottomSheetDialogFragment;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
 
@@ -45,6 +50,9 @@ public class ItemFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
                 bottomSheetDialog.show(getActivity().getSupportFragmentManager(),"Detail Item");
+//                startActivity(new Intent(getActivity(), ItemActivity.class));
+//                getActivity().overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left);
+
             }
         });
     }
@@ -59,7 +67,7 @@ public class ItemFragment extends Fragment {
 
     private void fakeData() {
         arrayList = new ArrayList<Item>();
-        arrayList.add(new Item("Ngon","non",50,"https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
+        arrayList.add(new Item("Hộp quà Tết 2021","Mang Tết về nhà là đây!!!!",50,"https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
         arrayList.add(new Item("Ngon","non",50,"https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
     }
 }

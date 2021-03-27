@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TNCoffee">
-        <activity android:name=".DetailNotificationActivity"></activity>
+        <activity
+            android:name=".ItemActivity"
+            android:theme="@style/Theme.TNCoffee.NoActionBar"></activity>
+        <activity android:name=".DetailNotificationActivity" />
         <activity
             android:name=".SearchItemActivity"
             android:theme="@style/Theme.TNCoffee.NoActionBar" />
