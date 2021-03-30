@@ -11,9 +11,9 @@
         tools:layout="@layout/fragment_home"
         android:label="Trang chủ" />
     <fragment
-        android:id="@+id/navigation_order"
-        android:name="com.cogeek.tncoffee.ui.order.OrderFragment"
-        tools:layout="@layout/fragment_order"
+        android:id="@+id/navigation_menu"
+        android:name="com.cogeek.tncoffee.ui.menu.MenuFragment"
+        tools:layout="@layout/fragment_menu"
         android:label="Đặt món">
     </fragment>
 
@@ -27,6 +27,5 @@
         android:name="com.cogeek.tncoffee.ui.person.PersonFragment"
         tools:layout="@layout/fragment_account"
         android:label="Khác" />
-
 
 </navigation>

@@ -75,6 +75,17 @@
             app:riv_corner_radius_top_left="20dp"
             app:riv_corner_radius_top_right="20dp" />
 
+        <ImageButton
+            android:id="@+id/btnImageClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

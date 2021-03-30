@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -61,22 +62,6 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.BottomSheetTheme);
     }
 
-    //    @Override
-//    public Dialog onCreateDialog(final Bundle savedInstanceState) {
-//
-//        // the content
-//        final RelativeLayout root = new RelativeLayout(getActivity());
-//        root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//
-//        // creating the fullscreen dialog
-//        final Dialog dialog = new Dialog(getActivity());
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(root);
-//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//
-//        return dialog;
-//    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -87,5 +72,13 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 .fit()
                 .centerCrop()
                 .into(imageView);
+
+        ImageView btnImageClose = view.findViewById(R.id.btnImageClose);
+        btnImageClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
     }
 }

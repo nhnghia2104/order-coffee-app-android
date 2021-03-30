@@ -44,7 +44,7 @@
         <android.widget.Button
             android:id="@+id/btnDismissNoti"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:background="@drawable/button_outline"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
@@ -56,11 +56,23 @@
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageNotification"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_corner_radius_top_left="20dp"
+        app:layout_constraintDimensionRatio="1"
         app:riv_corner_radius_top_right="20dp" />
+
+    <ImageButton
+        android:id="@+id/btnImageClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/ic_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

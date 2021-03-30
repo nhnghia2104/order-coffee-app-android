@@ -16,7 +16,7 @@
         <activity
             android:name=".SearchItemActivity"
             android:theme="@style/Theme.TNCoffee.NoActionBar" />
-        <activity android:name=".MenuItemActivity" />
+
         <activity
             android:name=".LaunchActivity"
             android:screenOrientation="portrait"

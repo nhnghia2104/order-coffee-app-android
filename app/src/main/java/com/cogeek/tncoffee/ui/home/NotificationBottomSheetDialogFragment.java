@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
@@ -28,7 +32,18 @@ public class NotificationBottomSheetDialogFragment extends BottomSheetDialogFrag
             title = arguments.getString("title");
             content = arguments.getString("content");
         }
-        return inflater.inflate(R.layout.bottom_sheet_notification_layout, container, false);
+        View view = inflater.inflate(R.layout.bottom_sheet_notification_layout, container, false);
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+                FrameLayout bottomSheet = (FrameLayout)
+                        dialog.findViewById(R.id.design_bottom_sheet);
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+        return view;
     }
 
     @Override
@@ -51,5 +66,13 @@ public class NotificationBottomSheetDialogFragment extends BottomSheetDialogFrag
                 .fit()
                 .centerCrop()
                 .into(imageView);
+
+        ImageView btnImageClose = view.findViewById(R.id.btnImageClose);
+        btnImageClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
     }
 }

@@ -6,7 +6,7 @@
         android:title="Trang Chủ" />
 
     <item
-        android:id="@+id/navigation_order"
+        android:id="@+id/navigation_menu"
         android:icon="@drawable/coffee_selector"
         android:title="Đặt Món" />
     <item
