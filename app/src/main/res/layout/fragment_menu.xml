@@ -6,12 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#F2F2F2"
     android:orientation="vertical">
-    <ImageView
-        android:id="@+id/heroImageView"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ic_launcher_background" />
+
     <ListView
         android:id="@+id/listViewItem"
         android:layout_width="match_parent"
@@ -21,15 +16,15 @@
         android:dividerHeight="10dp"
         android:background="#F2F2F2"
         />
-    <TextView
-        android:id="@+id/stickyView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#222"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:text="Heading1"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+<!--    <TextView-->
+<!--        android:id="@+id/stickyView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="#222"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:paddingLeft="10dp"-->
+<!--        android:text="Heading1"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold" />-->
 </FrameLayout>

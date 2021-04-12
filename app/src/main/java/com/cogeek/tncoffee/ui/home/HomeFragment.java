@@ -35,9 +35,9 @@ public class HomeFragment extends Fragment {
     private View header;
 
     String[] imageUrls = new String[]{
-            "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
-            "https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.0-9/118649170_3715031765191045_3492615898358150308_o.jpg?_nc_cat=104&ccb=1-3&_nc_sid=730e14&_nc_ohc=lVA5xKfWiG0AX88fv2g&_nc_ht=scontent.fsgn2-5.fna&oh=10fed9463b84ba911499801a2ef5fe6c&oe=6073BFB4",
-            "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/147126357_4170418296319054_6493367843296217162_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=zoKybtgQOVIAX8ipMJq&_nc_ht=scontent.fsgn2-3.fna&oh=6513735cdfd1b28bfdc7e727c89dccf4&oe=6076447A"
+            "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg",
+            "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg",
+            "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg"
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
