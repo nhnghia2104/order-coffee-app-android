@@ -1,22 +1,29 @@
-package com.cogeek.tncoffee.ui.account;
+package com.cogeek.tncoffee.ui.more;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import com.cogeek.tncoffee.LaunchActivity;
-import com.cogeek.tncoffee.MainActivity;
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.models.Store;
+import com.cogeek.tncoffee.ui.store.StoreAdapter;
 import com.cogeek.tncoffee.utils.SharedHelper;
 
-public class AccountFragment extends Fragment {
+import java.util.ArrayList;
+
+public class MoreFragment extends Fragment {
+
+    private ListView listView;
+    private StoreAdapter storeAdapter;
+    private ArrayList<Store> arrayList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

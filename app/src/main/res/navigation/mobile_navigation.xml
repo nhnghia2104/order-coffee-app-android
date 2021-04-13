@@ -23,8 +23,8 @@
         android:label="Cửa hàng" />
 
     <fragment
-        android:id="@+id/navigation_person"
-        android:name="com.cogeek.tncoffee.ui.person.PersonFragment"
+        android:id="@+id/navigation_more"
+        android:name="com.cogeek.tncoffee.ui.more.MoreFragment"
         tools:layout="@layout/fragment_account"
         android:label="Khác" />
 

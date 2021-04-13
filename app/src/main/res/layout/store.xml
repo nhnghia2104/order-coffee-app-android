@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txtStoreAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="Ngon vl asd abc xyz asaaaassss cc c c c c c c "
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/txtStoreName"
+            app:layout_constraintTop_toBottomOf="@+id/txtStoreName" />
+
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="Z! Cafe"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/imageStore"
+            app:layout_constraintTop_toTopOf="@id/imageStore" />
+
+        <TextView
+            android:id="@+id/txtDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Cách đây 5km"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/txtStoreAddress"
+            app:layout_constraintTop_toBottomOf="@+id/txtStoreAddress"
+            app:layout_constraintBottom_toBottomOf="@id/imageStore" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageStore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="8dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
