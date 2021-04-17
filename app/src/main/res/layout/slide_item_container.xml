@@ -7,6 +7,7 @@
     android:id="@+id/imageSlide"
     android:adjustViewBounds="true"
     app:riv_corner_radius="20dp"
+    android:src="@drawable/ic_zcafe_hint"
     >
 
 </com.makeramen.roundedimageview.RoundedImageView>

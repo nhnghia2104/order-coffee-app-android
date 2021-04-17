@@ -51,6 +51,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         txtPrice.setText(String.valueOf(item.getPrice()));
         Picasso.get()
                 .load(item.getImageUrl())
+                .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
                 .into(imageView);

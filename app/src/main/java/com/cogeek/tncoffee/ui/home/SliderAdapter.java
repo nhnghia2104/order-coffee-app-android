@@ -57,6 +57,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         void setImage(String url) {
             Picasso.get()
                     .load(url)
+                    .placeholder(R.drawable.ic_zcafe_hint)
                     .fit()
                     .centerCrop()
                     .into(imageView);

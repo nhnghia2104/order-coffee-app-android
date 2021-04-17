@@ -49,6 +49,7 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
 
         Picasso.get()
                 .load(objects.get(position).getImageUrl())
+                .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
                 .into(imageView);
