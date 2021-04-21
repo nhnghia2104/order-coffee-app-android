@@ -18,6 +18,15 @@ import java.util.List;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ViewHolder> {
 
     private List<Item> itemList;
+    private OnChildListener onChildListener;
+
+    public interface OnChildListener {
+        void onChildClick(int position);
+    }
+
+    public void setOnChildListener(OnChildListener onChildListener) {
+        this.onChildListener = onChildListener;
+    }
 
     public ChildItemAdapter(List<Item> itemList) {
         this.itemList = itemList;
@@ -26,8 +35,8 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent,false);
-        return new ChildItemAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
+        return new ChildItemAdapter.ViewHolder(v, onChildListener);
     }
 
     @Override
@@ -50,18 +59,21 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
         return itemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView txtItemName;
         private final TextView txtItemDescription;
         private final TextView txtPrice;
         private final RoundedImageView imageItem;
+        private OnChildListener onChildListener;
 
-        public ViewHolder(@NonNull View v) {
+        public ViewHolder(@NonNull View v, OnChildListener onChildClickListener) {
             super(v);
             txtItemName = v.findViewById(R.id.txtItemName);
             txtItemDescription = v.findViewById(R.id.txtItemDescription);
             txtPrice = v.findViewById(R.id.txtPrice);
             imageItem = v.findViewById(R.id.imageItem);
+            this.onChildListener = onChildClickListener;
+            v.setOnClickListener(this);
         }
 
         public TextView getTxtItemName() {
@@ -78,6 +90,13 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
 
         public RoundedImageView getImageItem() {
             return imageItem;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onChildListener != null) {
+                onChildListener.onChildClick(getAdapterPosition());
+            }
         }
     }
 }

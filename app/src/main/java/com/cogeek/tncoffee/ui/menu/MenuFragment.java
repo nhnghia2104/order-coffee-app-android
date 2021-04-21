@@ -19,6 +19,7 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
 import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.Item;
+import com.cogeek.tncoffee.ui.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.MainItemAdapter;
 
 import java.util.ArrayList;
@@ -74,6 +75,13 @@ public class MenuFragment extends Fragment {
 
         recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
         mainItemAdapter = new MainItemAdapter(categoryList);
+        mainItemAdapter.setOnItemListener(new MainItemAdapter.OnItemListener() {
+            @Override
+            public void onItemClick(int section, int row) {
+                ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+            }
+        });
         recyclerViewListItem.setLayoutManager(layoutManager);
         recyclerViewListItem.setAdapter(mainItemAdapter);
     }

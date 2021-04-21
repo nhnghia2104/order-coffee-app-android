@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="20dp"
-    android:paddingBottom="10dp"
+    android:paddingBottom="15dp"
     android:paddingRight="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

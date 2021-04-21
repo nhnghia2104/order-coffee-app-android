@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.ui.item;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,15 @@ import java.util.List;
 public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHolder> {
 
     private List<Category> categoryList;
+    private  OnItemListener onItemListener;
+
+    public interface OnItemListener {
+        void onItemClick(int section, int row);
+    };
+
+    public void setOnItemListener(OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
 
     public MainItemAdapter(List<Category> categoryList) {
         this.categoryList = categoryList;
@@ -32,14 +42,23 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Category category = categoryList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int section) {
+        Category category = categoryList.get(section);
 
         String sectionName = category.getName();
         List<Item> items = category.getItems();
 
         holder.getTxtSectionName().setText(sectionName);
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(items);
+        childItemAdapter.setOnChildListener(new ChildItemAdapter.OnChildListener() {
+            @Override
+            public void onChildClick(int row) {
+                Log.i("Ngon", "section" + section + ", row:" + row);
+                if (onItemListener != null) {
+                    onItemListener.onItemClick(section,row);
+                }
+            }
+        });
         holder.getChildRecyclerView().setAdapter(childItemAdapter);
     }
 
@@ -51,6 +70,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView txtSectionName;
         private final RecyclerView childRecyclerView;
+        private OnItemListener onItemListener;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtSectionName = itemView.findViewById(R.id.txtSectionName);
