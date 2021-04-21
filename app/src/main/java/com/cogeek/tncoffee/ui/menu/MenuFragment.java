@@ -6,31 +6,30 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
+import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.Item;
-import com.cogeek.tncoffee.ui.item.ItemAdapter;
-import com.cogeek.tncoffee.ui.item.ItemBottomSheetDialogFragment;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.cogeek.tncoffee.ui.item.MainItemAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuFragment extends Fragment {
 
-    private ListView listView;
-    private ItemAdapter itemAdapter;
-    private ArrayList<Item> arrayList;
+    private RecyclerView recyclerViewListItem;
+    private MainItemAdapter mainItemAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Category> categoryList;
     private TextView stickyView;
     private View heroImageView;
     private View stickyViewSpacer;
@@ -41,7 +40,7 @@ public class MenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
-
+        layoutManager = new LinearLayoutManager(getContext());
         return root;
     }
 
@@ -57,34 +56,41 @@ public class MenuFragment extends Fragment {
 
     private void addControl() {
         /* Initialise views */
-        listView = view.findViewById(R.id.listViewItem);
-        stickyView = view.findViewById(R.id.stickyView);
-        heroImageView = view.findViewById(R.id.heroImageView);
+//        listView = view.findViewById(R.id.listViewItem);
+//        stickyView = view.findViewById(R.id.stickyView);
+//        heroImageView = view.findViewById(R.id.heroImageView);
 //        searchView = header.findViewById(R.id.searchView);
 
         /* Init list header layout */
-        header = getLayoutInflater().inflate(R.layout.header_category_listview, null, false);
+//        header = getLayoutInflater().inflate(R.layout.header_category_listview, null, false);
 //        stickyViewSpacer = header.findViewById(R.id.stickyViewPlaceholder);
 
         /* Add list view header */
-        listView.addHeaderView(header);
+//        listView.addHeaderView(header);
 
         /* create and set adapter */
-        itemAdapter = new ItemAdapter(getActivity(), R.layout.item, arrayList);
-        listView.setAdapter(itemAdapter);
+//        itemAdapter = new ItemAdapter(getActivity(), R.layout.item, listItems);
+//        listView.setAdapter(itemAdapter);
 
+        recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
+        mainItemAdapter = new MainItemAdapter(categoryList);
+        recyclerViewListItem.setLayoutManager(layoutManager);
+        recyclerViewListItem.setAdapter(mainItemAdapter);
     }
 
 
     private void addEvent() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_Order_to_MenuItem);
                 ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
                 bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
             }
-        });
+        });*/
+
+//        recyclerViewListItem.setOnClickListener(new );
+
 //        header.findViewById(R.id.vCurrentOrder).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -139,15 +145,19 @@ public class MenuFragment extends Fragment {
     }
 
     private void fakeData() {
-        arrayList = new ArrayList<Item>();
-        arrayList.add(new Item("Hộp quà Tết 2021", "Mang Tết về nhà là đây!!!!", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
-        arrayList.add(new Item("Ngon", "non", 50, "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2"));
+        categoryList = new ArrayList<>();
+
+        List<Item> list1 = new ArrayList<>();
+        list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+
+        List<Item> list2 = new ArrayList<>();
+        list2.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list2.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+
+        categoryList.add(new Category("Trà sữa", list1));
+        categoryList.add(new Category("Cà phê", list2));
+
     }
 }

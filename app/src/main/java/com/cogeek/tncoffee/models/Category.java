@@ -1,14 +1,17 @@
 package com.cogeek.tncoffee.models;
 
+import java.util.List;
+
 public class Category {
     String name;
-    String description;
-    String imageUrl;
+    List<Item> items;
 
-    public Category(String name, String description, String imageUrl) {
+    public Category() {
+    }
+
+    public Category(String name, List<Item> items) {
         this.name = name;
-        this.description = description;
-        this.imageUrl = imageUrl;
+        this.items = items;
     }
 
     public String getName() {
@@ -19,19 +22,11 @@ public class Category {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

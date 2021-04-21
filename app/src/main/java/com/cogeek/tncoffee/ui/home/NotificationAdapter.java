@@ -42,13 +42,13 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         RoundedImageView imageView = row.findViewById(R.id.img);
 
         String dateAsText = new SimpleDateFormat("dd/MM/yyyy HH:mm")
-                .format(new Date(objects.get(position).getiTime() * 1000L));
+                .format(new Date(objects.get(position).getTime()));
 
         txtTitle.setText(objects.get(position).getTitle());
         txtTime.setText(dateAsText);
 
         Picasso.get()
-                .load(objects.get(position).getImageUrl())
+                .load(objects.get(position).getImage())
                 .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()

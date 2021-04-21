@@ -2,11 +2,13 @@ package com.cogeek.tncoffee.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,21 +20,38 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Notification;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Comment;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import me.relex.circleindicator.CircleIndicator3;
 
+import static android.content.ContentValues.TAG;
+
 public class HomeFragment extends Fragment {
+
+    private static final boolean IS_DEBUG = true;
+
     private ListView listView;
     private NotificationAdapter adapter;
-    private ArrayList<Notification> notificationList;
+    private ArrayList<Notification> notificationArrayList = new ArrayList<Notification>();;
     //    private List<SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     private Handler slideHandler;
     private CircleIndicator3 indicator;
     private View header;
+
+    private DatabaseReference databaseReference;
 
     String[] imageUrls = new String[]{
             "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg",
@@ -50,9 +69,17 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fakeData();
+
+        if (IS_DEBUG) {
+            fakeData();
+        }
+        else {
+            databaseReference = FirebaseDatabase.getInstance().getReference("notification");
+            databaseReference.addValueEventListener(notificationValueEventListner);
+        }
+
         listView = view.findViewById(R.id.lvNotification);
-        adapter = new NotificationAdapter(getActivity(), R.layout.notification, notificationList);
+        adapter = new NotificationAdapter(getActivity(), R.layout.notification, notificationArrayList);
         this.header = getLayoutInflater().inflate(R.layout.header_home_listview, null, false);
         listView.addHeaderView(header);
         listView.setAdapter(adapter);
@@ -68,11 +95,11 @@ public class HomeFragment extends Fragment {
 
                 NotificationBottomSheetDialogFragment bottomSheetDialog = new NotificationBottomSheetDialogFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("imageUrl", notificationList.get(position - 1 ).getImageUrl());
-                bundle.putString("title", notificationList.get(position - 1).getTitle());
-                bundle.putString("content", notificationList.get(position - 1).getBody());
+                bundle.putString("imageUrl", notificationArrayList.get(position - 1).getImage());
+                bundle.putString("title", notificationArrayList.get(position - 1).getTitle());
+                bundle.putString("content", notificationArrayList.get(position - 1).getContent());
                 bottomSheetDialog.setArguments(bundle);
-                bottomSheetDialog.show(getActivity().getSupportFragmentManager(),"Detail Notification");
+                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Notification");
             }
         });
     }
@@ -116,6 +143,25 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private ValueEventListener notificationValueEventListner = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            notificationArrayList.clear();
+            for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                Notification post = postSnapshot.getValue(Notification.class);
+                Log.e("Data:::::", post.getContent());
+                notificationArrayList.add(post);
+            }
+            Collections.sort(notificationArrayList, (a,b) -> Long.valueOf(b.getTime()).compareTo(a.getTime()));
+            adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
+
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
@@ -137,17 +183,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void fakeData() {
-        notificationList = new ArrayList<Notification>();
-        notificationList.add(new Notification("Đang giảm giá nè",
+//        notificationArrayList = new ArrayList<Notification>();
+        notificationArrayList.add(new Notification("Đang giảm giá nè",
                 "Đang giảm giá nè, mại zô mại zô giảm 40k cho đơn hàng từ 160k đâyyyyyy",
                 "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
                 (int) (new Date().getTime() / 1000)));
 
-        notificationList.add(new Notification("non",
+        notificationArrayList.add(new Notification("non",
                 "",
                 "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
                 (int) (new Date().getTime() / 1000)));
-        notificationList.add(new Notification("non",
+        notificationArrayList.add(new Notification("non",
                 "",
                 "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/130818260_4019742878053264_1195813771588404240_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=730e14&_nc_ohc=OBOeLzuKcWEAX8H92-M&_nc_ht=scontent.fsgn2-3.fna&oh=b940c0851975f5020882a80a17f6e059&oe=607534C2",
                 (int) (new Date().getTime() / 1000)));

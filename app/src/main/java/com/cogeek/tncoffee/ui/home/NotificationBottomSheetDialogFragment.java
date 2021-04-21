@@ -63,6 +63,7 @@ public class NotificationBottomSheetDialogFragment extends BottomSheetDialogFrag
         txtContent.setText(content);
         Picasso.get()
                 .load(imageUrl)
+                .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
                 .into(imageView);

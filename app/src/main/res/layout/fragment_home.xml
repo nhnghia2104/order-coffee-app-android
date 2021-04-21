@@ -9,6 +9,8 @@
         android:id="@+id/lvNotification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false"
         android:background="#F2F2F2"
         android:divider="#F2F2F2"
         android:dividerHeight="2dp"

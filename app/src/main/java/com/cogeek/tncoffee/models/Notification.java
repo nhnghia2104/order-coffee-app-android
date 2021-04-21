@@ -2,15 +2,18 @@ package com.cogeek.tncoffee.models;
 
 public class Notification {
     String title;
-    String body;
-    String imageUrl;
-    int iTime;
+    String content;
+    String image;
+    long time;
 
-    public Notification(String title, String body, String imageUrl, int iTime) {
+    public Notification() {
+    }
+
+    public Notification(String title, String content, String image, int time) {
         this.title = title;
-        this.body = body;
-        this.imageUrl = imageUrl;
-        this.iTime = iTime;
+        this.content = content;
+        this.image = image;
+        this.time = time;
     }
 
     public String getTitle() {
@@ -21,27 +24,27 @@ public class Notification {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public int getiTime() {
-        return iTime;
+    public long getTime() {
+        return time;
     }
 
-    public void setiTime(int iTime) {
-        this.iTime = iTime;
+    public void setTime(long time) {
+        this.time = time;
     }
 }

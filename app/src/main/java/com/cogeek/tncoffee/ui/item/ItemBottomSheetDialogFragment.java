@@ -69,6 +69,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         RoundedImageView imageView = view.findViewById(R.id.imageItem);
         Picasso.get()
                 .load(R.drawable.image_1)
+                .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
                 .into(imageView);

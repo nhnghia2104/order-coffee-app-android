@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    >
+    android:paddingBottom="10dp"
+    android:paddingRight="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             android:lines="2"
             android:text="Ngon vl asd abc xyz asaaaassss cc c c c c c c "
             android:textSize="13sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageNotification"
+            app:layout_constraintEnd_toStartOf="@+id/imageItem"
             app:layout_constraintStart_toStartOf="@+id/txtItemName"
             app:layout_constraintTop_toBottomOf="@+id/txtItemName" />
 
@@ -40,17 +41,6 @@
             app:layout_constraintEnd_toStartOf="@+id/imageNotification"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtPriceUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text=".000đ"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/txtPrice"
-            app:layout_constraintTop_toBottomOf="@+id/txtItemDescription" />
 
         <TextView
             android:id="@+id/txtPrice"
