@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,10 @@ import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.Item;
 import com.cogeek.tncoffee.ui.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.MainItemAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +42,8 @@ public class MenuFragment extends Fragment {
     private View view;
     private View header;
     private SearchView searchView;
+
+    private DatabaseReference databaseReference;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +85,14 @@ public class MenuFragment extends Fragment {
         mainItemAdapter.setOnItemListener(new MainItemAdapter.OnItemListener() {
             @Override
             public void onItemClick(int section, int row) {
+                Log.i("click item at", "section: " + section + ", row: " + row);
                 ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("name", categoryList.get(section).getItems().get(row).getName());
+                bundle.putString("description", categoryList.get(section).getItems().get(row).getDescription());
+                bundle.putInt("price", categoryList.get(section).getItems().get(row).getPrice());
+                bundle.putString("imageUrl", categoryList.get(section).getItems().get(row).getImageUrl());
+                bottomSheetDialog.setArguments(bundle);
                 bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
             }
         });
@@ -156,7 +170,7 @@ public class MenuFragment extends Fragment {
         categoryList = new ArrayList<>();
 
         List<Item> list1 = new ArrayList<>();
-        list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list1.add(new Item("Trà Sữa êi", "em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
         list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
         list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
 
@@ -168,4 +182,16 @@ public class MenuFragment extends Fragment {
         categoryList.add(new Category("Cà phê", list2));
 
     }
+
+    private ValueEventListener categoryValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 }

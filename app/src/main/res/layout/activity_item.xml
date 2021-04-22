@@ -31,19 +31,19 @@
 
                     <fragment
                         android:id="@+id/fragment_info"
-                        android:name="com.cogeek.tncoffee.ui.item.InfoItemFragment"
+                        android:name="com.cogeek.tncoffee.ui.item.ChildItemInfoFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <fragment
                         android:id="@+id/fragment_size"
-                        android:name="com.cogeek.tncoffee.ui.item.ItemSizeFragment"
+                        android:name="com.cogeek.tncoffee.ui.item.ChildItemSizeFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <fragment
                         android:id="@+id/fragment2"
-                        android:name="com.cogeek.tncoffee.ui.item.InfoItemFragment"
+                        android:name="com.cogeek.tncoffee.ui.item.ChildItemInfoFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

@@ -20,13 +20,13 @@
             android:id="@+id/txtItemDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:ellipsize="end"
             android:lines="2"
             android:text="Ngon vl asd abc xyz asaaaassss cc c c c c c c "
             android:textSize="13sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageItem"
+            app:layout_constraintEnd_toStartOf="@+id/imageItem_BottomSheet"
             app:layout_constraintStart_toStartOf="@+id/txtItemName"
             app:layout_constraintTop_toBottomOf="@+id/txtItemName" />
 
@@ -37,6 +37,7 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="Cà phê Sữa"
+            android:textColor="@color/zcafe_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/imageNotification"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,12 +50,13 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="60"
+            android:textColor="@color/zcafe_black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/txtItemDescription"
             app:layout_constraintTop_toBottomOf="@+id/txtItemDescription" />
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageItem"
+            android:id="@+id/imageItem_BottomSheet"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_zcafe_hint"

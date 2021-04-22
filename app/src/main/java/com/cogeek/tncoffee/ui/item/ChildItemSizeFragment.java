@@ -10,12 +10,7 @@ import android.view.ViewGroup;
 
 import com.cogeek.tncoffee.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ItemRequirementFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ItemRequirementFragment extends Fragment {
+public class ChildItemSizeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,12 +21,13 @@ public class ItemRequirementFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ItemRequirementFragment() {
+    public ChildItemSizeFragment() {
         // Required empty public constructor
     }
+
     // TODO: Rename and change types and number of parameters
-    public static ItemRequirementFragment newInstance(String param1, String param2) {
-        ItemRequirementFragment fragment = new ItemRequirementFragment();
+    public static ChildItemSizeFragment newInstance(String param1, String param2) {
+        ChildItemSizeFragment fragment = new ChildItemSizeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -52,6 +48,6 @@ public class ItemRequirementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_requirement, container, false);
+        return inflater.inflate(R.layout.fragment_item_size, container, false);
     }
 }

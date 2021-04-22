@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_background"
-    tools:context=".ui.item.InfoItemFragment">
+    tools:context=".ui.item.ChildItemInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,16 +13,16 @@
         android:paddingBottom="20dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageIsFavorite_BottomSheet"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/txtItemName_BottomSheet"
             app:srcCompat="@drawable/ic_z_favorite" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtItemName_BottomSheet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -34,12 +34,12 @@
             android:textColor="@color/zcafe_black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/imageIsFavorite_BottomSheet"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageItem" />
+            app:layout_constraintTop_toBottomOf="@+id/imageItem_BottomSheet" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtItemPrice_BottomSheet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -47,12 +47,12 @@
             android:textColor="@color/zcafe_black_80"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintEnd_toEndOf="@+id/txtItemName_BottomSheet"
+            app:layout_constraintStart_toStartOf="@+id/txtItemName_BottomSheet"
+            app:layout_constraintTop_toBottomOf="@+id/txtItemName_BottomSheet" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txtItemDescription_BottomSheet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -61,11 +61,11 @@
             android:textColor="@color/zcafe_black"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintStart_toStartOf="@+id/txtItemName_BottomSheet"
+            app:layout_constraintTop_toBottomOf="@+id/txtItemPrice_BottomSheet" />
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageItem"
+            android:id="@+id/imageItem_BottomSheet"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1"
@@ -76,7 +76,7 @@
             app:riv_corner_radius_top_right="20dp" />
 
         <ImageButton
-            android:id="@+id/btnImageClose"
+            android:id="@+id/btnImageClose_BottomSheet"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"

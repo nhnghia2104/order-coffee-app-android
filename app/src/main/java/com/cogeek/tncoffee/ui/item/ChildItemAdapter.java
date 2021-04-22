@@ -71,7 +71,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
             txtItemName = v.findViewById(R.id.txtItemName);
             txtItemDescription = v.findViewById(R.id.txtItemDescription);
             txtPrice = v.findViewById(R.id.txtPrice);
-            imageItem = v.findViewById(R.id.imageItem);
+            imageItem = v.findViewById(R.id.imageItem_BottomSheet);
             this.onChildListener = onChildClickListener;
             v.setOnClickListener(this);
         }

@@ -68,7 +68,7 @@ public class NotificationBottomSheetDialogFragment extends BottomSheetDialogFrag
                 .centerCrop()
                 .into(imageView);
 
-        ImageView btnImageClose = view.findViewById(R.id.btnImageClose);
+        ImageView btnImageClose = view.findViewById(R.id.btnImageClose_BottomSheet);
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

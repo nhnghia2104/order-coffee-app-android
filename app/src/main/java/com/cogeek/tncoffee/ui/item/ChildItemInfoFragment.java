@@ -10,12 +10,7 @@ import android.view.ViewGroup;
 
 import com.cogeek.tncoffee.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link InfoItemFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class InfoItemFragment extends Fragment {
+public class ChildItemInfoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,21 +21,13 @@ public class InfoItemFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public InfoItemFragment() {
+    public ChildItemInfoFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InfoItemFragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static InfoItemFragment newInstance(String param1, String param2) {
-        InfoItemFragment fragment = new InfoItemFragment();
+    public static ChildItemInfoFragment newInstance(String param1, String param2) {
+        ChildItemInfoFragment fragment = new ChildItemInfoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

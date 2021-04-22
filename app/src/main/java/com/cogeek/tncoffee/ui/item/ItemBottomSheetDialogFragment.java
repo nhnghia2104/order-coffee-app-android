@@ -1,19 +1,15 @@
 package com.cogeek.tncoffee.ui.item;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +49,15 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            imageUrl = arguments.getString("imageUrl");
+            name = arguments.getString("name");
+            description = arguments.getString("description");
+            price = arguments.getInt("price");
+        }
+
         return view;
     }
 
@@ -66,15 +71,23 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RoundedImageView imageView = view.findViewById(R.id.imageItem);
+        RoundedImageView imageView = view.findViewById(R.id.imageItem_BottomSheet);
+        TextView txtName = view.findViewById(R.id.txtItemName_BottomSheet);
+        TextView txtPrice = view.findViewById(R.id.txtItemPrice_BottomSheet);
+        TextView txtDescription = view.findViewById(R.id.txtItemDescription_BottomSheet);
+
+
+        txtName.setText(name);
+        txtPrice.setText(price + ".000đ");
+        txtDescription.setText(description);
         Picasso.get()
-                .load(R.drawable.image_1)
+                .load(imageUrl)
                 .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
                 .into(imageView);
 
-        ImageView btnImageClose = view.findViewById(R.id.btnImageClose);
+        ImageView btnImageClose = view.findViewById(R.id.btnImageClose_BottomSheet);
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

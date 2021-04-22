@@ -65,7 +65,7 @@
         app:riv_corner_radius_top_right="20dp" />
 
     <ImageButton
-        android:id="@+id/btnImageClose"
+        android:id="@+id/btnImageClose_BottomSheet"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
