@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,14 +23,21 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
-
 public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
-    String imageUrl;
-    String name;
-    int price;
-    String description;
-    boolean isFavorite;
+    private String imageUrl;
+    private String name;
+    private int price;
+    private String description;
+    private boolean isFavorite;
+    private TextView txtPriceFinal;
+    private TextView txtNameFinal;
+    private RadioGroup radioGroupItemSize;
+    private TextView txtQty;
+    private ImageView btnIncrease;
+    private ImageView btnDecrease;
+    private Button btnConfirmItem;
 
+    private int itemQty = 1;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,12 +81,19 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        txtNameFinal = view.findViewById(R.id.txtNameFinal);
+        txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
         RoundedImageView imageView = view.findViewById(R.id.imageItem_BottomSheet);
         TextView txtName = view.findViewById(R.id.txtItemName_BottomSheet);
         TextView txtPrice = view.findViewById(R.id.txtItemPrice_BottomSheet);
         TextView txtDescription = view.findViewById(R.id.txtItemDescription_BottomSheet);
-
-
+        ImageView btnImageClose = view.findViewById(R.id.btnImageClose_BottomSheet);
+        radioGroupItemSize = view.findViewById(R.id.radioGroupItemSize);
+        btnIncrease = view.findViewById(R.id.btnIncreaseQty);
+        btnDecrease = view.findViewById(R.id.btnDecreaseQty);
+        txtQty = view.findViewById(R.id.txtQuantity);
+        btnConfirmItem = view.findViewById(R.id.btnConfirmItem);
+        //==========================================================
         txtName.setText(name);
         txtPrice.setText(price + ".000đ");
         txtDescription.setText(description);
@@ -86,13 +103,48 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 .fit()
                 .centerCrop()
                 .into(imageView);
-
-        ImageView btnImageClose = view.findViewById(R.id.btnImageClose_BottomSheet);
+        txtQty.setText(String.valueOf(itemQty));
+        txtPriceFinal.setText(String.valueOf(itemQty*price) + ".000đ");
+        RadioButton btnSizeSelected = view.findViewById(radioGroupItemSize.getCheckedRadioButtonId());
+        txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getDialog().dismiss();
             }
         });
+        radioGroupItemSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton btnSizeSelected = view.findViewById(checkedId);
+                txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
+            }
+        });
+
+        btnIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemQty++;
+                changeItemQty(itemQty);
+            }
+        });
+        btnDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemQty = itemQty == 1 ? 1 : itemQty - 1;
+                changeItemQty(itemQty);
+            }
+        });
+        btnConfirmItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void changeItemQty(int num) {
+        txtQty.setText(String.valueOf(num));
+        txtPriceFinal.setText(String.valueOf(itemQty*price) + ".000đ");
     }
 }

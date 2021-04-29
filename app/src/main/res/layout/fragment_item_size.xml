@@ -58,11 +58,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RadioGroup
+            android:id="@+id/radioGroupItemSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checkedButton="@id/radioBtnSizeS"
             android:paddingStart="20dp"
-            android:paddingEnd="0dp"
-            android:checkedButton="@id/radioBtnSizeS">
+            android:paddingEnd="0dp">
 
             <RadioButton
                 android:id="@+id/radioBtnSizeS"
