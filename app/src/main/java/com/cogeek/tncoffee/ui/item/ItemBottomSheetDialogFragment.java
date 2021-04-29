@@ -16,13 +16,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.models.CartDetail;
+import com.cogeek.tncoffee.models.Item;
+import com.cogeek.tncoffee.ui.menu.MenuViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
+
 public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private String imageUrl;
     private String name;
@@ -36,8 +41,13 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private ImageView btnIncrease;
     private ImageView btnDecrease;
     private Button btnConfirmItem;
+    private TextView txtNote;
+    private String size;
+    private Item item;
+    private MenuViewModel viewModel;
 
     private int itemQty = 1;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,7 +55,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         Rect displayRectangle = new Rect();
         Window window = getActivity().getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
-
+        viewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
 
         View view = inflater.inflate(R.layout.bottom_sheet_item_layout, container, false);
 
@@ -93,6 +103,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         btnDecrease = view.findViewById(R.id.btnDecreaseQty);
         txtQty = view.findViewById(R.id.txtQuantity);
         btnConfirmItem = view.findViewById(R.id.btnConfirmItem);
+        txtNote = view.findViewById(R.id.txtRequirement);
         //==========================================================
         txtName.setText(name);
         txtPrice.setText(price + ".000đ");
@@ -104,9 +115,10 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 .centerCrop()
                 .into(imageView);
         txtQty.setText(String.valueOf(itemQty));
-        txtPriceFinal.setText(String.valueOf(itemQty*price) + ".000đ");
+        txtPriceFinal.setText(String.valueOf(itemQty * price) + ".000đ");
         RadioButton btnSizeSelected = view.findViewById(radioGroupItemSize.getCheckedRadioButtonId());
         txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
+        size = (String) btnSizeSelected.getText();
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,13 +150,25 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         btnConfirmItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addItemToCart();
             }
         });
     }
 
     private void changeItemQty(int num) {
         txtQty.setText(String.valueOf(num));
-        txtPriceFinal.setText(String.valueOf(itemQty*price) + ".000đ");
+        txtPriceFinal.setText(String.valueOf(itemQty * price) + ".000đ");
+    }
+
+    private void addItemToCart() {
+        String note = txtNote.getText().toString().isEmpty() ? "" : txtNote.getText().toString();
+        CartDetail cartDetail = new CartDetail(
+                new Item(name, description, price, imageUrl),
+                size,
+                itemQty,
+                note
+        );
+        viewModel.addItemToCart(cartDetail);
+        dismiss();
     }
 }
