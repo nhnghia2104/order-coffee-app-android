@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
 import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.Item;
+import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.MainItemAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +44,7 @@ public class MenuFragment extends Fragment {
     private View view;
     private View header;
     private SearchView searchView;
+    private Button btnOpenCart;
 
     private DatabaseReference databaseReference;
 
@@ -79,7 +82,7 @@ public class MenuFragment extends Fragment {
         /* create and set adapter */
 //        itemAdapter = new ItemAdapter(getActivity(), R.layout.item, listItems);
 //        listView.setAdapter(itemAdapter);
-
+        btnOpenCart = view.findViewById(R.id.btnOpenCart);
         recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
         mainItemAdapter = new MainItemAdapter(categoryList);
         mainItemAdapter.setOnItemListener(new MainItemAdapter.OnItemListener() {
@@ -164,6 +167,14 @@ public class MenuFragment extends Fragment {
                 }
             });
         }
+
+        btnOpenCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartBottomSheetDialogFragment cartBottomSheetDialogFragment = new CartBottomSheetDialogFragment();
+                cartBottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Detail Item");
+            }
+        });
     }
 
     private void fakeData() {

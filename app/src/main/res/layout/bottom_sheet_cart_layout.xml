@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bottom_sheet_background_f2f2f2f2"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bottomConfirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView4">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F2F2F2"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp">
+
+
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1.5dp"
+                        android:background="#FFFFFF"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tự đến lấy"
+                            android:textColor="@color/zcafe_black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/btnChangeDeliveryMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_text_orange"
+                            android:backgroundTint="#80F4792A"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingStart="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="15dp"
+                            android:paddingBottom="5dp"
+                            android:text="Thay đổi"
+                            android:textAllCaps="true"
+                            android:textColor="#AA4B0E"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:padding="20dp">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtAddress"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/txtAddress"
+                            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+                            app:tint="@color/zcafe_black" />
+
+                        <Switch
+                            android:id="@+id/switchSaveAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:checked="true"
+                            android:showText="false"
+                            android:switchMinWidth="55dp"
+                            android:text="Lưu thông tin giao hàng"
+                            android:textColor="@color/zcafe_black"
+                            android:textSize="15sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                        <TextView
+                            android:id="@+id/txtCustomerName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:ellipsize="end"
+                            android:text="Nguyễn Hữu Nghĩa"
+                            android:textColor="@color/zcafe_black"
+                            app:layout_constraintEnd_toStartOf="@+id/view"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/view" />
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:text="0835574140"
+                            android:textColor="@color/zcafe_black_80"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="@+id/txtCustomerName"
+                            app:layout_constraintStart_toStartOf="@+id/txtCustomerName"
+                            app:layout_constraintTop_toBottomOf="@+id/txtCustomerName" />
+
+                        <TextView
+                            android:id="@+id/txtDateDeliver"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="Ngày mai"
+                            android:textColor="@color/zcafe_black"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view"
+                            app:layout_constraintTop_toTopOf="@+id/txtCustomerName" />
+
+                        <TextView
+                            android:id="@+id/txtTimeDeliver"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="16:03"
+                            android:textColor="@color/zcafe_black_80"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="@+id/txtDateDeliver"
+                            app:layout_constraintStart_toStartOf="@+id/txtDateDeliver"
+                            app:layout_constraintTop_toBottomOf="@+id/txtDateDeliver" />
+
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text=" 91 Nguyễn Hữu Cảnh, Quận Bình Thạnh, Thành phố Hồ Chí Minh  91 Nguyễn Hữu Cảnh, Quận Bình Thạnh, Thành phố Hồ Chí Minh  91 Nguyễn Hữu Cảnh, Quận Bình Thạnh, Thành phố Hồ Chí Minh"
+                            android:textColor="@color/zcafe_black"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="1.5dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="#F2F2F2"
+                            app:layout_constraintBottom_toTopOf="@id/switchSaveAddress"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pickupLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/background_border_bottom"
+                            android:padding="20dp">
+
+                            <ImageView
+                                android:id="@+id/imageView7"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/txtAddressPickup"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/txtAddressPickup"
+                                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+                                app:tint="@color/zcafe_black" />
+
+                            <TextView
+                                android:id="@+id/txtAddressPickup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text=" 91 Nguyễn Hữu Cảnh, Quận Bình Thạnh, Thành phố Hồ Chí Minh "
+                                android:textColor="@color/zcafe_black"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_border_bottom"
+                            android:padding="20dp">
+
+                            <ImageView
+                                android:id="@+id/imageView8"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+                                app:tint="@color/zcafe_black" />
+
+                            <TextView
+                                android:id="@+id/txtDatePickup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="Ngày mai"
+                                android:textColor="@color/zcafe_black_80"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/txtTimePickup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="20:00"
+                                android:textColor="@color/zcafe_black"
+                                app:layout_constraintEnd_toEndOf="@+id/txtDatePickup"
+                                app:layout_constraintStart_toStartOf="@id/txtDatePickup"
+                                app:layout_constraintTop_toBottomOf="@+id/txtDatePickup" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <fragment
+                        android:id="@+id/childListitem"
+                        android:name="com.cogeek.tncoffee.ui.cart.ChildListItemCartFragment"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/childTotalPrice"
+                        android:name="com.cogeek.tncoffee.ui.cart.ChildTotalPriceCartFragment"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/childPaymentMethod"
+                        android:name="com.cogeek.tncoffee.ui.cart.ChildPaymentCartFragment"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="Xác nhận đơn hàng"
+            android:textAlignment="center"
+            android:textColor="@color/zcafe_black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/zcafe_orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/txtNameFinal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Giao tận nơi • 1 món"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/button2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPriceFinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:text="169.000đ"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtNameFinal"
+                app:layout_constraintTop_toBottomOf="@+id/txtNameFinal" />
+
+            <android.widget.Button
+                android:id="@+id/btnConfirmItem"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_shadow_white"
+                android:elevation="3dp"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Đặt hàng"
+                android:textColor="@color/zcafe_orange"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
