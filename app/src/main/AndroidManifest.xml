@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cogeek.tncoffee">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,15 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TNCoffee">
         <activity
-            android:name=".ItemActivity"
+            android:name="com.cogeek.tncoffee.ItemActivity"
             android:theme="@style/Theme.TNCoffee.NoActionBar"></activity>
-        <activity android:name=".DetailNotificationActivity" />
+        <activity android:name="com.cogeek.tncoffee.DetailNotificationActivity" />
         <activity
-            android:name=".SearchItemActivity"
+            android:name="com.cogeek.tncoffee.SearchItemActivity"
             android:theme="@style/Theme.TNCoffee.NoActionBar" />
 
         <activity
-            android:name=".LaunchActivity"
+            android:name="com.cogeek.tncoffee.LaunchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.TNCoffee.NoActionBar">
             <intent-filter>
@@ -27,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.cogeek.tncoffee.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

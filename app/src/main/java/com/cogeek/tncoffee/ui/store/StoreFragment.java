@@ -8,10 +8,8 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
-import com.cogeek.tncoffee.MainActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Store;
 
