@@ -43,8 +43,8 @@ public class UserInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //fake data cái
-        imgAvatar = view.findViewById(R.id.imgAvatarInfo);
-        Picasso.get().load("url").into(imgAvatar);
+        imgAvatar = view.findViewById(R.id.imgAvatarInfo); //hình của tui á =)))
+        Picasso.get().load("https://www.facebook.com/photo/?fbid=1231540623848390&set=picfp.100009773927286").into(imgAvatar);
 
         edtLastName = view.findViewById(R.id.edtLastNameInfo);
         edtLastName.setText("Trương");
@@ -65,6 +65,6 @@ public class UserInfoFragment extends Fragment {
 
         btnSecreSex = view.findViewById(R.id.btnSecretSexInfo);
 
-        
+
     }
 }
