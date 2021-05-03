@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.ui.info;
+package com.cogeek.tncoffee.ui.userinfo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.utils.SharedHelper;
 
-public class InfoFragment {
+public class UserInfoFragment {
     private ImageView imgAvatar;
     private TextView txtLastName;
     private TextView txtFirstName;
@@ -24,4 +24,8 @@ public class InfoFragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_edit_info, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 }
