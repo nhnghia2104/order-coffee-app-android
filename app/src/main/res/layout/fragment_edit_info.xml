@@ -79,7 +79,7 @@
 
             android:orientation="horizontal">
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/btnFemaleInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                 android:textSize="18dp"
                 tools:ignore="MissingConstraints" />
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/btnMaleInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                 android:text="Nam"
                 android:textSize="18dp" />
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/btnSecretSexInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

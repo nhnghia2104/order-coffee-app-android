@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +24,10 @@ public class UserInfoFragment extends Fragment {
     private EditText edtFirstName;
     private EditText edtPhoneNumber;
     private EditText edtBirth;
-    private CheckBox btnFemale;
-    private CheckBox btnMale;
-    private CheckBox btnSecreSex;
-    private Button txtUpdateInfo;
+    private RadioButton btnFemale;
+    private RadioButton btnMale;
+    private RadioButton btnSecreSex;
+    private TextView txtUpdateInfo;
 
 
     //@Override

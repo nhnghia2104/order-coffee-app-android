@@ -49,7 +49,20 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/txtTaiKhoan2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="Tài khoản"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
     <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_white_corner_shadow"
@@ -74,10 +87,10 @@
                 android:id="@+id/img7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:paddingTop="10dp"
                 android:src="@drawable/ic_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="DuplicateIds,MissingConstraints" />
@@ -86,9 +99,7 @@
                 android:id="@+id/txtLichSuDonHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="42dp"
                 android:paddingBottom="10dp"
                 android:text="Lịch sử đơn hàng     "
                 android:textColor="#000000"
@@ -117,10 +128,10 @@
                 android:id="@+id/imageView7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:paddingTop="10dp"
                 android:src="@drawable/ic_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
@@ -129,18 +140,29 @@
                 android:id="@+id/txtLichSuDonHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="Tin tức và Khuyến mãi"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView7"
                 tools:ignore="DuplicateIds,MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtTienIch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="Tiện ích"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -327,29 +349,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txtTaiKhoan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        android:text="Tài khoản"
-        android:textColor="#000000"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/txtTienIch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        android:text="Tiện ích"
-        android:textColor="#000000"
-        android:textSize="18sp" />
-
 
 
 </LinearLayout>
