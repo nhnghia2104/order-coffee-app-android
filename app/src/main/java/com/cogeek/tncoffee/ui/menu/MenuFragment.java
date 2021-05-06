@@ -108,7 +108,7 @@ public class MenuFragment extends Fragment {
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_Order_to_MenuItem);
+                NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_Order_to_MenuItem);
                 ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
                 bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
             }

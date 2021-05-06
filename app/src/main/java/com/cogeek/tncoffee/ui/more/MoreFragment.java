@@ -1,20 +1,17 @@
 package com.cogeek.tncoffee.ui.more;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.cogeek.tncoffee.LaunchActivity;
 import com.cogeek.tncoffee.R;
@@ -22,13 +19,8 @@ import com.cogeek.tncoffee.models.Store;
 import com.cogeek.tncoffee.ui.store.StoreAdapter;
 import com.cogeek.tncoffee.ui.userinfo.UserInfoFragment;
 import com.cogeek.tncoffee.utils.SharedHelper;
-import com.google.firebase.auth.UserInfo;
 
 import java.util.ArrayList;
-
-import kotlin.collections.IntIterator;
-
-import static com.cogeek.tncoffee.R.id.vInfo;
 
 public class MoreFragment extends Fragment {
 
@@ -39,7 +31,7 @@ public class MoreFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_account, container, false);
+        View root = inflater.inflate(R.layout.fragment_more, container, false);
 //        ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
 //        if (actionBar != null) {
 //            actionBar.setDisplayHomeAsUpEnabled(false);
@@ -58,12 +50,7 @@ public class MoreFragment extends Fragment {
     }
 
     private void openUserInfo() {
-        Fragment fragment = new UserInfoFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.more_fragment, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        NavHostFragment.findNavController(MoreFragment.this).navigate(R.id.action_navigation_more_to_userInfoFragment);
     }
 
 

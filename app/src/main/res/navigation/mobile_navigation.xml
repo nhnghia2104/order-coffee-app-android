@@ -25,7 +25,19 @@
     <fragment
         android:id="@+id/navigation_more"
         android:name="com.cogeek.tncoffee.ui.more.MoreFragment"
-        tools:layout="@layout/fragment_account"
-        android:label="Khác" />
+        tools:layout="@layout/fragment_more"
+        android:label="Khác" >
+        <action
+            android:id="@+id/action_navigation_more_to_userInfoFragment"
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.cogeek.tncoffee.ui.userinfo.UserInfoFragment"
+        android:label="UserInfoFragment" />
 
 </navigation>
