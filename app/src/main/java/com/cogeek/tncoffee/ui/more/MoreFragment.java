@@ -1,11 +1,13 @@
 package com.cogeek.tncoffee.ui.more;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,7 @@ public class MoreFragment extends Fragment {
     private ListView listView;
     private StoreAdapter storeAdapter;
     private ArrayList<Store> arrayList;
-    private Button btnUserInfo;
+    private ImageView imgvUserInfo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +44,26 @@ public class MoreFragment extends Fragment {
 //        if (actionBar != null) {
 //            actionBar.setDisplayHomeAsUpEnabled(false);
 //        }
+
+        imgvUserInfo = root.findViewById(R.id.imgvUserInfo);
+        imgvUserInfo.setOnClickListener(new View.OnClickListener() {
+            //jump to user info
+            @Override
+            public void onClick(View v) {
+                openUserInfo();
+            }
+        });
+
         return root;
+    }
+
+    private void openUserInfo() {
+        Fragment fragment = new UserInfoFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.more_fragment, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 
@@ -52,26 +73,9 @@ public class MoreFragment extends Fragment {
         view.findViewById(R.id.vLogout).setOnClickListener(v -> {
             logout();
         });
-
-        btnUserInfo = view.findViewById(vInfo);
-        btnUserInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUserInfo();
-            }
-        });
     }
 
-    private void openUserInfo() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setReorderingAllowed(true);
-        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out,R.anim.slide_in_left, R.anim.fade_out);
-        transaction.addToBackStack(null);
-        transaction.add(R.id.vInfo, UserInfoFragment.class, null).commit();
-    }
 
-    //jump to user info layout
     private void logout() {
         SharedHelper.getInstance(getActivity()).logout();
         Intent intent = new Intent(getActivity(), LaunchActivity.class);

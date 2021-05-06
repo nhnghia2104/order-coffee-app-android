@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/more_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2F2"
@@ -68,10 +69,10 @@
         android:padding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginRight="10dp"
             android:id="@+id/vLichSuDonHang"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/background_black_corner_shadow"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -191,7 +192,7 @@
                 app:tint="@color/zcafe_black_80" />
 
             <ImageView
-                android:id="@+id/img6"
+                android:id="@+id/imgvUserInfo"
                 android:layout_width="16dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="1dp"
@@ -234,7 +235,7 @@
                 tools:ignore="DuplicateIds" />
 
             <ImageView
-                android:id="@+id/img6"
+                android:id="@+id/imgvUserInfo"
                 android:layout_width="16dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="1dp"
@@ -279,7 +280,7 @@
                 tools:ignore="DuplicateIds" />
 
             <ImageView
-                android:id="@+id/img6"
+                android:id="@+id/imgvUserInfo"
                 android:layout_width="16dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="1dp"
@@ -324,7 +325,7 @@
                 tools:ignore="DuplicateIds" />
 
             <ImageView
-                android:id="@+id/img6"
+                android:id="@+id/imgvUserInfo"
                 android:layout_width="16dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="1dp"
