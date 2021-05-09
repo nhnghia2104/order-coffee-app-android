@@ -2,20 +2,20 @@ package com.cogeek.tncoffee.models;
 
 import java.io.Serializable;
 
-public class LichSuDonHang implements Serializable {
+public class OrderHistory implements Serializable {
     private String hinh;
     private String ten;
     private int soSanPham;
     private int soTien;
 
-    public LichSuDonHang(String hinh, String ten, int soSanPham, int soTien) {
+    public OrderHistory(String hinh, String ten, int soSanPham, int soTien) {
         this.hinh = hinh;
         this.ten = ten;
         this.soSanPham = soSanPham;
         this.soTien = soTien;
     }
 
-    public LichSuDonHang() {
+    public OrderHistory() {
     }
 
     public String getHinh() {

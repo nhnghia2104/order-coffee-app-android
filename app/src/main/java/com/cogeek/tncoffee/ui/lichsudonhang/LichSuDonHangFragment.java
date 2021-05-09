@@ -5,14 +5,14 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cogeek.tncoffee.models.LichSuDonHang;
+import com.cogeek.tncoffee.models.OrderHistory;
 import com.cogeek.tncoffee.R;
 
 import java.util.ArrayList;
 
 public class LichSuDonHangFragment extends AppCompatActivity {
     ListView lvLichSuDonHang;
-    ArrayList<LichSuDonHang> dsLichSuDonHang;
+    ArrayList<OrderHistory> dsOrderHistory;
     LichSuDonHangAdapter lichSuDonHangAdapter;
 
     @Override
@@ -26,11 +26,11 @@ public class LichSuDonHangFragment extends AppCompatActivity {
 
     private void addControls() {
         lvLichSuDonHang = findViewById(R.id.lvLichSuDonHang);
-        dsLichSuDonHang = new ArrayList<>();
-        dsLichSuDonHang.add(new LichSuDonHang("https://cafebiz.cafebizcdn.vn/2019/7/23/photo-1-15638793092381493027519.jpg","Truong Ngoc Anh Thu", 1,23000));
+        dsOrderHistory = new ArrayList<>();
+        dsOrderHistory.add(new OrderHistory("https://cafebiz.cafebizcdn.vn/2019/7/23/photo-1-15638793092381493027519.jpg","Truong Ngoc Anh Thu", 1,23000));
         //dsLichSuDonHang.add(new com.example.models.LichSuDonHang());
 
-        lichSuDonHangAdapter = new LichSuDonHangAdapter(LichSuDonHangFragment.this, R.layout.item_lichsudonhang, dsLichSuDonHang);
+        lichSuDonHangAdapter = new LichSuDonHangAdapter(LichSuDonHangFragment.this, R.layout.item_lichsudonhang, dsOrderHistory);
 
         lvLichSuDonHang.setAdapter(lichSuDonHangAdapter);
     }
