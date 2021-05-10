@@ -38,16 +38,7 @@
         android:padding="20dp">
 
         <EditText
-            android:layout_marginBottom="5dp"
-            android:id="@+id/edtLastNameInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Họ" />
-
-        <EditText
-            android:id="@+id/edtFirstNameInfo"
+            android:id="@+id/edtNameInfo"
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

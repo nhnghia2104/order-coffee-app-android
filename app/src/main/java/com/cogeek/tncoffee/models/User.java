@@ -78,4 +78,5 @@ public class User {
     public void setGender(boolean gender) {
         this.gender = gender;
     }
+
 }

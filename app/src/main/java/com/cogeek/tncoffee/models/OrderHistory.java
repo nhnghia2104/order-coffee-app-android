@@ -1,52 +1,40 @@
 package com.cogeek.tncoffee.models;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class OrderHistory implements Serializable {
-    private String hinh;
-    private String ten;
-    private int soSanPham;
-    private int soTien;
-
-    public OrderHistory(String hinh, String ten, int soSanPham, int soTien) {
-        this.hinh = hinh;
-        this.ten = ten;
-        this.soSanPham = soSanPham;
-        this.soTien = soTien;
-    }
+public class OrderHistory {
+    private int total;
+    private List<OrderHistoryDetail> details;
 
     public OrderHistory() {
+        this.total = 0;
+        this.details = new ArrayList<>();
     }
 
-    public String getHinh() {
-        return hinh;
+    public int getTotal() {
+        return total;
     }
 
-    public void setHinh(String hinh) {
-        this.hinh = hinh;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
-    public String getTen() {
-        return ten;
+    public List<OrderHistoryDetail> getDetails() {
+        return details;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setDetails(List<OrderHistoryDetail> details) {
+        this.details = details;
     }
 
-    public int getSoSanPham() {
-        return soSanPham;
+    public OrderHistory(int total, List<OrderHistoryDetail> details) {
+        this.total = total;
+        this.details = details;
     }
 
-    public void setSoSanPham(int soSanPham) {
-        this.soSanPham = soSanPham;
-    }
-
-    public int getSoTien() {
-        return soTien;
-    }
-
-    public void setSoTien(int soTien) {
-        this.soTien = soTien;
+    public void addItem(OrderHistoryDetail item) {
+        this.details.add(item);
+        //this.total += item.getPrice();
     }
 }

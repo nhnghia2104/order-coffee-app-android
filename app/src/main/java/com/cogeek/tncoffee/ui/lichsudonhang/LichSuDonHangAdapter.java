@@ -12,17 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.OrderHistory;
+import com.cogeek.tncoffee.models.OrderHistoryDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class LichSuDonHangAdapter extends ArrayAdapter<OrderHistory> {
+public class LichSuDonHangAdapter extends ArrayAdapter<OrderHistoryDetail> {
     Activity context;       // màn hình sử dụng layout này (giao diện này)
     int resource;           // Layout cho từng dòng muốn hiển thị (làm theo khách hàng)
-    List<OrderHistory> objects;   // danh sách nguồn dữ liệu muốn hiển thị lên giao diện
+    List<OrderHistoryDetail> objects;   // danh sách nguồn dữ liệu muốn hiển thị lên giao diện
     // chính là item (không lấy item vì rất khó kế thừa)
-    public LichSuDonHangAdapter(@NonNull Activity context, int resource, @NonNull List<OrderHistory> objects) {
+    public LichSuDonHangAdapter(@NonNull Activity context, int resource, @NonNull List<OrderHistoryDetail> objects) {
         super(context, resource, objects);
         this.context = context; //this là tham chiếu hiện tại
         this.resource = resource;
@@ -36,20 +36,20 @@ public class LichSuDonHangAdapter extends ArrayAdapter<OrderHistory> {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_lichsudonhang, null, true);
         }
-        OrderHistory orderHistory = getItem(position);
+        OrderHistoryDetail orderHistoryDetail = getItem(position);
 
 
         ImageView imgHinh =(ImageView) convertView.findViewById(R.id.imgHinhDH);
-        Picasso.get().load(orderHistory.getHinh()).into(imgHinh);
+        Picasso.get().load(orderHistoryDetail.getHinh()).into(imgHinh);
 
         TextView txtTen = convertView.findViewById(R.id.txtTenDonHang);
-        txtTen.setText(orderHistory.getTen());
+        txtTen.setText(orderHistoryDetail.getTen());
 
         TextView txtSoSanPham = convertView.findViewById(R.id.txtSoSanPham);
-        txtSoSanPham.setText(String.valueOf(orderHistory.getSoSanPham()));
+        txtSoSanPham.setText(String.valueOf(orderHistoryDetail.getSoSanPham()));
 
         TextView txtSoTien = convertView.findViewById(R.id.txtSoTienDonHang);
-        txtSoTien.setText(String.valueOf(orderHistory.getSoTien()));
+        txtSoTien.setText(String.valueOf(orderHistoryDetail.getSoTien()));
         
         return convertView;
     }
