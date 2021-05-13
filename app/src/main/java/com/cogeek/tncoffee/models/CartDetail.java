@@ -2,7 +2,7 @@ package com.cogeek.tncoffee.models;
 
 public class CartDetail {
     private Item item;
-    private String size;
+    private Size size;
     private int quantity;
     private String note;
 
@@ -14,11 +14,11 @@ public class CartDetail {
         this.item = item;
     }
 
-    public String getSize() {
+    public Size getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
@@ -38,7 +38,7 @@ public class CartDetail {
         this.note = note;
     }
 
-    public CartDetail(Item item, String size, int quantity, String note) {
+    public CartDetail(Item item, Size size, int quantity, String note) {
         this.item = item;
         this.size = size;
         this.quantity = quantity;

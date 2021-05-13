@@ -4,37 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private int total;
-    private List<CartDetail> details;
+    private Double total;
+    private List<CartDetail> items;
 
     public Cart() {
-        this.total = 0;
-        this.details = new ArrayList<>();
+        this.total = 0.0;
+        this.items = new ArrayList<>();
     }
 
-    public Cart(int total, List<CartDetail> details) {
+    public Cart(Double total, List<CartDetail> items) {
         this.total = total;
-        this.details = details;
+        this.items = items;
     }
 
     public List<CartDetail> getDetails() {
-        return details;
+        return items;
     }
 
-    public void setDetails(List<CartDetail> details) {
-        this.details = details;
+    public void setDetails(List<CartDetail> items) {
+        this.items = items;
     }
 
-    public int getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void addItem(CartDetail item) {
+        this.items.add(item);
+        this.total += item.getPrice();
     }
 
-    public void addItem(CartDetail item) {
-        this.details.add(item);
-        this.total += item.getPrice();
+    public void removeItem(int index) {
+        this.items.remove(index);
     }
 }
