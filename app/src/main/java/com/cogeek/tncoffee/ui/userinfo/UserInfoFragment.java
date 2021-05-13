@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 public class UserInfoFragment extends Fragment {
     private ImageView imgAvatar;
-    private TextInputLayout edtName, edtPhoneNumber, edtBirth;
+    private EditText edtName, edtPhoneNumber, edtBirth;
     private RadioButton btnFemale;
     private RadioButton btnMale;
     private RadioButton btnSecreSex;
@@ -75,7 +75,7 @@ public class UserInfoFragment extends Fragment {
 
         showAllUserData();
 
-
+        txtUpdateInfo = view.findViewById(R.id.txtUpdateInfo);
 
         txtUpdateInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +91,9 @@ public class UserInfoFragment extends Fragment {
         _PHONE = intent.getStringExtra("phonenb");
         _BIRTH = intent.getStringExtra("birthday");
 
-        edtName.getEditText().setText(_NAME);
-        edtPhoneNumber.getEditText().setText(_PHONE);
-        edtBirth.getEditText().setText(_BIRTH);
+        edtName.setText(_NAME);
+        edtPhoneNumber.setText(_PHONE);
+        edtBirth.setText(_BIRTH);
     }
 
 
@@ -104,7 +104,7 @@ public class UserInfoFragment extends Fragment {
     }
 
     private boolean isBirthChanged() {
-        if (!_BIRTH.equals(edtBirth.getEditText().getText().toString())){
+        if (!_BIRTH.equals(edtBirth.getText().toString())){
             reference.child(_BIRTH).child("birthday").setValue("");
             return true;
         } else {
@@ -113,7 +113,7 @@ public class UserInfoFragment extends Fragment {
     }
 
     private boolean isPhoneChanged() {
-        if (!_PHONE.equals(edtPhoneNumber.getEditText().getText().toString())){
+        if (!_PHONE.equals(edtPhoneNumber.getText().toString())){
             reference.child(_PHONE).child("phonenb").setValue("");
             return true;
         } else {
@@ -122,7 +122,7 @@ public class UserInfoFragment extends Fragment {
     }
 
     private boolean isNameChanged() {
-        if (!_NAME.equals(edtName.getEditText().getText().toString())){
+        if (!_NAME.equals(edtName.getText().toString())){
             reference.child(_NAME).child("name").setValue("");
             return true;
         } else {
