@@ -19,10 +19,6 @@ public class MenuViewModel extends AndroidViewModel {
         mCart.setValue(cart);
     }
 
-    public MutableLiveData<Cart> getCart() {
-        return mCart;
-    }
-
     public void addItemToCart(CartDetail item) {
         cart.addItem(item);
         this.mCart.setValue(cart);

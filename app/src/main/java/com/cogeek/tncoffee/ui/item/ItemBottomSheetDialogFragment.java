@@ -16,14 +16,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.CartDetail;
 import com.cogeek.tncoffee.models.Item;
-import com.cogeek.tncoffee.models.Size;
-import com.cogeek.tncoffee.ui.cart.CartViewModel;
 import com.cogeek.tncoffee.ui.menu.MenuViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -45,9 +42,9 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private ImageView btnDecrease;
     private Button btnConfirmItem;
     private TextView txtNote;
-    private Size size = Size.SMALL;
+    private String size;
     private Item item;
-    private CartViewModel cartViewModel;
+    private MenuViewModel viewModel;
 
     private int itemQty = 1;
 
@@ -58,7 +55,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         Rect displayRectangle = new Rect();
         Window window = getActivity().getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
-        cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
 
         View view = inflater.inflate(R.layout.bottom_sheet_item_layout, container, false);
 
@@ -121,7 +118,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         txtPriceFinal.setText(String.valueOf(itemQty * price) + ".000đ");
         RadioButton btnSizeSelected = view.findViewById(radioGroupItemSize.getCheckedRadioButtonId());
         txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
-
+        size = (String) btnSizeSelected.getText();
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,21 +130,6 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton btnSizeSelected = view.findViewById(checkedId);
                 txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
-
-                switch (btnSizeSelected.getId()) {
-                    case R.id.radioBtnSizeS:
-                        size = Size.SMALL;
-                        break;
-                    case R.id.radioBtnSizeM:
-                        size = Size.MEDIUM;
-                        break;
-                    case R.id.radioBtnSizeL:
-                        size = Size.LARGE;
-                        break;
-                    default:
-                        size = Size.SMALL;
-                        break;
-                }
             }
         });
 
@@ -186,7 +168,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 itemQty,
                 note
         );
-        cartViewModel.addItemToCart(cartDetail);
+        viewModel.addItemToCart(cartDetail);
         dismiss();
     }
 }
