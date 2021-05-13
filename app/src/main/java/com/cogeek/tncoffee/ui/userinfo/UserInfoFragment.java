@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.ui.userinfo;
 
+import android.graphics.Rect;
+import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +32,7 @@ import com.squareup.picasso.Picasso;
 public class UserInfoFragment extends Fragment {
     private ImageView imgAvatar;
     private EditText edtName, edtPhoneNumber, edtBirth;
-    private RadioButton btnFemale;
-    private RadioButton btnMale;
-    private RadioButton btnSecreSex;
+    private RadioGroup radioGroupGender;
     private TextView txtUpdateInfo;
     private User user;
 
@@ -66,12 +67,15 @@ public class UserInfoFragment extends Fragment {
         edtBirth = view.findViewById(R.id.edtBirthInfo);
         //edtBirth.setText("23/02/2000");
 
-        btnFemale = view.findViewById(R.id.btnFemaleInfo);
-        btnFemale.isChecked();
+        radioGroupGender = view.findViewById(R.id.radioGroupGender);
 
-        btnMale = view.findViewById(R.id.btnMaleInfo);
-
-        btnSecreSex = view.findViewById(R.id.btnSecretSexInfo);
+        RadioButton btnGenderSelected = view.findViewById(radioGroupGender.getCheckedRadioButtonId());
+        radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton btnGenderSelected = view.findViewById(checkedId);
+            }
+        });
 
         showAllUserData();
 

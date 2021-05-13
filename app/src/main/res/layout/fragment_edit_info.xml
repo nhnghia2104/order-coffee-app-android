@@ -64,15 +64,15 @@
             android:inputType="date"
             tools:text="Ngày sinh" />
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/radioGroupGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/btnFemaleInfo"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
@@ -84,7 +84,7 @@
 
             <RadioButton
                 android:id="@+id/btnMaleInfo"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
@@ -95,15 +95,14 @@
 
             <RadioButton
                 android:id="@+id/btnSecretSexInfo"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_black_corner_shadow"
                 android:baselineAligned="false"
-                android:text="Không nói"
+                android:text="Không"
                 android:textSize="18dp" />
-
-        </LinearLayout>
+        </RadioGroup>
 
     </LinearLayout>
 
