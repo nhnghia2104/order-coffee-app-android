@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.models;
 
+import java.util.List;
+
 public class User {
     String email;
     String name;
@@ -78,5 +80,9 @@ public class User {
     public void setGender(boolean gender) {
         this.gender = gender;
     }
+
+
+
+
 
 }
