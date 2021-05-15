@@ -3,7 +3,10 @@ package com.cogeek.tncoffee.ui.userinfo;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +33,10 @@ import com.cogeek.tncoffee.models.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
+import java.io.FileNotFoundException;
+
+import io.realm.internal.IOException;
 
 public class UserInfoFragment extends Fragment {
     private Context mContext;
@@ -84,11 +91,11 @@ public class UserInfoFragment extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //open Gallery
-                String strAvatarPrompt = "Choose a picture to use as your avatar!";
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK);
-                pickPhoto.setType("image/*");
-                startActivityForResult(Intent.createChooser(pickPhoto, strAvatarPrompt), AVATAR_GALLERY_REQUEST);
-                return true;
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), AVATAR_GALLERY_REQUEST);
+                return false;
             }
         });
 
@@ -129,6 +136,37 @@ public class UserInfoFragment extends Fragment {
         if (requestCode == CAMERA_REQUEST_CODE) {
             Bitmap imgBitmap = (Bitmap) data.getExtras().get("data");
             imgAvatar.setImageBitmap(imgBitmap);
+        } else if (requestCode == AVATAR_GALLERY_REQUEST) {
+            /*Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = mContext.getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+
+            if (bitmap != null) {
+                imgAvatar.setImageBitmap(bitmap);
+            }*/
+            Uri selectedImageUri = data.getData();
+
+            try {
+                Bitmap bitmap=BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(selectedImageUri));
+
+
+                imgAvatar.setImageBitmap(bitmap);
+                //messageText.setText("Uploading file path:" +imagepath);
+
+            } catch(IOException | FileNotFoundException ie) {
+
+                //messageText.setText("Error");
+            }
+
         }
     }
 
