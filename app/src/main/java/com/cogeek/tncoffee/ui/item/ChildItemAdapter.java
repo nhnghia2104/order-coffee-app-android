@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Item;
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +45,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
         Item item = itemList.get(position);
         holder.getTxtItemName().setText(item.getName());
         holder.getTxtItemDescription().setText(item.getDescription());
-        holder.getTxtPrice().setText(item.getPrice() + ".000đ");
+        holder.getTxtPrice().setText(NumberHelper.getInstance().currencyFormat(item.getPrice()));
 
         Picasso.get()
                 .load(item.getImageUrl())

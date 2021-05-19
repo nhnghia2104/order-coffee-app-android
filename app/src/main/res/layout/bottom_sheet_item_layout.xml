@@ -55,12 +55,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"/>
-                    <fragment
-                        android:id="@+id/fragment_quantity"
-                        android:name="com.cogeek.tncoffee.ui.item.ChildItemQuantity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp" />
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
@@ -71,55 +65,98 @@
             android:id="@+id/bottomConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/zcafe_orange"
+            android:background="@color/zcafe_black"
+            android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/txtNameFinal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="2 Cafe Sữa (M)"
-                android:textColor="#FFFFFF"
+                android:id="@+id/txtQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:minWidth="100dp"
+                android:minHeight="40dp"
+                android:text="1"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/button2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/btnConfirmItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/txtPriceFinal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:text="169.000đ"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/txtNameFinal"
-                app:layout_constraintTop_toBottomOf="@+id/txtNameFinal" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtQuantity"
+                app:layout_constraintStart_toEndOf="@+id/txtQuantity"
+                app:layout_constraintTop_toTopOf="@+id/txtQuantity">
 
-            <android.widget.Button
+                <TextView
+                    android:id="@+id/btnIncreaseQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="+"
+                    android:textColor="@color/zcafe_black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtQuantity"
+                app:layout_constraintEnd_toStartOf="@+id/txtQuantity"
+                app:layout_constraintTop_toTopOf="@+id/txtQuantity">
+
+                <TextView
+                    android:id="@+id/btnDecreaseQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="-"
+                    android:textColor="@color/zcafe_black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btnConfirmItem"
-                android:layout_width="wrap_content"
-                android:layout_height="37dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/button_shadow_white"
-                android:elevation="3dp"
-                android:fontFamily="sans-serif-medium"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="Chọn món"
-                android:textColor="@color/zcafe_orange"
-                android:textSize="13sp"
+                android:padding="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/txtPriceFinal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chọn món"
+                    android:textColor="@color/zcafe_black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

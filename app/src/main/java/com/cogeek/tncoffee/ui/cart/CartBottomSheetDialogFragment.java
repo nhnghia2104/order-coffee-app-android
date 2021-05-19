@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.ui.cart;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,9 +21,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cogeek.tncoffee.MainActivity;
+import com.cogeek.tncoffee.MapsActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.CartDetail;
 import com.cogeek.tncoffee.ui.menu.MenuViewModel;
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -36,6 +41,9 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private List<CartDetail> cartDetails = new ArrayList<>();
     private ItemCartAdapter itemCartAdapter;
     private RecyclerView recyclerView;
+    private TextView txtAddress;
+    private  TextView txtPriceFinal;
+    private TextView txtNameFinal;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,6 +85,17 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
         recyclerView.setAdapter(itemCartAdapter);
         registerLiveDataListenner();
 
+        txtAddress = view.findViewById(R.id.txtAddress);
+        txtAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
+        txtNameFinal = view.findViewById(R.id.txtNameFinal);
     }
 
     public void registerLiveDataListenner() {
@@ -85,6 +104,8 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
             cartDetails = cart.getDetails();
             itemCartAdapter.setObjects(cartDetails);
             itemCartAdapter.notifyDataSetChanged();
+            txtPriceFinal.setText(NumberHelper.getInstance().currencyFormat(cart.getTotal()));
+            txtNameFinal.setText("Giao tận nơi");
         });
     }
 }

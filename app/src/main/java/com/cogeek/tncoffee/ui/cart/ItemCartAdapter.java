@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.CartDetail;
 import com.cogeek.tncoffee.models.Store;
+import com.cogeek.tncoffee.utils.NumberHelper;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHolder> {
@@ -50,7 +53,8 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
 
         holder.getTxtSize().setText(cartDetail.getSize().getDisplayName());
 
-        holder.getTxtTotalPrice().setText(cartDetail.getPrice() + ".000đ");
+
+        holder.getTxtTotalPrice().setText(NumberHelper.getInstance().currencyFormat(cartDetail.getPrice()));
     }
 
     @Override

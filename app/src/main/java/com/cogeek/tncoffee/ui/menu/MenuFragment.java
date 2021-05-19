@@ -182,12 +182,12 @@ public class MenuFragment extends Fragment {
 
         List<Item> list1 = new ArrayList<>();
         list1.add(new Item("Trà Sữa êi", "em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-        list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-        list1.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list1.add(new Item("Trà Sữa êi", "em non lắm", 10000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list1.add(new Item("Trà Sữa êi", "em non lắm", 12000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
 
         List<Item> list2 = new ArrayList<>();
-        list2.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-        list2.add(new Item("Trà Sữa êi", "em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list2.add(new Item("Trà Sữa êi", "em non lắm", 18000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+        list2.add(new Item("Trà Sữa êi", "em non lắm", 22000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
 
         categoryList.add(new Category("Trà sữa", list1));
         categoryList.add(new Category("Cà phê", list2));

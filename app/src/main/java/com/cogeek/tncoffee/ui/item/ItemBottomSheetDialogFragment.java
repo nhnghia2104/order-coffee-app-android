@@ -16,15 +16,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.CartDetail;
 import com.cogeek.tncoffee.models.Item;
 import com.cogeek.tncoffee.models.Size;
 import com.cogeek.tncoffee.ui.cart.CartViewModel;
-import com.cogeek.tncoffee.ui.menu.MenuViewModel;
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -38,12 +39,11 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private String description;
     private boolean isFavorite;
     private TextView txtPriceFinal;
-    private TextView txtNameFinal;
     private RadioGroup radioGroupItemSize;
     private TextView txtQty;
-    private ImageView btnIncrease;
-    private ImageView btnDecrease;
-    private Button btnConfirmItem;
+    private TextView btnIncrease;
+    private TextView btnDecrease;
+    private ConstraintLayout btnConfirmItem;
     private TextView txtNote;
     private Size size = Size.SMALL;
     private Item item;
@@ -94,7 +94,6 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        txtNameFinal = view.findViewById(R.id.txtNameFinal);
         txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
         RoundedImageView imageView = view.findViewById(R.id.imageItem_BottomSheet);
         TextView txtName = view.findViewById(R.id.txtItemName_BottomSheet);
@@ -109,7 +108,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         txtNote = view.findViewById(R.id.txtRequirement);
         //==========================================================
         txtName.setText(name);
-        txtPrice.setText(price + ".000đ");
+        txtPrice.setText(NumberHelper.getInstance().currencyFormat(price));
         txtDescription.setText(description);
         Picasso.get()
                 .load(imageUrl)
@@ -118,9 +117,8 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 .centerCrop()
                 .into(imageView);
         txtQty.setText(String.valueOf(itemQty));
-        txtPriceFinal.setText(String.valueOf(itemQty * price) + ".000đ");
+        txtPriceFinal.setText("Chọn món - " + NumberHelper.getInstance().currencyFormat(itemQty * price));
         RadioButton btnSizeSelected = view.findViewById(radioGroupItemSize.getCheckedRadioButtonId());
-        txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
 
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +130,6 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton btnSizeSelected = view.findViewById(checkedId);
-                txtNameFinal.setText(name + " (" + btnSizeSelected.getText() + ")");
 
                 switch (btnSizeSelected.getId()) {
                     case R.id.radioBtnSizeS:
@@ -175,7 +172,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private void changeItemQty(int num) {
         txtQty.setText(String.valueOf(num));
-        txtPriceFinal.setText(String.valueOf(itemQty * price) + ".000đ");
+        txtPriceFinal.setText("Chọn món - " + NumberHelper.getInstance().currencyFormat(itemQty * price));
     }
 
     private void addItemToCart() {
