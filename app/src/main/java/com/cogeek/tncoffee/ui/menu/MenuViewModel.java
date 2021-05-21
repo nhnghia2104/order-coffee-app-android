@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.cogeek.tncoffee.models.Cart;
-import com.cogeek.tncoffee.models.CartDetail;
+import com.cogeek.tncoffee.models_old.Cart;
+import com.cogeek.tncoffee.models_old.CartDetail;
 
 public class MenuViewModel extends AndroidViewModel {
     private MutableLiveData<Cart> mCart = new MutableLiveData<>();

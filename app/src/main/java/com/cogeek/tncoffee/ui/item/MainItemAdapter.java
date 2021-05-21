@@ -7,17 +7,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Category;
-import com.cogeek.tncoffee.models.Item;
+import com.cogeek.tncoffee.models.Product;
 
 import java.util.List;
 
 public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHolder> {
 
-    private List<Category> categoryList;
+    private List<com.cogeek.tncoffee.models.Category> categoryList;
+    private RecyclerView.LayoutManager layoutManager;
     private  OnItemListener onItemListener;
 
     public interface OnItemListener {
@@ -32,12 +35,17 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
         this.categoryList = categoryList;
     }
 
+    public void setObjects(List<Category> list) {
+        this.categoryList = list;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section,
                 parent,
                 false);
+        layoutManager = new GridLayoutManager(parent.getContext(),2);
         return new MainItemAdapter.ViewHolder(v);
     }
 
@@ -46,7 +54,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
         Category category = categoryList.get(section);
 
         String sectionName = category.getName();
-        List<Item> items = category.getItems();
+        List<Product> items = category.getItems();
 
         holder.getTxtSectionName().setText(sectionName);
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(items);
@@ -59,7 +67,9 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
                 }
             }
         });
+        holder.getChildRecyclerView().setLayoutManager(layoutManager);
         holder.getChildRecyclerView().setAdapter(childItemAdapter);
+
     }
 
     @Override

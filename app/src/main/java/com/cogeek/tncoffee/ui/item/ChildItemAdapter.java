@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.Item;
+import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ViewHolder> {
 
-    private List<Item> itemList;
+    private List<Product> itemList;
     private OnChildListener onChildListener;
 
     public interface OnChildListener {
@@ -29,26 +29,25 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
         this.onChildListener = onChildListener;
     }
 
-    public ChildItemAdapter(List<Item> itemList) {
+    public ChildItemAdapter(List<Product> itemList) {
         this.itemList = itemList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cell, parent, false);
         return new ChildItemAdapter.ViewHolder(v, onChildListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item item = itemList.get(position);
+        Product item = itemList.get(position);
         holder.getTxtItemName().setText(item.getName());
-        holder.getTxtItemDescription().setText(item.getDescription());
-        holder.getTxtPrice().setText(NumberHelper.getInstance().currencyFormat(item.getPrice()));
+        holder.getTxtPrice().setText(NumberHelper.getInstance().currencyFormat(Double.parseDouble(item.getPrice())));
 
         Picasso.get()
-                .load(item.getImageUrl())
+                .load(item.getImage())
                 .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
@@ -62,7 +61,6 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView txtItemName;
-        private final TextView txtItemDescription;
         private final TextView txtPrice;
         private final RoundedImageView imageItem;
         private OnChildListener onChildListener;
@@ -70,7 +68,6 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
         public ViewHolder(@NonNull View v, OnChildListener onChildClickListener) {
             super(v);
             txtItemName = v.findViewById(R.id.txtItemName);
-            txtItemDescription = v.findViewById(R.id.txtItemDescription);
             txtPrice = v.findViewById(R.id.txtPrice);
             imageItem = v.findViewById(R.id.imageItem_BottomSheet);
             this.onChildListener = onChildClickListener;
@@ -79,10 +76,6 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
 
         public TextView getTxtItemName() {
             return txtItemName;
-        }
-
-        public TextView getTxtItemDescription() {
-            return txtItemDescription;
         }
 
         public TextView getTxtPrice() {

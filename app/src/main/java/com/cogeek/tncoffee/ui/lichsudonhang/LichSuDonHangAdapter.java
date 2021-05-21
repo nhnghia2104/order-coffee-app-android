@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.LichSuDonHang;
+import com.cogeek.tncoffee.models_old.LichSuDonHang;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

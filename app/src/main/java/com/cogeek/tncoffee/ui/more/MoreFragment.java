@@ -15,9 +15,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.cogeek.tncoffee.LaunchActivity;
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.Store;
+import com.cogeek.tncoffee.models_old.Store;
 import com.cogeek.tncoffee.ui.store.StoreAdapter;
-import com.cogeek.tncoffee.ui.userinfo.UserInfoFragment;
 import com.cogeek.tncoffee.utils.SharedHelper;
 
 import java.util.ArrayList;

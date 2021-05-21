@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="20dp">
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,52 +17,43 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/txtItemDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:ellipsize="end"
-            android:lines="2"
-            android:text="Ngon vl asd abc xyz asaaaassss cc c c c c c c "
-            android:textSize="13sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageItem_BottomSheet"
-            app:layout_constraintStart_toStartOf="@+id/txtItemName"
-            app:layout_constraintTop_toBottomOf="@+id/txtItemName" />
-
-        <TextView
             android:id="@+id/txtItemName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="sans-serif-medium"
+            android:maxLines="2"
             android:text="Cà phê Sữa"
             android:textColor="@color/zcafe_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/imageNotification"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageItem_BottomSheet" />
 
         <TextView
             android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="sans-serif-medium"
-            android:text="60"
+            android:text="60,000đ"
             android:textColor="@color/zcafe_black"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/txtItemDescription"
-            app:layout_constraintTop_toBottomOf="@+id/txtItemDescription" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/txtItemName"
+            app:layout_constraintTop_toBottomOf="@+id/txtItemName" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageItem_BottomSheet"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:maxHeight="50dp"
             android:src="@drawable/ic_zcafe_hint"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>

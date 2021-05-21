@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.models;
+package com.cogeek.tncoffee.models_old;
 
 import java.util.ArrayList;
 import java.util.List;

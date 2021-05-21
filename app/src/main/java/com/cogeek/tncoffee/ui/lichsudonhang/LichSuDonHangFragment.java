@@ -5,7 +5,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cogeek.tncoffee.models.LichSuDonHang;
+import com.cogeek.tncoffee.models_old.LichSuDonHang;
 import com.cogeek.tncoffee.R;
 
 import java.util.ArrayList;

@@ -1,24 +1,17 @@
 package com.cogeek.tncoffee.ui.cart;
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.CartDetail;
-import com.cogeek.tncoffee.models.Store;
+import com.cogeek.tncoffee.models_old.CartDetail;
 import com.cogeek.tncoffee.utils.NumberHelper;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
 
 public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHolder> {

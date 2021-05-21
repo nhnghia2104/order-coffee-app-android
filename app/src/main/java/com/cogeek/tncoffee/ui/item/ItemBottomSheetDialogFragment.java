@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -16,14 +15,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.CartDetail;
-import com.cogeek.tncoffee.models.Item;
-import com.cogeek.tncoffee.models.Size;
+import com.cogeek.tncoffee.models_old.CartDetail;
+import com.cogeek.tncoffee.models_old.Item;
+import com.cogeek.tncoffee.models_old.Size;
 import com.cogeek.tncoffee.ui.cart.CartViewModel;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;

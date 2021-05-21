@@ -1,32 +1,29 @@
 package com.cogeek.tncoffee.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Category {
-    String name;
-    List<Item> items;
 
-    public Category() {
+    @SerializedName("id")
+    public String id;
+
+    @SerializedName("items")
+    public List<Product> items;
+
+    @SerializedName("name")
+    public String name;
+
+    public String getId() {
+        return id;
     }
 
-    public Category(String name, List<Item> items) {
-        this.name = name;
-        this.items = items;
+    public List<Product> getItems() {
+        return items;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
     }
 }

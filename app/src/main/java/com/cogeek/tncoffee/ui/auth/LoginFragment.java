@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,9 @@ import java.util.List;
 
 public class LoginFragment extends Fragment {
     private Button btnLoginGoogle;
+    private Button btnOk;
+    private EditText editUsername;
+    private EditText editPassword;
     private LoginFragmentListener listener;
     private static final int RC_SIGN_IN = 123;
 
@@ -44,6 +48,13 @@ public class LoginFragment extends Fragment {
         btnLoginGoogle = view.findViewById(R.id.btnLoginGoogle);
         view.findViewById(R.id.btnLoginGoogle).setOnClickListener((v) -> {
             loginWithGoogle();
+        });
+
+        btnOk = view.findViewById(R.id.btnOk);
+        editUsername = view.findViewById(R.id.editUsername);
+        editPassword = view.findViewById(R.id.editPassword);
+        btnOk.setOnClickListener(v -> {
+
         });
 
     }

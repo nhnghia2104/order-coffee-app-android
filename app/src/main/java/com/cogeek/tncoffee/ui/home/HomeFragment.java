@@ -18,7 +18,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.Notification;
+import com.cogeek.tncoffee.models_old.Notification;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

@@ -17,13 +17,13 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.cogeek.tncoffee.PlaceHolderApi;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
-import com.cogeek.tncoffee.models.Category;
-import com.cogeek.tncoffee.models.Item;
 import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.MainItemAdapter;
+import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,12 +32,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MenuFragment extends Fragment {
 
     private RecyclerView recyclerViewListItem;
     private MainItemAdapter mainItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Category> categoryList;
+    private List<com.cogeek.tncoffee.models.Category> categoryList;
     private TextView stickyView;
     private View heroImageView;
     private View stickyViewSpacer;
@@ -63,6 +67,27 @@ public class MenuFragment extends Fragment {
         addControl();
         addEvent();
 
+        PlaceHolderApi placeHolderApi = NetworkProvider.self().retrofit.create(PlaceHolderApi.class);
+        Call<List<com.cogeek.tncoffee.models.Category>> call = placeHolderApi.getCategories();
+
+        call.enqueue(new Callback<List<com.cogeek.tncoffee.models.Category>>() {
+            @Override
+            public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<com.cogeek.tncoffee.models.Category>> response) {
+                if (response.isSuccessful()) {
+                    categoryList.clear();
+                    List<com.cogeek.tncoffee.models.Category> categories = response.body();
+                    categoryList.addAll(categories);
+                    mainItemAdapter.setObjects(categories);
+                    mainItemAdapter.notifyDataSetChanged();
+                    Log.i("ok", categories.get(0).getItems().get(0).getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<com.cogeek.tncoffee.models.Category>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void addControl() {
@@ -93,8 +118,8 @@ public class MenuFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("name", categoryList.get(section).getItems().get(row).getName());
                 bundle.putString("description", categoryList.get(section).getItems().get(row).getDescription());
-                bundle.putInt("price", categoryList.get(section).getItems().get(row).getPrice());
-                bundle.putString("imageUrl", categoryList.get(section).getItems().get(row).getImageUrl());
+                bundle.putDouble("price", Double.parseDouble(categoryList.get(section).getItems().get(row).getPrice()));
+                bundle.putString("imageUrl", categoryList.get(section).getItems().get(row).getImage());
                 bottomSheetDialog.setArguments(bundle);
                 bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
             }
@@ -180,17 +205,17 @@ public class MenuFragment extends Fragment {
     private void fakeData() {
         categoryList = new ArrayList<>();
 
-        List<Item> list1 = new ArrayList<>();
-        list1.add(new Item("Trà Sữa êi", "em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-        list1.add(new Item("Trà Sữa êi", "em non lắm", 10000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-        list1.add(new Item("Trà Sữa êi", "em non lắm", 12000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-
-        List<Item> list2 = new ArrayList<>();
-        list2.add(new Item("Trà Sữa êi", "em non lắm", 18000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-        list2.add(new Item("Trà Sữa êi", "em non lắm", 22000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-
-        categoryList.add(new Category("Trà sữa", list1));
-        categoryList.add(new Category("Cà phê", list2));
+//        List<Item> list1 = new ArrayList<>();
+//        list1.add(new Item("Trà Sữa êi", "em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+//        list1.add(new Item("Trà Sữa êi", "em non lắm", 10000, "http://10.0.2.2:2104/01/img_product/kit_cat10l_huong_phan_thom_68a252dc5958421a8752e816fa3287c8_65f162cd6b5e443094fd85d4800a6d07_large.webp"));
+//        list1.add(new Item("Trà Sữa êi", "em non lắm", 12000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+//
+//        List<Item> list2 = new ArrayList<>();
+//        list2.add(new Item("Trà Sữa êi", "em non lắm", 18000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+//        list2.add(new Item("Trà Sữa êi", "em non lắm", 22000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
+//
+//        categoryList.add(new Category("Trà sữa", list1));
+//        categoryList.add(new Category("Cà phê", list2));
 
     }
 

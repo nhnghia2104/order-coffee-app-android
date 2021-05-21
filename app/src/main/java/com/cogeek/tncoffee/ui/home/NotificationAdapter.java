@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cogeek.tncoffee.R;
-import com.cogeek.tncoffee.models.Notification;
+import com.cogeek.tncoffee.models_old.Notification;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
