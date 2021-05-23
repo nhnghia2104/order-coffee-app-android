@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.MapsActivity;
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.models.ItemCart;
 import com.cogeek.tncoffee.models_old.CartDetail;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -32,7 +33,7 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 
     private CartViewModel cartViewModel;
-    private List<CartDetail> cartDetails = new ArrayList<>();
+    private List<ItemCart> cartDetails = new ArrayList<>();
     private ItemCartAdapter itemCartAdapter;
     private RecyclerView recyclerView;
     private TextView txtAddress;
@@ -71,9 +72,6 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayout pickupLayout = view.findViewById(R.id.pickupLayout);
-        pickupLayout.setVisibility(View.GONE);
-
         recyclerView = view.findViewById(R.id.recyclerView_cart_item);
         itemCartAdapter = new ItemCartAdapter(cartDetails);
         recyclerView.setAdapter(itemCartAdapter);
@@ -95,11 +93,10 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void registerLiveDataListenner() {
         cartViewModel.getCart().observe(getViewLifecycleOwner(), cart -> {
             cartDetails.clear();
-            cartDetails = cart.getDetails();
+            cartDetails = cart.getItemList();
             itemCartAdapter.setObjects(cartDetails);
             itemCartAdapter.notifyDataSetChanged();
-            txtPriceFinal.setText(NumberHelper.getInstance().currencyFormat(cart.getTotal()));
-            txtNameFinal.setText("Giao tận nơi");
+            txtPriceFinal.setText(NumberHelper.getInstance().currencyFormat(cart.totalPrice()));
         });
     }
 }

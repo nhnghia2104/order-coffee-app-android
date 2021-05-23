@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.ui.menu;
+    package com.cogeek.tncoffee.ui.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,10 @@ import android.widget.TextView;
 import com.cogeek.tncoffee.api.ProductApi;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
+import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
+import com.cogeek.tncoffee.ui.cart.CartViewModel;
+import com.cogeek.tncoffee.ui.home.ItemViewModel;
 import com.cogeek.tncoffee.ui.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.item.MainItemAdapter;
 import com.cogeek.tncoffee.utils.NetworkProvider;
@@ -41,6 +45,7 @@ public class MenuFragment extends Fragment {
     private RecyclerView recyclerViewListItem;
     private MainItemAdapter mainItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ItemViewModel itemViewModel;
     private List<com.cogeek.tncoffee.models.Category> categoryList;
     private TextView stickyView;
     private View heroImageView;
@@ -56,6 +61,7 @@ public class MenuFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
         layoutManager = new LinearLayoutManager(getContext());
+        itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         return root;
     }
 
@@ -91,43 +97,24 @@ public class MenuFragment extends Fragment {
     }
 
     private void addControl() {
-        /* Initialise views */
-//        listView = view.findViewById(R.id.listViewItem);
-//        stickyView = view.findViewById(R.id.stickyView);
-//        heroImageView = view.findViewById(R.id.heroImageView);
-//        searchView = header.findViewById(R.id.searchView);
-
-        /* Init list header layout */
-//        header = getLayoutInflater().inflate(R.layout.header_category_listview, null, false);
-//        stickyViewSpacer = header.findViewById(R.id.stickyViewPlaceholder);
-
-        /* Add list view header */
-//        listView.addHeaderView(header);
-
-        /* create and set adapter */
-//        itemAdapter = new ItemAdapter(getActivity(), R.layout.item, listItems);
-//        listView.setAdapter(itemAdapter);
         btnOpenCart = view.findViewById(R.id.btnOpenCart);
         recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
         mainItemAdapter = new MainItemAdapter(categoryList);
-        mainItemAdapter.setOnItemListener(new MainItemAdapter.OnItemListener() {
-            @Override
-            public void onItemClick(int section, int row) {
-                Log.i("click item at", "section: " + section + ", row: " + row);
-                ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("name", categoryList.get(section).getItems().get(row).getName());
-                bundle.putString("description", categoryList.get(section).getItems().get(row).getDescription());
-                bundle.putDouble("price", Double.parseDouble(categoryList.get(section).getItems().get(row).getPrice()));
-                bundle.putString("imageUrl", categoryList.get(section).getItems().get(row).getImage());
-                bottomSheetDialog.setArguments(bundle);
-                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
-            }
-        });
+        mainItemAdapter.setOnItemListener(itemListener);
         recyclerViewListItem.setLayoutManager(layoutManager);
         recyclerViewListItem.setAdapter(mainItemAdapter);
     }
 
+    MainItemAdapter.OnItemListener itemListener = new MainItemAdapter.OnItemListener() {
+        @Override
+        public void onItemClick(int section, int row) {
+            Log.i("click item at", "section: " + section + ", row: " + row);
+            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+            Product item = categoryList.get(section).getItems().get(row);
+            itemViewModel.selectItem(item);
+            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+        }
+    };
 
     private void addEvent() {
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

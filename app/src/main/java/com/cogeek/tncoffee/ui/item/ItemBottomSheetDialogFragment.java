@@ -19,10 +19,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.models.ItemCart;
+import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.models_old.CartDetail;
 import com.cogeek.tncoffee.models_old.Item;
 import com.cogeek.tncoffee.models_old.Size;
 import com.cogeek.tncoffee.ui.cart.CartViewModel;
+import com.cogeek.tncoffee.ui.home.ItemViewModel;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -31,11 +34,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
-    private String imageUrl;
-    private String name;
-    private int price;
-    private String description;
-    private boolean isFavorite;
     private TextView txtPriceFinal;
     private RadioGroup radioGroupItemSize;
     private TextView txtQty;
@@ -43,10 +41,9 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private TextView btnDecrease;
     private ConstraintLayout btnConfirmItem;
     private TextView txtNote;
-    private Size size = Size.SMALL;
-    private Item item;
+    private Product product;
     private CartViewModel cartViewModel;
-
+    private ItemViewModel itemViewModel;
     private int itemQty = 1;
 
     @Nullable
@@ -57,7 +54,10 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         Window window = getActivity().getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
-
+        itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        itemViewModel.getSelectedItem().observe(getActivity(), item -> {
+            product = item;
+        });
         View view = inflater.inflate(R.layout.bottom_sheet_item_layout, container, false);
 
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -70,15 +70,6 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
-
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            imageUrl = arguments.getString("imageUrl");
-            name = arguments.getString("name");
-            description = arguments.getString("description");
-            price = arguments.getInt("price");
-        }
-
         return view;
     }
 
@@ -105,44 +96,23 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         btnConfirmItem = view.findViewById(R.id.btnConfirmItem);
         txtNote = view.findViewById(R.id.txtRequirement);
         //==========================================================
-        txtName.setText(name);
-        txtPrice.setText(NumberHelper.getInstance().currencyFormat(price));
-        txtDescription.setText(description);
+        txtName.setText(product.getName());
+        txtPrice.setText(NumberHelper.getInstance().currencyFormat(product.getFinalPrice()));
+        txtDescription.setText(product.getDescription());
         Picasso.get()
-                .load(imageUrl)
+                .load(product.getImage())
                 .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
                 .centerCrop()
                 .into(imageView);
         txtQty.setText(String.valueOf(itemQty));
-        txtPriceFinal.setText("Chọn món - " + NumberHelper.getInstance().currencyFormat(itemQty * price));
+        txtPriceFinal.setText("Chọn món");
         RadioButton btnSizeSelected = view.findViewById(radioGroupItemSize.getCheckedRadioButtonId());
 
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getDialog().dismiss();
-            }
-        });
-        radioGroupItemSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton btnSizeSelected = view.findViewById(checkedId);
-
-                switch (btnSizeSelected.getId()) {
-                    case R.id.radioBtnSizeS:
-                        size = Size.SMALL;
-                        break;
-                    case R.id.radioBtnSizeM:
-                        size = Size.MEDIUM;
-                        break;
-                    case R.id.radioBtnSizeL:
-                        size = Size.LARGE;
-                        break;
-                    default:
-                        size = Size.SMALL;
-                        break;
-                }
             }
         });
 
@@ -170,18 +140,13 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private void changeItemQty(int num) {
         txtQty.setText(String.valueOf(num));
-        txtPriceFinal.setText("Chọn món - " + NumberHelper.getInstance().currencyFormat(itemQty * price));
+//        txtPriceFinal.setText("Chọn món - " + NumberHelper.getInstance().currencyFormat(itemQty * price));
     }
 
     private void addItemToCart() {
         String note = txtNote.getText().toString().isEmpty() ? "" : txtNote.getText().toString();
-        CartDetail cartDetail = new CartDetail(
-                new Item(name, description, price, imageUrl),
-                size,
-                itemQty,
-                note
-        );
-        cartViewModel.addItemToCart(cartDetail);
+        ItemCart cartDetail = new ItemCart("","","",0.0,0.0,0);
+        cartViewModel.addItem(cartDetail);
         dismiss();
     }
 }

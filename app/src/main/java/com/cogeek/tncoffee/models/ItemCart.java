@@ -84,4 +84,17 @@ public class ItemCart {
     public int decQty() {
        return --this.quantity;
     }
+
+    @Override
+    public String toString() {
+        return "ItemCart{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", finalPrice=" + finalPrice +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

@@ -8,8 +8,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.cogeek.tncoffee.models_old.Cart;
-import com.cogeek.tncoffee.models_old.CartDetail;
+import com.cogeek.tncoffee.models.Cart;
+import com.cogeek.tncoffee.models.ItemCart;
+import com.cogeek.tncoffee.models_old.Item;
+import com.cogeek.tncoffee.utils.SharedHelper;
 
 public class CartViewModel extends AndroidViewModel {
     private MutableLiveData<Cart> mCart = new MutableLiveData<>();
@@ -17,15 +19,48 @@ public class CartViewModel extends AndroidViewModel {
     public CartViewModel(@NonNull Application application) {
         super(application);
         cart = new Cart();
-        mCart.setValue(cart);
+        loadCart();
     }
     public LiveData<Cart> getCart() {
         return mCart;
     }
 
-    public void addItemToCart(CartDetail item) {
-        cart.addItem(item);
-        this.mCart.setValue(cart);
-        Log.i("Item Added", item.toString());
+    public void addItem(ItemCart itemCart) {
+        for (ItemCart item : cart.getItemList()) {
+            if (item.getId() == itemCart.getId()) {
+                item.incQty();
+                saveCart();
+                return;
+            }
+        }
+        cart.addItem(itemCart);
+        saveCart();
+    }
+
+    public void removeItem(String id) {
+        for (ItemCart item : cart.getItemList()) {
+            if (item.getId() == id) {
+                if (item.decQty() == 0) {
+                    cart.removeItem(item);
+                }
+                break;
+            }
+        }
+        saveCart();
+    }
+
+    private void saveCart() {
+        SharedHelper.getInstance(getApplication()).setCart(cart);
+        mCart.setValue(cart);
+    }
+
+    private void loadCart() {
+        cart = SharedHelper.getInstance(getApplication()).getCart();
+        mCart.setValue(cart);
+    }
+
+    public void clearCart() {
+        cart.clear();
+        saveCart();
     }
 }

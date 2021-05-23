@@ -44,7 +44,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product item = itemList.get(position);
         holder.getTxtItemName().setText(item.getName());
-        holder.getTxtPrice().setText(NumberHelper.getInstance().currencyFormat(Double.parseDouble(item.getPrice())));
+        holder.getTxtPrice().setText(NumberHelper.getInstance().currencyFormat(item.getPrice()));
 
         Picasso.get()
                 .load(item.getImage())

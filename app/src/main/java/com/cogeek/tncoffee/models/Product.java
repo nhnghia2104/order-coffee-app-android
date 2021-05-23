@@ -56,11 +56,15 @@ public final class Product {
         return name;
     }
 
-    public String getPrice() {
-        return price;
+    public Double getPrice() {
+        return Double.parseDouble(price);
     }
 
-    public String getDiscount() {
-        return discount;
+    public Double getFinalPrice() {
+        return Double.parseDouble(price) * Double.parseDouble(discount);
+    }
+
+    public Double getDiscount() {
+        return Double.parseDouble(discount);
     }
 }

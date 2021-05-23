@@ -8,48 +8,12 @@ import java.util.List;
 public class Cart {
 
     private List<ItemCart> itemList;
-    private SharedHelper sharedHelper;
 
-    public Cart(SharedHelper sharedHelper) {
-        itemList = new ArrayList<>();
-        this.sharedHelper = sharedHelper;
+    public Cart() {
     }
 
-    public void saveCart() {
-
-    }
-
-    public void loadCart() {
-
-    }
-
-    public void clearCart() {
-        itemList.clear();
-        saveCart();
-    }
-
-    public void addItem(ItemCart itemCart) {
-        for (ItemCart item : itemList) {
-            if (item.getId() == itemCart.getId()) {
-                item.incQty();
-                saveCart();
-                return;
-            }
-        }
-        itemList.add(itemCart);
-        saveCart();
-    }
-
-    public void removeItem(String id) {
-        for (ItemCart item : itemList) {
-            if (item.getId() == id) {
-                if (item.decQty() == 0) {
-                    itemList.remove(item);
-                }
-                break;
-            }
-        }
-        saveCart();
+    public List<ItemCart> getItemList() {
+        return itemList;
     }
 
     public Double totalPrice() {
@@ -60,7 +24,19 @@ public class Cart {
         return total;
     }
 
-    public List<ItemCart> getItemList() {
-        return itemList;
+    public void setItemList(List<ItemCart> itemList) {
+        this.itemList = itemList;
+    }
+
+    public void removeItem(ItemCart item) {
+        this.itemList.remove(item);
+    }
+
+    public void addItem(ItemCart item) {
+        this.itemList.add(item);
+    }
+
+    public void clear() {
+        this.itemList.clear();
     }
 }

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.models.ItemCart;
 import com.cogeek.tncoffee.models_old.CartDetail;
 import com.cogeek.tncoffee.utils.NumberHelper;
 
@@ -16,13 +17,13 @@ import java.util.List;
 
 public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHolder> {
 
-    List<CartDetail> objects;
+    List<ItemCart> objects;
 
-    public ItemCartAdapter(List<CartDetail> objects) {
+    public ItemCartAdapter(List<ItemCart> objects) {
         this.objects = objects;
     }
 
-    public void setObjects(List<CartDetail> objects) {
+    public void setObjects(List<ItemCart> objects) {
         this.objects = objects;
     }
 
@@ -38,16 +39,7 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CartDetail cartDetail = objects.get(position);
-
-        holder.getTxtItem().setText(cartDetail.getQuantity()
-                + " x "
-                + cartDetail.getItem().getName());
-
-        holder.getTxtSize().setText(cartDetail.getSize().getDisplayName());
-
-
-        holder.getTxtTotalPrice().setText(NumberHelper.getInstance().currencyFormat(cartDetail.getPrice()));
+        ItemCart item = objects.get(position);
     }
 
     @Override
