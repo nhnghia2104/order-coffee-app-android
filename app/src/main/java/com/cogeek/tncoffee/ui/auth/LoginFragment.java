@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.api.UserApi;
+import com.cogeek.tncoffee.models.User;
+import com.cogeek.tncoffee.utils.NetworkProvider;
+import com.cogeek.tncoffee.utils.SharedHelper;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +28,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
     private Button btnLoginGoogle;
@@ -33,7 +42,7 @@ public class LoginFragment extends Fragment {
     private static final int RC_SIGN_IN = 123;
 
     public interface LoginFragmentListener {
-        void onCompleteLoginWithGoogle(String uid);
+        void onCompleteLogin(User user);
     }
 
     @Override
@@ -53,8 +62,37 @@ public class LoginFragment extends Fragment {
         btnOk = view.findViewById(R.id.btnOk);
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
-        btnOk.setOnClickListener(v -> {
 
+
+
+
+
+        btnOk.setOnClickListener(v -> {
+            String username = editUsername.getText().toString();
+            String password = editPassword.getText().toString();
+            Log.i("username", username);
+            Log.i("password", password);
+
+            if (username != "" && password != "") {
+                UserApi userApi = NetworkProvider.self().retrofit.create(UserApi.class);
+                Call<User> call = userApi.authenticate(username,password);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Log.i("response", response.message());
+                        if (response.isSuccessful()) {
+                            User user = response.body();
+                            Log.i("non", user.getGender());
+                            listener.onCompleteLogin(user);
+                            SharedHelper.getInstance(getContext()).setUserProfile(user);
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
+            }
         });
 
     }
@@ -82,7 +120,7 @@ public class LoginFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                listener.onCompleteLoginWithGoogle(user.getUid());
+//                listener.onCompleteLogin(user.getUid());
                 Toast.makeText(getActivity(), "Hello " + user.getDisplayName(), Toast.LENGTH_LONG).show();
             } else {
                 // Sign in failed. If response is null the user canceled the

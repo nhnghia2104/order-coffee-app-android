@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cogeek.tncoffee.models.User;
 import com.cogeek.tncoffee.ui.auth.LoginFragment;
 import com.cogeek.tncoffee.utils.SharedHelper;
 
@@ -19,7 +20,8 @@ public class LaunchActivity extends AppCompatActivity implements LoginFragment.L
         setContentView(R.layout.activity_launch);
 
         String uid = SharedHelper.getInstance(this).getUserUidKey();
-        if (uid.isEmpty()) {
+        User user = SharedHelper.getInstance(this).getUserProfile();
+        if (user == null) {
             addLoginFragment();
         } else {
             onLoginCompleted();
@@ -40,9 +42,8 @@ public class LaunchActivity extends AppCompatActivity implements LoginFragment.L
     }
 
     @Override
-    public void onCompleteLoginWithGoogle(String uid) {
-        Log.d("UID", uid);
-        SharedHelper.getInstance(this).setUserUidKey(uid);
+    public void onCompleteLogin(User user) {
+        SharedHelper.getInstance(this).setUserProfile(user);
         onLoginCompleted();
     }
 

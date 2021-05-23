@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.cogeek.tncoffee.PlaceHolderApi;
+import com.cogeek.tncoffee.api.ProductApi;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
 import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
@@ -67,8 +67,8 @@ public class MenuFragment extends Fragment {
         addControl();
         addEvent();
 
-        PlaceHolderApi placeHolderApi = NetworkProvider.self().retrofit.create(PlaceHolderApi.class);
-        Call<List<com.cogeek.tncoffee.models.Category>> call = placeHolderApi.getCategories();
+        ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
+        Call<List<com.cogeek.tncoffee.models.Category>> call = productApi.getCategories();
 
         call.enqueue(new Callback<List<com.cogeek.tncoffee.models.Category>>() {
             @Override
