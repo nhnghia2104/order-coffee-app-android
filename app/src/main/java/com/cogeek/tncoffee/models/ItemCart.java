@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.NumberHelper;
+
 public class ItemCart {
     private String id;
     private String name;
@@ -16,7 +18,7 @@ public class ItemCart {
         this.price = price;
         this.discount = discount;
         this.quantity = quantity;
-        this.finalPrice = price * discount;
+        this.finalPrice = price * (1 - discount);
     }
 
     public String getId() {
@@ -47,6 +49,11 @@ public class ItemCart {
         return price;
     }
 
+
+    public String getPriceToString() {
+        return NumberHelper.getInstance().currencyFormat(price);
+    }
+
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -61,6 +68,10 @@ public class ItemCart {
 
     public Double getFinalPrice() {
         return finalPrice;
+    }
+
+    public String getFinalPriceToString() {
+        return NumberHelper.getInstance().currencyFormat(finalPrice);
     }
 
     public void setFinalPrice(Double finalPrice) {
@@ -82,7 +93,7 @@ public class ItemCart {
 
     /* Decrease quantity item */
     public int decQty() {
-       return --this.quantity;
+        return --this.quantity;
     }
 
     @Override

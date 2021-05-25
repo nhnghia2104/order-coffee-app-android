@@ -34,13 +34,10 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
-    private TextView txtPriceFinal;
-    private RadioGroup radioGroupItemSize;
     private TextView txtQty;
     private TextView btnIncrease;
     private TextView btnDecrease;
     private ConstraintLayout btnConfirmItem;
-    private TextView txtNote;
     private Product product;
     private CartViewModel cartViewModel;
     private ItemViewModel itemViewModel;
@@ -83,18 +80,15 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
         RoundedImageView imageView = view.findViewById(R.id.imageItem_BottomSheet);
         TextView txtName = view.findViewById(R.id.txtItemName_BottomSheet);
         TextView txtPrice = view.findViewById(R.id.txtItemPrice_BottomSheet);
         TextView txtDescription = view.findViewById(R.id.txtItemDescription_BottomSheet);
         ImageView btnImageClose = view.findViewById(R.id.btnImageClose_BottomSheet);
-        radioGroupItemSize = view.findViewById(R.id.radioGroupItemSize);
         btnIncrease = view.findViewById(R.id.btnIncreaseQty);
         btnDecrease = view.findViewById(R.id.btnDecreaseQty);
         txtQty = view.findViewById(R.id.txtQuantity);
         btnConfirmItem = view.findViewById(R.id.btnConfirmItem);
-        txtNote = view.findViewById(R.id.txtRequirement);
         //==========================================================
         txtName.setText(product.getName());
         txtPrice.setText(NumberHelper.getInstance().currencyFormat(product.getFinalPrice()));
@@ -106,8 +100,6 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 .centerCrop()
                 .into(imageView);
         txtQty.setText(String.valueOf(itemQty));
-        txtPriceFinal.setText("Chọn món");
-        RadioButton btnSizeSelected = view.findViewById(radioGroupItemSize.getCheckedRadioButtonId());
 
         btnImageClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,8 +136,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     }
 
     private void addItemToCart() {
-        String note = txtNote.getText().toString().isEmpty() ? "" : txtNote.getText().toString();
-        ItemCart cartDetail = new ItemCart("","","",0.0,0.0,0);
+        ItemCart cartDetail = new ItemCart(product.getId(),product.getName(),product.getImage(),product.getPrice(),product.getDiscount(),itemQty);
         cartViewModel.addItem(cartDetail);
         dismiss();
     }

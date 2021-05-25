@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.cogeek.tncoffee.utils.SharedHelper;
 
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ public class Cart {
     private List<ItemCart> itemList;
 
     public Cart() {
+        if (itemList == null) {
+            itemList = new ArrayList<>();
+        }
     }
 
     public List<ItemCart> getItemList() {
@@ -24,6 +28,9 @@ public class Cart {
         return total;
     }
 
+    public String totalPriceToString() {
+        return NumberHelper.getInstance().currencyFormat(totalPrice());
+    }
     public void setItemList(List<ItemCart> itemList) {
         this.itemList = itemList;
     }

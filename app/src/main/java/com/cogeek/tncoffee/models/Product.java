@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -44,6 +45,10 @@ public final class Product {
     @SerializedName("view")
     private  String view;
 
+    public String getId() {
+        return id;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -61,7 +66,15 @@ public final class Product {
     }
 
     public Double getFinalPrice() {
-        return Double.parseDouble(price) * Double.parseDouble(discount);
+        return Double.parseDouble(price) * ( 1 - Double.parseDouble(discount));
+    }
+
+    public String getFinalPriceToString() {
+        return NumberHelper.getInstance().currencyFormat(Double.parseDouble(price) * ( 1 - Double.parseDouble(discount)));
+    }
+
+    public String getPriceToString() {
+        return  NumberHelper.getInstance().currencyFormat(Double.parseDouble(price));
     }
 
     public Double getDiscount() {

@@ -16,11 +16,13 @@ import com.cogeek.tncoffee.utils.SharedHelper;
 public class CartViewModel extends AndroidViewModel {
     private MutableLiveData<Cart> mCart = new MutableLiveData<>();
     private Cart cart;
+
     public CartViewModel(@NonNull Application application) {
         super(application);
         cart = new Cart();
         loadCart();
     }
+
     public LiveData<Cart> getCart() {
         return mCart;
     }
@@ -55,8 +57,10 @@ public class CartViewModel extends AndroidViewModel {
     }
 
     private void loadCart() {
-        cart = SharedHelper.getInstance(getApplication()).getCart();
-        mCart.setValue(cart);
+        Cart temp = SharedHelper.getInstance(getApplication()).getCart();
+        if (temp != null) {
+            mCart.setValue(cart);
+        }
     }
 
     public void clearCart() {

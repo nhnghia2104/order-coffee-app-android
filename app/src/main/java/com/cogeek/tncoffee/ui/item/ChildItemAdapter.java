@@ -50,7 +50,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
                 .load(item.getImage())
                 .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .into(holder.getImageItem());
     }
 
