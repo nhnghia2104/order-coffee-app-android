@@ -23,21 +23,24 @@ import com.cogeek.tncoffee.MapsActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.OrderApi;
 import com.cogeek.tncoffee.models.ItemCart;
+import com.cogeek.tncoffee.models.Order;
 import com.cogeek.tncoffee.models.User;
 import com.cogeek.tncoffee.models_old.CartDetail;
-import com.cogeek.tncoffee.models_old.Order;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.cogeek.tncoffee.utils.SharedHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -128,24 +131,47 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
     View.OnClickListener onConfirmCartListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            User user = SharedHelper.getInstance(getActivity()).getUserProfile();
-            OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
-            orderApi.create(new Date().getTime(),
-                    new Date().getTime(),
-                    totalCart,
-                    1,
-                    1,
-                    0,
-                    0,
-                    "",
-                    user.getUid(),
-                    "",
-                    "",
-                    "",
-                    "",
-                    1);
+            if (cartDetails.size() > 0) {
+                createOrder();
+            }
         }
     };
+
+    private void createOrder() {
+        User user = SharedHelper.getInstance(getActivity()).getUserProfile();
+        OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
+        Gson gson = new Gson();
+        String prodcutListString = gson.toJson(cartDetails);
+        String dateString = NumberHelper.getInstance().dateFormatForDatabase(new Date().getTime());
+        Call<Order> call = orderApi.create(new Date().getTime(),
+                dateString,
+                totalCart,
+                1,
+                1,
+                0,
+                "0",
+                "",
+                user.getUid(),
+                "",
+                prodcutListString,
+                "",
+                "",
+                1);
+
+        call.enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                Log.i("response", response.message());
+                if (response.isSuccessful()) {
+                    Log.i("non", "ngon");
+                }
+            }
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                Log.e("errror", t.getMessage());
+            }
+        });
+    }
 
     public void registerLiveDataListenner() {
         cartViewModel.getCart().observe(getViewLifecycleOwner(), cart -> {

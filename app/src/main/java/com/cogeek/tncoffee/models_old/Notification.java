@@ -9,7 +9,7 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(String title, String content, String image, int time) {
+    public Notification(String title, String content, String image, long time) {
         this.title = title;
         this.content = content;
         this.image = image;

@@ -8,7 +8,6 @@ public class ItemCart {
     private String image;
     private Double price;
     private Double discount;
-//    private Double finalPrice;
     private int quantity;
 
     public ItemCart(String id, String name, String image, Double price, Double discount, int quantity) {

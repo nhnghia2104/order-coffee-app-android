@@ -12,12 +12,12 @@ public interface OrderApi {
     @FormUrlEncoded
     @POST("order/create")
     Call<Order> create(@Field("id") long id,
-                       @Field("createAt") long createAt,
+                       @Field("createAt") String createAt,
                        @Field("total") Double total,
                        @Field("idPayment") int idPayment,
                        @Field("status") int status,
                        @Field("paid") int paid,
-                       @Field("payDate") long payDate,
+                       @Field("payDate") String payDate,
                        @Field("note") String note,
                        @Field("idCustomer") String idCustomer,
                        @Field("timeline") String timeline,
