@@ -3,11 +3,13 @@ package com.cogeek.tncoffee.ui.cart;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,15 +21,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.MapsActivity;
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.api.OrderApi;
 import com.cogeek.tncoffee.models.ItemCart;
+import com.cogeek.tncoffee.models.User;
 import com.cogeek.tncoffee.models_old.CartDetail;
+import com.cogeek.tncoffee.models_old.Order;
+import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.cogeek.tncoffee.utils.NumberHelper;
+import com.cogeek.tncoffee.utils.SharedHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
 
 public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -37,8 +47,9 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private ItemCartAdapter itemCartAdapter;
     private RecyclerView recyclerView;
     private TextView txtAddress;
-    private  TextView txtPriceFinal;
-    private TextView txtNameFinal;
+    private TextView txtPriceFinal;
+    private Button btnConfirmCart;
+    private Double totalCart;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,6 +73,28 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
         return view;
     }
 
+    ItemCartAdapter.OnItemListener onItemListener = new ItemCartAdapter.OnItemListener() {
+        @Override
+        public void onItemClick(int row) {
+
+        }
+
+        @Override
+        public void onIncrease(int row) {
+            cartViewModel.addItem(cartDetails.get(row));
+        }
+
+        @Override
+        public void onDecrease(int row) {
+            cartViewModel.removeItem(cartDetails.get(row).getId());
+        }
+
+        @Override
+        public void onRemove(int row) {
+            cartViewModel.deleteItemCart(cartDetails.get(row));
+        }
+    };
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +108,7 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
         recyclerView = view.findViewById(R.id.recyclerView_cart_item);
         itemCartAdapter = new ItemCartAdapter(cartDetails);
         recyclerView.setAdapter(itemCartAdapter);
+        itemCartAdapter.setOnItemListener(onItemListener);
         registerLiveDataListenner();
 
         txtAddress = view.findViewById(R.id.txtAddress);
@@ -87,16 +121,39 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
         });
 
         txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
-        txtNameFinal = view.findViewById(R.id.txtNameFinal);
+        btnConfirmCart = view.findViewById(R.id.btnConfirmCart);
+        btnConfirmCart.setOnClickListener(onConfirmCartListener);
     }
+
+    View.OnClickListener onConfirmCartListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            User user = SharedHelper.getInstance(getActivity()).getUserProfile();
+            OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
+            orderApi.create(new Date().getTime(),
+                    new Date().getTime(),
+                    totalCart,
+                    1,
+                    1,
+                    0,
+                    0,
+                    "",
+                    user.getUid(),
+                    "",
+                    "",
+                    "",
+                    "",
+                    1);
+        }
+    };
 
     public void registerLiveDataListenner() {
         cartViewModel.getCart().observe(getViewLifecycleOwner(), cart -> {
             cartDetails.clear();
-            cartDetails = cart.getItemList();
-            itemCartAdapter.setObjects(cartDetails);
+            cartDetails.addAll(cart.getItemList());
             itemCartAdapter.notifyDataSetChanged();
-            txtPriceFinal.setText(NumberHelper.getInstance().currencyFormat(cart.totalPrice()));
+            txtPriceFinal.setText(cart.totalCartPriceToString());
+            totalCart = cart.totalCartPrice();
         });
     }
 }

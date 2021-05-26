@@ -8,7 +8,7 @@ public class ItemCart {
     private String image;
     private Double price;
     private Double discount;
-    private Double finalPrice;
+//    private Double finalPrice;
     private int quantity;
 
     public ItemCart(String id, String name, String image, Double price, Double discount, int quantity) {
@@ -18,7 +18,7 @@ public class ItemCart {
         this.price = price;
         this.discount = discount;
         this.quantity = quantity;
-        this.finalPrice = price * (1 - discount);
+//        this.finalPrice = price * (1 - discount);
     }
 
     public String getId() {
@@ -66,16 +66,12 @@ public class ItemCart {
         this.discount = discount;
     }
 
-    public Double getFinalPrice() {
-        return finalPrice;
+    public Double getPriceAfterDiscount() {
+        return this.price * ( 1 - this.discount);
     }
 
-    public String getFinalPriceToString() {
-        return NumberHelper.getInstance().currencyFormat(finalPrice);
-    }
-
-    public void setFinalPrice(Double finalPrice) {
-        this.finalPrice = finalPrice;
+    public String getPriceAfterDiscountToString() {
+        return NumberHelper.getInstance().currencyFormat(getPriceAfterDiscount());
     }
 
     public int getQuantity() {
@@ -87,12 +83,12 @@ public class ItemCart {
     }
 
     /* Increase quantity item */
-    public void incQty() {
+    public void increaseQuantity() {
         this.quantity++;
     }
 
     /* Decrease quantity item */
-    public int decQty() {
+    public int decreaseQuantity() {
         return --this.quantity;
     }
 
@@ -104,7 +100,6 @@ public class ItemCart {
                 ", image='" + image + '\'' +
                 ", price=" + price +
                 ", discount=" + discount +
-                ", finalPrice=" + finalPrice +
                 ", quantity=" + quantity +
                 '}';
     }

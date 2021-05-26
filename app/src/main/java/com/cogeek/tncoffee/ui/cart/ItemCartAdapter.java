@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.ItemCart;
+import com.cogeek.tncoffee.ui.item.MainItemAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,8 +26,17 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
         this.objects = objects;
     }
 
-    public void setObjects(List<ItemCart> objects) {
-        this.objects = objects;
+    private OnItemListener onItemListener;
+
+    public interface OnItemListener {
+        void onItemClick(int row);
+        void onIncrease(int row);
+        void onDecrease(int row);
+        void onRemove(int row);
+    };
+
+    public void setOnItemListener(OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
@@ -45,7 +55,7 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
 
         holder.getTxtItemName().setText(item.getName());
         holder.getTxtQuantity().setText(String.valueOf(item.getQuantity()));
-        holder.getTxtFinalPrice().setText(item.getFinalPriceToString());
+        holder.getTxtFinalPrice().setText(item.getPriceAfterDiscountToString());
         if (item.getDiscount() > 0) {
             holder.getTxtPrice().setText(item.getPriceToString());
             holder.getTxtPrice().setPaintFlags(holder.getTxtPrice().getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -60,6 +70,16 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
                 .fit()
                 .centerInside()
                 .into(holder.getImgItem());
+
+        holder.getBtnDecrease().setOnClickListener(v -> {
+            this.onItemListener.onDecrease(position);
+        });
+        holder.getBtnInCrease().setOnClickListener(v -> {
+            this.onItemListener.onIncrease(position);
+        });
+        holder.getBtnRemove().setOnClickListener(v -> {
+            this.onItemListener.onRemove(position);
+        });
     }
 
     @Override
@@ -74,6 +94,7 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
         private final ImageView imgItem;
         private final ImageButton btnDecrease;
         private final ImageButton btnInCrease;
+        private final ImageButton btnRemove;
         private final TextView txtQuantity;
 
         public ViewHolder(@NonNull View itemView) {
@@ -85,6 +106,12 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.ViewHo
             btnDecrease = itemView.findViewById(R.id.btn_decrease_cart);
             btnInCrease = itemView.findViewById(R.id.btn_increase_cart);
             txtQuantity = itemView.findViewById(R.id.txt_item_quantity_cart);
+            btnRemove = itemView.findViewById(R.id.btn_delete_cart);
+
+        }
+
+        public ImageButton getBtnRemove() {
+            return btnRemove;
         }
 
         public TextView getTxtFinalPrice() {

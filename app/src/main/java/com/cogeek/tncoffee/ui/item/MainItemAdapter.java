@@ -15,6 +15,7 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHolder> {
@@ -35,9 +36,9 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
         this.categoryList = categoryList;
     }
 
-    public void setObjects(List<Category> list) {
-        this.categoryList = list;
-    }
+//    public void setObjects(List<Category> list) {
+//        this.categoryList = list;
+//    }
 
     @NonNull
     @Override
@@ -54,7 +55,9 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
         Category category = categoryList.get(section);
 
         String sectionName = category.getName();
-        List<Product> items = category.getItems();
+        List<Product> items = new ArrayList<>();
+
+        items.addAll(category.getItems());
 
         holder.getTxtSectionName().setText(sectionName);
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(items);
@@ -69,7 +72,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
         });
         holder.getChildRecyclerView().setLayoutManager(layoutManager);
         holder.getChildRecyclerView().setAdapter(childItemAdapter);
-
+        childItemAdapter.notifyDataSetChanged();
     }
 
     @Override

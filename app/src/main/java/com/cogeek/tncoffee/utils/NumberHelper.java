@@ -14,7 +14,7 @@ public class NumberHelper {
     private NumberHelper() {};
 
     public String currencyFormat(double number) {
-        NumberFormat formatter = new DecimalFormat("#,###");
+        NumberFormat formatter = new DecimalFormat("#.###");
         String formattedNumber = formatter.format(number);
         return formattedNumber + "₫";
     }

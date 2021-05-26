@@ -39,5 +39,9 @@
         android:id="@+id/userInfoFragment"
         android:name="com.cogeek.tncoffee.ui.userinfo.UserInfoFragment"
         android:label="UserInfoFragment" />
+    <fragment
+        android:id="@+id/cartBottomSheetDialogFragment"
+        android:name="com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment"
+        android:label="CartBottomSheetDialogFragment" />
 
 </navigation>

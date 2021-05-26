@@ -30,7 +30,7 @@ public class CartViewModel extends AndroidViewModel {
     public void addItem(ItemCart itemCart) {
         for (ItemCart item : cart.getItemList()) {
             if (item.getId() == itemCart.getId()) {
-                item.incQty();
+                item.increaseQuantity();
                 saveCart();
                 return;
             }
@@ -42,12 +42,17 @@ public class CartViewModel extends AndroidViewModel {
     public void removeItem(String id) {
         for (ItemCart item : cart.getItemList()) {
             if (item.getId() == id) {
-                if (item.decQty() == 0) {
+                if (item.decreaseQuantity() == 0) {
                     cart.removeItem(item);
                 }
                 break;
             }
         }
+        saveCart();
+    }
+
+    public void deleteItemCart(ItemCart itemCart) {
+        cart.removeItem(itemCart);
         saveCart();
     }
 

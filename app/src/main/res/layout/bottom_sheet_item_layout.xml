@@ -144,7 +144,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/btnConfirmItem"
+                app:layout_constraintBottom_toTopOf="@+id/btnAddItem"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -193,7 +193,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btnConfirmItem"
+                android:id="@+id/btnAddItem"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_shadow_white_corner_5dp"

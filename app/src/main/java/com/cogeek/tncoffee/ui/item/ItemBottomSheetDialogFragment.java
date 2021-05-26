@@ -9,8 +9,6 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,9 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.ItemCart;
 import com.cogeek.tncoffee.models.Product;
-import com.cogeek.tncoffee.models_old.CartDetail;
-import com.cogeek.tncoffee.models_old.Item;
-import com.cogeek.tncoffee.models_old.Size;
 import com.cogeek.tncoffee.ui.cart.CartViewModel;
 import com.cogeek.tncoffee.ui.home.ItemViewModel;
 import com.cogeek.tncoffee.utils.NumberHelper;
@@ -37,7 +32,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private TextView txtQty;
     private TextView btnIncrease;
     private TextView btnDecrease;
-    private ConstraintLayout btnConfirmItem;
+    private ConstraintLayout btnAddItem;
     private Product product;
     private CartViewModel cartViewModel;
     private ItemViewModel itemViewModel;
@@ -88,7 +83,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         btnIncrease = view.findViewById(R.id.btnIncreaseQty);
         btnDecrease = view.findViewById(R.id.btnDecreaseQty);
         txtQty = view.findViewById(R.id.txtQuantity);
-        btnConfirmItem = view.findViewById(R.id.btnConfirmItem);
+        btnAddItem = view.findViewById(R.id.btnAddItem);
         //==========================================================
         txtName.setText(product.getName());
         txtPrice.setText(NumberHelper.getInstance().currencyFormat(product.getFinalPrice()));
@@ -122,7 +117,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 changeItemQty(itemQty);
             }
         });
-        btnConfirmItem.setOnClickListener(new View.OnClickListener() {
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addItemToCart();

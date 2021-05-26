@@ -33,6 +33,9 @@ public class User {
     @SerializedName("avatar")
     private String avatar;
 
+    @SerializedName("shipping_address")
+    private UserAddress userAddress;
+
     public String getUid() {
         return uid;
     }
@@ -71,5 +74,9 @@ public class User {
 
     public String getAvatar() {
         return avatar;
+    }
+
+    public UserAddress getUserAddress() {
+        return userAddress;
     }
 }

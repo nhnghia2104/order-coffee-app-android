@@ -83,7 +83,7 @@ public class MenuFragment extends Fragment {
                     categoryList.clear();
                     List<com.cogeek.tncoffee.models.Category> categories = response.body();
                     categoryList.addAll(categories);
-                    mainItemAdapter.setObjects(categories);
+//                    mainItemAdapter.setObjects(categories);
                     mainItemAdapter.notifyDataSetChanged();
                     Log.i("ok", categories.get(0).getItems().get(0).getName());
                 }

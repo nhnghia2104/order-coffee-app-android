@@ -20,16 +20,16 @@ public class Cart {
         return itemList;
     }
 
-    public Double totalPrice() {
-        Double total = 0.0;
+    public Double totalCartPrice() {
+        Double totalCart = 0.0;
         for (ItemCart item : itemList) {
-            total += item.getFinalPrice();
+            totalCart += item.getPrice() * item.getQuantity() * ( 1 - item.getDiscount());
         }
-        return total;
+        return totalCart;
     }
 
-    public String totalPriceToString() {
-        return NumberHelper.getInstance().currencyFormat(totalPrice());
+    public String totalCartPriceToString() {
+        return NumberHelper.getInstance().currencyFormat(totalCartPrice());
     }
     public void setItemList(List<ItemCart> itemList) {
         this.itemList = itemList;
