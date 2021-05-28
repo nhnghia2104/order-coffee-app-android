@@ -6,8 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,6 @@ public class HomeFragment extends Fragment {
 
     private static final boolean IS_DEBUG = true;
 
-    private ListView listView;
     private NotificationAdapter adapter;
     private ArrayList<Notification> notificationArrayList = new ArrayList<Notification>();;
     //    private List<SliderItem> sliderItems;
@@ -43,6 +42,7 @@ public class HomeFragment extends Fragment {
     private Handler slideHandler;
     private CircleIndicator3 indicator;
     private View header;
+    private ImageView imgBackground;
 
     private DatabaseReference databaseReference;
 
@@ -71,30 +71,38 @@ public class HomeFragment extends Fragment {
             databaseReference.addValueEventListener(notificationValueEventListner);
         }
 
-        listView = view.findViewById(R.id.lvNotification);
-        adapter = new NotificationAdapter(getActivity(), R.layout.notification, notificationArrayList);
-        this.header = getLayoutInflater().inflate(R.layout.header_home_listview, null, false);
-        listView.addHeaderView(header);
-        listView.setAdapter(adapter);
+        imgBackground = view.findViewById(R.id.img_background_home);
+        Picasso.get()
+                .load("https://www.rebgv.org/content/dam/rebgv_org_content/images/strata%20pets.jpg")
+                .fit()
+                .placeholder(R.drawable.ic_zcafe_hint)
+                .centerCrop()
+                .into(imgBackground);
 
-        setUpSlider();
+//        listView = view.findViewById(R.id.lvNotification);
+//        adapter = new NotificationAdapter(getActivity(), R.layout.notification, notificationArrayList);
+//        this.header = getLayoutInflater().inflate(R.layout.header_home_listview, null, false);
+//        listView.addHeaderView(header);
+//        listView.setAdapter(adapter);
+
+//        setUpSlider();
         addEvent();
     }
 
     private void addEvent() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                NotificationBottomSheetDialogFragment bottomSheetDialog = new NotificationBottomSheetDialogFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("imageUrl", notificationArrayList.get(position - 1).getImage());
-                bundle.putString("title", notificationArrayList.get(position - 1).getTitle());
-                bundle.putString("content", notificationArrayList.get(position - 1).getContent());
-                bottomSheetDialog.setArguments(bundle);
-                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Notification");
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                NotificationBottomSheetDialogFragment bottomSheetDialog = new NotificationBottomSheetDialogFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("imageUrl", notificationArrayList.get(position - 1).getImage());
+//                bundle.putString("title", notificationArrayList.get(position - 1).getTitle());
+//                bundle.putString("content", notificationArrayList.get(position - 1).getContent());
+//                bottomSheetDialog.setArguments(bundle);
+//                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Notification");
+//            }
+//        });
     }
 
     private void setUpSlider() {
@@ -166,13 +174,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        slideHandler.removeCallbacks(sliderRunnable);
+//        slideHandler.removeCallbacks(sliderRunnable);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        slideHandler.postDelayed(sliderRunnable, 4000);
+//        slideHandler.postDelayed(sliderRunnable, 4000);
     }
 
     private void fakeData() {

@@ -7,12 +7,9 @@
 
     <item
         android:id="@+id/navigation_menu"
-        android:icon="@drawable/coffee_selector"
-        android:title="Đặt Món" />
-    <item
-        android:id="@id/navigation_store"
         android:icon="@drawable/store_selector"
-        android:title="Cửa Hàng" />
+        android:title="Cửa hàng" />
+
     <item
         android:id="@+id/navigation_more"
         android:icon="@drawable/menu_selector"

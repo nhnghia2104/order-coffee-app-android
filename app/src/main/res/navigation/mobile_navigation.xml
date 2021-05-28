@@ -18,11 +18,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_store"
-        android:name="com.cogeek.tncoffee.ui.store.StoreFragment"
-        android:label="Cửa hàng" />
-
-    <fragment
         android:id="@+id/navigation_more"
         android:name="com.cogeek.tncoffee.ui.more.MoreFragment"
         tools:layout="@layout/fragment_more"

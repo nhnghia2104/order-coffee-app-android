@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/background_black_corner_shadow"
+                android:background="@drawable/background_elevation"
                 android:baselineAligned="false"
                 android:text="Nữ"
                 android:textSize="18dp"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/background_black_corner_shadow"
+                android:background="@drawable/background_elevation"
                 android:baselineAligned="false"
                 android:text="Nam"
                 android:textSize="18dp" />
@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/background_black_corner_shadow"
+                android:background="@drawable/background_elevation"
                 android:baselineAligned="false"
                 android:text="Không nói"
                 android:textSize="18dp" />

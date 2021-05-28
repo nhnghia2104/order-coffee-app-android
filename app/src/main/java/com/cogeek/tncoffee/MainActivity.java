@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedHelper = SharedHelper.getInstance(this);
-        setupActionBar();
+//        setupActionBar();
         setupBottomNavBar();
     }
 
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.main_action_bar);
         getSupportActionBar().setElevation(0);
-//        View view = getSupportActionBar().getCustomView();
 
     }
 
