@@ -79,12 +79,10 @@ public class LoginFragment extends Fragment {
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        Log.i("response", response.message());
                         if (response.isSuccessful()) {
                             User user = response.body();
-                            Log.i("non", user.getGender());
                             listener.onCompleteLogin(user);
-                            SharedHelper.getInstance(getContext()).setUserProfile(user);
+//                            SharedHelper.getInstance(getContext()).setUserProfile(user);
                         }
                     }
                     @Override

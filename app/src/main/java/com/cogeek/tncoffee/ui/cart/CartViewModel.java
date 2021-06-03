@@ -28,6 +28,9 @@ public class CartViewModel extends AndroidViewModel {
     }
 
     public void addItem(ItemCart itemCart) {
+        if (cart == null) {
+            loadCart();
+        }
         for (ItemCart item : cart.getItemList()) {
             if (item.getId() == itemCart.getId()) {
                 item.increaseQuantity();
@@ -64,7 +67,7 @@ public class CartViewModel extends AndroidViewModel {
     private void loadCart() {
         Cart temp = SharedHelper.getInstance(getApplication()).getCart();
         if (temp != null) {
-            mCart.setValue(cart);
+            mCart.setValue(temp);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.MyConfig;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
@@ -60,6 +61,8 @@ public class User {
         return lastName;
     }
 
+    public String getFullName() { return firstName + " " + lastName;}
+
     public String getPhone() {
         return phone;
     }
@@ -73,7 +76,7 @@ public class User {
     }
 
     public String getAvatar() {
-        return avatar;
+        return MyConfig.self().BASE_URL + avatar;
     }
 
     public UserAddress getUserAddress() {

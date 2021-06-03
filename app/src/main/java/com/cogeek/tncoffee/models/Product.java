@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.MyConfig;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.gson.annotations.SerializedName;
 
@@ -54,7 +55,7 @@ public final class Product {
     }
 
     public String getImage() {
-        return "http://10.0.2.2:2104/01/" + image;
+        return MyConfig.self().BASE_URL + image;
     }
 
     public String getName() {

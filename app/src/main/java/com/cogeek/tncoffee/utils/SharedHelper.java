@@ -2,6 +2,7 @@ package com.cogeek.tncoffee.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.cogeek.tncoffee.models.Cart;
 import com.cogeek.tncoffee.models.User;
@@ -49,6 +50,7 @@ public class SharedHelper {
 
     public Cart getCart() {
         Gson gson = new Gson();
+        Log.e("cart", preferences.getString(CART_KEY,"[]"));
         return gson.fromJson(preferences.getString(CART_KEY, ""), Cart.class);
     }
 

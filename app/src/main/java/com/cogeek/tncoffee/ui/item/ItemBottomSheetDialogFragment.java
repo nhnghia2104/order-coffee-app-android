@@ -92,7 +92,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 .load(product.getImage())
                 .placeholder(R.drawable.ic_zcafe_hint)
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .into(imageView);
         txtQty.setText(String.valueOf(itemQty));
 

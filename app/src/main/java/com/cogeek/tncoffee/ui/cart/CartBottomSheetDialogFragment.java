@@ -22,8 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cogeek.tncoffee.MapsActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.OrderApi;
+import com.cogeek.tncoffee.models.Address;
+import com.cogeek.tncoffee.models.Cart;
 import com.cogeek.tncoffee.models.ItemCart;
 import com.cogeek.tncoffee.models.Order;
+import com.cogeek.tncoffee.models.TimelineOrder;
+import com.cogeek.tncoffee.models.TrackingOrder;
 import com.cogeek.tncoffee.models.User;
 import com.cogeek.tncoffee.models_old.CartDetail;
 import com.cogeek.tncoffee.utils.NetworkProvider;
@@ -126,6 +130,12 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
         txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
         btnConfirmCart = view.findViewById(R.id.btnConfirmCart);
         btnConfirmCart.setOnClickListener(onConfirmCartListener);
+
+        Cart cart = SharedHelper.getInstance(getActivity()).getCart();
+        if ( cart != null) {
+            cartDetails.addAll(cart.getItemList());
+            itemCartAdapter.notifyDataSetChanged();
+        }
     }
 
     View.OnClickListener onConfirmCartListener = new View.OnClickListener() {
@@ -138,11 +148,33 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
     };
 
     private void createOrder() {
+
+        // Lấy thông tin user
         User user = SharedHelper.getInstance(getActivity()).getUserProfile();
-        OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
         Gson gson = new Gson();
+
+        // Danh sách sản phẩm -> string
         String prodcutListString = gson.toJson(cartDetails);
+
+        // Ngày tạo đơn hàng -> string
         String dateString = NumberHelper.getInstance().dateFormatForDatabase(new Date().getTime());
+
+        //Dòng thời gian, khi nào cần dùng thì quên rùi hihi
+        List<TimelineOrder> timelineOrderList = new ArrayList<>();
+        timelineOrderList.add(new TimelineOrder(dateString,"1","Đặt hàng thành công"));
+        String timeline = gson.toJson(timelineOrderList);
+
+        // Theo dõi đơn hàng
+        List<TrackingOrder> trackingOrders = new ArrayList<>();
+        trackingOrders.add(new TrackingOrder(dateString,"1","Đặt hàng thành công"));
+        String tracking = gson.toJson(trackingOrders);
+
+        // Địa chỉ giao hàng
+        Address shippingAddress = user.getUserAddress().getUserAddressDefault();
+        String shippingAddressString = gson.toJson(shippingAddress);
+
+        // Gửi thông tin lên Server
+        OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
         Call<Order> call = orderApi.create(new Date().getTime(),
                 dateString,
                 totalCart,
@@ -152,10 +184,10 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 "0",
                 "",
                 user.getUid(),
-                "",
+                timeline,
                 prodcutListString,
-                "",
-                "",
+                tracking,
+                shippingAddressString,
                 1);
 
         call.enqueue(new Callback<Order>() {
@@ -164,6 +196,8 @@ public class CartBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 Log.i("response", response.message());
                 if (response.isSuccessful()) {
                     Log.i("non", "ngon");
+                    cartViewModel.clearCart();
+                    dismiss();
                 }
             }
             @Override

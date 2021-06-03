@@ -28,7 +28,16 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            />
+        <action
+            android:id="@+id/action_navigation_more_to_userOrderHistoryFragment"
+            app:destination="@id/userOrderHistoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -38,5 +47,10 @@
         android:id="@+id/cartBottomSheetDialogFragment"
         android:name="com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment"
         android:label="CartBottomSheetDialogFragment" />
+    <fragment
+        android:id="@+id/userOrderHistoryFragment"
+        android:name="com.cogeek.tncoffee.ui.userorder.UserOrderHistoryFragment"
+        android:label="fragment_user_order_history"
+        tools:layout="@layout/fragment_user_order_history" />
 
 </navigation>
