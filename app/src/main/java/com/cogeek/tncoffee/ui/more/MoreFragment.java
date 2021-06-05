@@ -36,9 +36,8 @@ public class MoreFragment extends Fragment {
 //        if (actionBar != null) {
 //            actionBar.setDisplayHomeAsUpEnabled(false);
 //        }
-
-        imgvUserInfo = root.findViewById(R.id.imgvUserInfo);
-        imgvUserInfo.setOnClickListener(new View.OnClickListener() {
+        View v = root.findViewById(R.id.vInfo);
+        v.setOnClickListener(new View.OnClickListener() {
             //jump to user info
             @Override
             public void onClick(View v) {
