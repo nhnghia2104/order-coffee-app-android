@@ -55,9 +55,9 @@ public class MoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        view.findViewById(R.id.vLogout).setOnClickListener(v -> {
-//            logout();
-//        });
+        view.findViewById(R.id.layout_user_logout).setOnClickListener(v -> {
+           logout();
+       });
         imgUserInfo = view.findViewById(R.id.img_user_avt);
         txtUserName = view.findViewById(R.id.txt_user_name);
         layoutOrder = view.findViewById(R.id.layout_user_order);
