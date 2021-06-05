@@ -136,11 +136,20 @@
                 android:textSize="16sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
+<<<<<<< Updated upstream
                 app:layout_constraintStart_toEndOf="@+id/img_user_logout"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/img_user_logout"
+=======
+                app:layout_constraintStart_toEndOf="@+id/roundedImageView1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/roundedImageView1"
+>>>>>>> Stashed changes
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_exit"
