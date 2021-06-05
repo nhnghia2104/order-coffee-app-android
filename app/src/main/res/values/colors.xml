@@ -14,5 +14,11 @@
     <color name="zcafe_light">#F5F5F5</color>
     <color name="coffee">#967259</color>
     <color name="gray">#828282</color>
+    <color name="pink">#F9D1D1</color>
     <color name="colorIconInActive">#4E4E50</color>
+    <color name="light_light_pink">#F6BB93</color>
+    <color name="light_pink">#FBA490</color>
+    <color name="mid_pink">#FB8985</color>
+    <color name="mid_purple">#B83253</color>
+    <color name="purple">#651B40</color>
 </resources>
