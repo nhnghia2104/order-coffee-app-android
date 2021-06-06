@@ -61,6 +61,7 @@
 
         <EditText
             android:id="@+id/editUserName_signup"
+            android:textColorHint="@color/mid_purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -75,6 +76,7 @@
 
         <EditText
             android:id="@+id/editPhoneNumber_signup"
+            android:textColorHint="@color/mid_purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -89,6 +91,7 @@
 
         <EditText
             android:id="@+id/editEmail_signup"
+            android:textColorHint="@color/mid_purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -103,6 +106,7 @@
 
         <EditText
             android:id="@+id/editPassword_signup"
+            android:textColorHint="@color/mid_purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
