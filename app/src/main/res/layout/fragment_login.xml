@@ -107,6 +107,7 @@
 
         <EditText
             android:textColor="@color/mid_purple"
+            android:textColorHint="@color/mid_purple"
             android:id="@+id/editPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,6 +121,7 @@
 
         <EditText
             android:textColor="@color/mid_purple"
+            android:textColorHint="@color/mid_purple"
             android:id="@+id/editUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
