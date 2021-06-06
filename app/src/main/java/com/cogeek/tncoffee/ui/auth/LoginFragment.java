@@ -20,7 +20,6 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.UserApi;
 import com.cogeek.tncoffee.models.User;
 import com.cogeek.tncoffee.utils.NetworkProvider;
-import com.cogeek.tncoffee.utils.SharedHelper;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
