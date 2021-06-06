@@ -5,7 +5,7 @@
     android:layout_width="match_parent">
 
     <solid
-        android:color="@color/coffee" >
+        android:color="@color/milk_pink" >
     </solid>
 
 
