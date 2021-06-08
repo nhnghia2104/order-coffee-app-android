@@ -43,6 +43,7 @@
 
                         <ImageView
                             android:id="@+id/imageIsFavorite_BottomSheet"
+                            app:tint="@color/mid_pink"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_marginEnd="20dp"
@@ -60,7 +61,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:text="Hộp quà Tết 2021"
-                            android:textColor="@color/zcafe_black"
+                            android:textColor="@color/purple"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/imageIsFavorite_BottomSheet"
@@ -73,7 +74,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="690.000đ"
-                            android:textColor="@color/zcafe_black_80"
+                            android:textColor="@color/mid_purple"
                             android:textSize="17sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="@+id/txtItemName_BottomSheet"
@@ -126,7 +127,7 @@
             android:id="@+id/bottomConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/zcafe_black"
+            android:background="@color/light_light_pink"
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +142,7 @@
                 android:minWidth="100dp"
                 android:minHeight="40dp"
                 android:text="1"
-                android:textColor="@color/white"
+                android:textColor="@color/purple"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/btnAddItem"
@@ -166,7 +167,7 @@
                     android:background="#FFFFFF"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="+"
-                    android:textColor="@color/zcafe_black"
+                    android:textColor="@color/mid_purple"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
@@ -187,7 +188,7 @@
                     android:background="#FFFFFF"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="-"
-                    android:textColor="@color/zcafe_black"
+                    android:textColor="@color/mid_purple"
                     android:textSize="17sp"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
@@ -208,8 +209,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chọn mua"
-                    android:textColor="@color/zcafe_black"
-                    android:textSize="16sp"
+                    android:textColor="@color/purple"
+                    android:textSize="19sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
