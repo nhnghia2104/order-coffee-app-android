@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.ui.item;
+package com.cogeek.tncoffee.ui.menu.item;
 
 import android.view.LayoutInflater;
 import android.view.View;

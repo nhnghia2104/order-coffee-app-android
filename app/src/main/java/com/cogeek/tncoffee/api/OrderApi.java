@@ -1,7 +1,10 @@
 package com.cogeek.tncoffee.api;
 
 import com.cogeek.tncoffee.models.Order;
+import com.cogeek.tncoffee.models.OrderHistoryOverview;
 import com.cogeek.tncoffee.models.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -26,4 +29,8 @@ public interface OrderApi {
                        @Field("shipping_address") String shipAddress,
                        @Field("shipping_option_id") int shipOption
                        );
+
+    @FormUrlEncoded
+    @POST("order/getListOrderByCustomerId")
+    Call<List<OrderHistoryOverview>> getListOrder(@Field("id") String id);
 }

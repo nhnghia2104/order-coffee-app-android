@@ -99,7 +99,7 @@ public class LoginFragment extends Fragment {
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-
+                        Log.e("toang",t.getMessage());
                     }
                 });
             }

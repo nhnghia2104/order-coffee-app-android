@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.ItemCart;
-import com.cogeek.tncoffee.ui.item.MainItemAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

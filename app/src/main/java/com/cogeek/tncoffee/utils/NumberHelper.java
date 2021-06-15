@@ -18,7 +18,7 @@ public class NumberHelper {
     public String currencyFormat(double number) {
         NumberFormat formatter = new DecimalFormat("#.###");
         String formattedNumber = formatter.format(number);
-        return formattedNumber + "₫";
+        return formattedNumber + " ₫";
     }
 
     public String dateFormatForDatabase(long date) {

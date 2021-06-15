@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.ui.item;
+package com.cogeek.tncoffee.ui.menu.item;
 
 import android.graphics.Rect;
 import android.os.Bundle;

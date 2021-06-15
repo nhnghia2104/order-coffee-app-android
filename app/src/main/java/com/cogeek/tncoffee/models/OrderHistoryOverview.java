@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.MyConfig;
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.gson.annotations.SerializedName;
 
 public class OrderHistoryOverview {
@@ -30,6 +32,9 @@ public class OrderHistoryOverview {
     @SerializedName("productImage")
     private String productImage;
 
+    @SerializedName("productName")
+    private String productName;
+
     public String getId() {
         return id;
     }
@@ -43,7 +48,7 @@ public class OrderHistoryOverview {
     }
 
     public String getTotal() {
-        return total;
+        return NumberHelper.getInstance().currencyFormat(Double.parseDouble(total));
     }
 
     public String getTracking() {
@@ -58,11 +63,15 @@ public class OrderHistoryOverview {
         return statusName;
     }
 
-    public String getProductInCart() {
-        return productInCart;
+    public int getProductInCart() {
+        return Integer.parseInt(productInCart);
     }
 
     public String getProductImage() {
-        return productImage;
+        return MyConfig.self().BASE_URL + productImage;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 }
