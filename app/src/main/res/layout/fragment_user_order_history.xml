@@ -6,11 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.userorder.UserOrderHistoryFragment">
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/mid_purple"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Đơn hàng của tôi"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_order_history"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F2F2F2" />
+        android:layout_height="0dp"
+        android:background="#F2F2F2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ProgressBar
         android:id="@+id/progressBar"

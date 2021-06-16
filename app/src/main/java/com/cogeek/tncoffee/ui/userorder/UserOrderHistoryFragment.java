@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,6 +63,7 @@ public class UserOrderHistoryFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_order_history);
         listOrder = new ArrayList<>();
         adapter = new UserOrderOverviewAdapter(listOrder);
+        adapter.setOnChildListener(this.onChildListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
@@ -86,4 +88,12 @@ public class UserOrderHistoryFragment extends Fragment {
             }
         });
     }
+
+    UserOrderOverviewAdapter.OnChildListener onChildListener = new UserOrderOverviewAdapter.OnChildListener() {
+        @Override
+        public void onChildClick(int position) {
+            listOrder.get(position).getId();
+            NavHostFragment.findNavController(UserOrderHistoryFragment.this).navigate(R.id.action_userOrderHistoryFragment_to_userOrderDetailFragment);
+        }
+    };
 }
