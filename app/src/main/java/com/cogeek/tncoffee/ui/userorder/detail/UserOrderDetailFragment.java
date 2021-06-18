@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,9 +36,10 @@ public class UserOrderDetailFragment extends Fragment {
     private UserOrderDetailViewModel mViewModel;
     private String mID;
     private RecyclerView recyclerView;
-    private TextView txtId, txtDateCreated, txtStatus, txtName, txtPhone, txtAddress, txtTotal, txtStatusTracking, txtTrackingTime;
+    private TextView txtId, txtDateCreated, txtStatus, txtName, txtPhone, txtAddress, txtTotal, txtStatusTracking, txtTrackingTime, txtViewTracking;
     private List<OrderDetail> orderDetails = new ArrayList<>();
     private OrderDetailAdapter adapter;
+    private UserOrderDetailViewModel viewModel;
 
     public static UserOrderDetailFragment newInstance() {
         return new UserOrderDetailFragment();
@@ -54,6 +56,7 @@ public class UserOrderDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(requireActivity()).get(UserOrderDetailViewModel.class);
         return inflater.inflate(R.layout.fragment_user_order_detail, container, false);
     }
 
@@ -61,6 +64,7 @@ public class UserOrderDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initial(view);
+        addAction();
         OrderApi orderApi = NetworkProvider.self().retrofit.create(OrderApi.class);
         Call<Order> call = orderApi.getOrderById(mID);
         call.enqueue(new Callback<Order>() {
@@ -99,18 +103,26 @@ public class UserOrderDetailFragment extends Fragment {
         txtPhone = view.findViewById(R.id.txt_receiver_phone);
         txtAddress = view.findViewById(R.id.txt_receiver_address);
         txtTotal = view.findViewById(R.id.txt_order_total);
+        txtViewTracking = view.findViewById(R.id.txt_go_to_tracking);
+
+        /* ------------------- */
         recyclerView = view.findViewById(R.id.rv_order_detail);
         adapter = new OrderDetailAdapter(orderDetails);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    private void addAction() {
+        txtViewTracking.setOnClickListener(clickViewTracking);
+    }
+
     private void fillUiWithData(Order order) {
+        viewModel.selectItem(order);
         txtId.setText("Mã đơn hàng: " + order.getId());
         txtDateCreated.setText("Ngày đặt hàng: " + order.getCreatedFormat());
         txtStatus.setText(order.getStatus());
-        txtStatusTracking.setText(order.getTrackingOrderList().get(0).getStatus());
-        txtTrackingTime.setText(order.getTrackingOrderList().get(0).getTimeFormat());
+        txtStatusTracking.setText(order.getTimelineOrderList().get(0).getStatus());
+        txtTrackingTime.setText(order.getTimelineOrderList().get(0).getTimeFormat());
         txtName.setText(order.getShipmentDetails().getFullName());
         txtPhone.setText(order.getShipmentDetails().getPhone());
         txtAddress.setText(order.getShipmentDetails().getFullAddress());
@@ -121,4 +133,10 @@ public class UserOrderDetailFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    View.OnClickListener clickViewTracking = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            NavHostFragment.findNavController(UserOrderDetailFragment.this).navigate(R.id.action_userOrderDetailFragment_to_orderTrackingFragment);
+        }
+    };
 }

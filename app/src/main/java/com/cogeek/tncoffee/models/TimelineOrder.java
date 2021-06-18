@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.models;
 
+import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.gson.annotations.SerializedName;
 
 public class TimelineOrder {
@@ -19,7 +20,11 @@ public class TimelineOrder {
         return time;
     }
 
-    public String getStatus_id() {
+    public String getTimeFormat() {
+        return NumberHelper.getInstance().dateFormat(time);
+    }
+
+    public String getStatusId() {
         return status_id;
     }
 

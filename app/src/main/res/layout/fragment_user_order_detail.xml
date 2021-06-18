@@ -75,7 +75,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/txt_go_to_tracking"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="XEM CHI TIẾT"
@@ -122,6 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Giao hàng thành công"
+                        android:textAllCaps="true"
                         android:textColor="@color/zcafe_black"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/txt_order_id2"

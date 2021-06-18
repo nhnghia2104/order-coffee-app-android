@@ -27,6 +27,9 @@ public class Order {
     @SerializedName("tracking")
     private List<TrackingOrder> trackingOrderList;
 
+    @SerializedName("timeline")
+    private List<TimelineOrder> timelineOrderList;
+
     @SerializedName("shipping_address")
     private ShipmentDetails shipmentDetails;
 
@@ -64,6 +67,10 @@ public class Order {
 
     public List<TrackingOrder> getTrackingOrderList() {
         return trackingOrderList;
+    }
+
+    public List<TimelineOrder> getTimelineOrderList() {
+        return timelineOrderList;
     }
 }
 

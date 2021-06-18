@@ -64,6 +64,18 @@
         android:id="@+id/userOrderDetailFragment"
         android:name="com.cogeek.tncoffee.ui.userorder.detail.UserOrderDetailFragment"
         android:label="user_order_detail_fragment"
-        tools:layout="@layout/fragment_user_order_detail" />
+        tools:layout="@layout/fragment_user_order_detail" >
+        <action
+            android:id="@+id/action_userOrderDetailFragment_to_orderTrackingFragment"
+            app:destination="@id/orderTrackingFragment" app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/orderTrackingFragment"
+        android:name="com.cogeek.tncoffee.ui.userorder.tracking.OrderTrackingFragment"
+        android:label="fragment_order_tracking"
+        tools:layout="@layout/fragment_order_tracking" />
 
 </navigation>
