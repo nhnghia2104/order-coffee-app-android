@@ -66,11 +66,7 @@ public class MoreFragment extends Fragment {
 
         txtUserName.setText(user.getFullName());
         Picasso.get().load(user.getAvatar()).placeholder(R.drawable.ic_zcafe_hint).centerCrop().fit().into(imgUserInfo);
-        layoutOrder.setOnClickListener( v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("id", user.getUid());
-            NavHostFragment.findNavController(MoreFragment.this).navigate(R.id.action_navigation_more_to_userOrderHistoryFragment,bundle);
-        });
+        layoutOrder.setOnClickListener(onClickLayoutOrder);
     }
 
 
@@ -82,4 +78,13 @@ public class MoreFragment extends Fragment {
         startActivity(intent);
         getActivity().finish();
     }
+
+    View.OnClickListener onClickLayoutOrder = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", user.getUid());
+            NavHostFragment.findNavController(MoreFragment.this).navigate(R.id.action_navigation_more_to_userOrderHistoryFragment,bundle);
+        }
+    };
 }

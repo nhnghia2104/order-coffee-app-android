@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,10 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.OrderHistoryOverview;
-import com.cogeek.tncoffee.models.Product;
-import com.cogeek.tncoffee.ui.menu.item.ChildItemAdapter;
-import com.cogeek.tncoffee.ui.menu.item.MainItemAdapter;
-import com.cogeek.tncoffee.utils.NumberHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -42,7 +37,7 @@ public class UserOrderOverviewAdapter extends RecyclerView.Adapter<UserOrderOver
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_order_history_row, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_history_row, parent, false);
         return new ViewHolder(v, onChildListener);
     }
 

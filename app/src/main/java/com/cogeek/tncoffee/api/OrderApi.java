@@ -33,4 +33,8 @@ public interface OrderApi {
     @FormUrlEncoded
     @POST("order/getListOrderByCustomerId")
     Call<List<OrderHistoryOverview>> getListOrder(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("order/getOrderById")
+    Call<Order> getOrderById(@Field("id") String id);
 }

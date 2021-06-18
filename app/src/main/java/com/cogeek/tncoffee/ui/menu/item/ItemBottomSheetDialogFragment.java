@@ -20,7 +20,7 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.ItemCart;
 import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.ui.cart.CartViewModel;
-import com.cogeek.tncoffee.ui.home.ItemViewModel;
+import com.cogeek.tncoffee.ui.menu.ItemViewModel;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;

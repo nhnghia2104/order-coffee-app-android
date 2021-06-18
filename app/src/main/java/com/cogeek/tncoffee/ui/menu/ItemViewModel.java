@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.ui.home;
+package com.cogeek.tncoffee.ui.menu;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

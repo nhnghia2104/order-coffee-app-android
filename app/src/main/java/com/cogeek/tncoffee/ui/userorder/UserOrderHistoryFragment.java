@@ -19,6 +19,7 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.OrderApi;
 import com.cogeek.tncoffee.api.UserApi;
 import com.cogeek.tncoffee.models.OrderHistoryOverview;
+import com.cogeek.tncoffee.ui.more.MoreFragment;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 
 import java.util.ArrayList;
@@ -92,8 +93,9 @@ public class UserOrderHistoryFragment extends Fragment {
     UserOrderOverviewAdapter.OnChildListener onChildListener = new UserOrderOverviewAdapter.OnChildListener() {
         @Override
         public void onChildClick(int position) {
-            listOrder.get(position).getId();
-            NavHostFragment.findNavController(UserOrderHistoryFragment.this).navigate(R.id.action_userOrderHistoryFragment_to_userOrderDetailFragment);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", listOrder.get(position).getId());
+            NavHostFragment.findNavController(UserOrderHistoryFragment.this).navigate(R.id.action_userOrderHistoryFragment_to_userOrderDetailFragment,bundle);
         }
     };
 }

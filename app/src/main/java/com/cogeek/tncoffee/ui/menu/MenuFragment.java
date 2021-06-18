@@ -23,7 +23,6 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
 import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
-import com.cogeek.tncoffee.ui.home.ItemViewModel;
 import com.cogeek.tncoffee.ui.menu.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.item.MainItemAdapter;
 import com.cogeek.tncoffee.utils.NetworkProvider;
