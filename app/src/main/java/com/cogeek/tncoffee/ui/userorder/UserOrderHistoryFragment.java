@@ -85,7 +85,7 @@ public class UserOrderHistoryFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<OrderHistoryOverview>> call, Throwable t) {
-
+                Log.e("UserOrderHistory", t.getMessage());
             }
         });
     }

@@ -44,8 +44,8 @@ public class UserOrderOverviewAdapter extends RecyclerView.Adapter<UserOrderOver
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OrderHistoryOverview item = orderHistoryOverviewList.get(position);
-        holder.getTxtOrderOverviewStatus().setText(item.getStatusName());
-        holder.getTxtOrderOverviewStatus().setTextColor(Color.parseColor("#" + item.getStatusColor()));
+        holder.getTxtOrderOverviewStatus().setText(item.getTracking().getStatus());
+//        holder.getTxtOrderOverviewStatus().setTextColor(Color.parseColor("#" + item.getStatusColor()));
         if (item.getProductInCart() > 1) {
             holder.getTxtOrderOverviewName().setText(item.getProductName() + " và " + (item.getProductInCart() - 1) + " sản phẩm");
         }

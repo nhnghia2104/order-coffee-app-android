@@ -11,13 +11,21 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.api.ProductApi;
+import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.models_old.Notification;
+import com.cogeek.tncoffee.ui.home.sale.HorizontalItemAdapter;
+import com.cogeek.tncoffee.ui.menu.ItemViewModel;
+import com.cogeek.tncoffee.ui.menu.item.ItemBottomSheetDialogFragment;
+import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +36,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -43,6 +55,7 @@ public class HomeFragment extends Fragment {
     private CircleIndicator3 indicator;
     private View header;
     private ImageView imgBackground;
+    ProductApi productApi;
 
     private DatabaseReference databaseReference;
 
@@ -52,10 +65,19 @@ public class HomeFragment extends Fragment {
             "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg"
     };
 
+    private HorizontalItemAdapter adapterSaleItem;
+    private RecyclerView rvSaleProduct;
+    private List<Product> saleProductList;
+    private ItemViewModel itemViewModel;
+
+    private HorizontalItemAdapter adapterTopProduct;
+    private RecyclerView rvTopProduct;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
         return root;
     }
 
@@ -70,7 +92,7 @@ public class HomeFragment extends Fragment {
             databaseReference = FirebaseDatabase.getInstance().getReference("notification");
             databaseReference.addValueEventListener(notificationValueEventListner);
         }
-
+        rvSaleProduct = view.findViewById(R.id.rv_sale_product);
         imgBackground = view.findViewById(R.id.img_background_home);
         Picasso.get()
                 .load("https://www.rebgv.org/content/dam/rebgv_org_content/images/strata%20pets.jpg")
@@ -87,7 +109,45 @@ public class HomeFragment extends Fragment {
 
 //        setUpSlider();
         addEvent();
+        setupSaleAdapter();
     }
+
+    private void setupSaleAdapter() {
+        saleProductList = new ArrayList<>();
+        adapterSaleItem = new HorizontalItemAdapter(saleProductList);
+        adapterSaleItem.setOnChildListener(onChildSaleItemListener);
+        rvSaleProduct.setAdapter(adapterSaleItem);
+        rvSaleProduct.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false));
+
+        Call<List<Product>> call = productApi.getLimitSaleProducts();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()) {
+                    saleProductList.clear();
+                    List<Product> responseList = response.body();
+                    saleProductList.addAll(responseList);
+                    adapterSaleItem.notifyDataSetChanged();
+                    Log.i("Sale product", "received");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    HorizontalItemAdapter.OnChildListener onChildSaleItemListener = new HorizontalItemAdapter.OnChildListener() {
+        @Override
+        public void onChildClick(int position) {
+            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+            Product item = saleProductList.get(position);
+            itemViewModel.selectItem(item);
+            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+        }
+    };
 
     private void addEvent() {
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

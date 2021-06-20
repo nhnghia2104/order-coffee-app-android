@@ -65,7 +65,7 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/imageIsFavorite_BottomSheet"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageItem_BottomSheet" />
+                            app:layout_constraintTop_toBottomOf="@+id/img_item_cell" />
 
                         <TextView
                             android:id="@+id/txtItemPrice_BottomSheet"
@@ -94,7 +94,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/txtItemPrice_BottomSheet" />
 
                         <com.makeramen.roundedimageview.RoundedImageView
-                            android:id="@+id/imageItem_BottomSheet"
+                            android:id="@+id/img_item_cell"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             app:layout_constraintDimensionRatio="1"

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.TimelineOrder;
+import com.cogeek.tncoffee.models.TrackingOrder;
 import com.cogeek.tncoffee.ui.userorder.detail.UserOrderDetailViewModel;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 public class OrderTrackingFragment extends Fragment {
 
     private UserOrderDetailViewModel viewModel;
-    private List<TimelineOrder> timelineOrderList;
+    private List<TrackingOrder> trackingOrderList;
     private  OrderTrackingAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -40,7 +41,7 @@ public class OrderTrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(requireActivity()).get(UserOrderDetailViewModel.class);
         viewModel.getSelectedItem().observe(getActivity(), item -> {
-            timelineOrderList = item.getTimelineOrderList();
+            trackingOrderList = item.getTrackingOrderList();
         });
         return inflater.inflate(R.layout.fragment_order_tracking, container, false);
     }
@@ -50,7 +51,7 @@ public class OrderTrackingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rv_order_tracking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new OrderTrackingAdapter(timelineOrderList);
+        adapter = new OrderTrackingAdapter(trackingOrderList);
         recyclerView.setAdapter(adapter);
 
     }

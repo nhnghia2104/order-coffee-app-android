@@ -17,7 +17,7 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/txtItemName"
+            android:id="@+id/txt_cell_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -30,10 +30,10 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toStartOf="@+id/imageNotification"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageItem_BottomSheet" />
+            app:layout_constraintTop_toBottomOf="@+id/img_item_cell" />
 
         <TextView
-            android:id="@+id/txtPrice"
+            android:id="@+id/txt_cell_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -42,11 +42,11 @@
             android:textColor="@color/zcafe_black"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/txtItemName"
-            app:layout_constraintTop_toBottomOf="@+id/txtItemName" />
+            app:layout_constraintStart_toStartOf="@+id/txt_cell_name"
+            app:layout_constraintTop_toBottomOf="@+id/txt_cell_name" />
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageItem_BottomSheet"
+            android:id="@+id/img_item_cell"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:maxHeight="50dp"
@@ -57,5 +57,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="8dp" />
+
+        <TextView
+            android:id="@+id/txt_cell_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="TextView"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_cell_price"
+            app:layout_constraintStart_toEndOf="@+id/txt_cell_price" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

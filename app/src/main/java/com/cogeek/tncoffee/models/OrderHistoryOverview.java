@@ -18,7 +18,7 @@ public class OrderHistoryOverview {
     private String total;
 
     @SerializedName("tracking")
-    private String tracking;
+    private TrackingOrder tracking;
 
     @SerializedName("statusColor")
     private String statusColor;
@@ -51,7 +51,7 @@ public class OrderHistoryOverview {
         return NumberHelper.getInstance().currencyFormat(Double.parseDouble(total));
     }
 
-    public String getTracking() {
+    public TrackingOrder getTracking() {
         return tracking;
     }
 

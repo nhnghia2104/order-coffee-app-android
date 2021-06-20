@@ -19,9 +19,15 @@ public class NumberHelper {
     private NumberHelper() {};
 
     public String currencyFormat(double number) {
-        NumberFormat formatter = new DecimalFormat("#.###");
+        NumberFormat formatter = new DecimalFormat("###,### ₫");
         String formattedNumber = formatter.format(number);
-        return formattedNumber + " ₫";
+        return formattedNumber;
+    }
+
+    public String percentFormat(double number) {
+        NumberFormat formatter = new DecimalFormat("0.#");
+        String formattedNumber = formatter.format(number);
+        return "-" + formattedNumber + "%";
     }
 
     public String dateFormatForDatabase(long date) {
@@ -43,5 +49,14 @@ public class NumberHelper {
                 return null;
             }
         }
+    }
+
+    private double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }

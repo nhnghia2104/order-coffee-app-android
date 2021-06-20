@@ -121,8 +121,8 @@ public class UserOrderDetailFragment extends Fragment {
         txtId.setText("Mã đơn hàng: " + order.getId());
         txtDateCreated.setText("Ngày đặt hàng: " + order.getCreatedFormat());
         txtStatus.setText(order.getStatus());
-        txtStatusTracking.setText(order.getTimelineOrderList().get(0).getStatus());
-        txtTrackingTime.setText(order.getTimelineOrderList().get(0).getTimeFormat());
+        txtStatusTracking.setText(order.getTrackingOrderList().get(0).getStatus());
+        txtTrackingTime.setText(order.getTrackingOrderList().get(0).getTimeFormat());
         txtName.setText(order.getShipmentDetails().getFullName());
         txtPhone.setText(order.getShipmentDetails().getPhone());
         txtAddress.setText(order.getShipmentDetails().getFullAddress());

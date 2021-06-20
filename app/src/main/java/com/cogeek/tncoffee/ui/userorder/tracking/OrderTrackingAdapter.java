@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.TimelineOrder;
+import com.cogeek.tncoffee.models.TrackingOrder;
 import com.cogeek.tncoffee.ui.userorder.UserOrderOverviewAdapter;
 
 import org.w3c.dom.Text;
@@ -20,10 +21,10 @@ import java.util.List;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
-    private List<TimelineOrder> timelineOrderList;
+    private List<TrackingOrder> trackingOrderList;
 
-    public OrderTrackingAdapter(List<TimelineOrder> timelineOrderList) {
-        this.timelineOrderList = timelineOrderList;
+    public OrderTrackingAdapter(List<TrackingOrder> timelineOrderList) {
+        this.trackingOrderList = timelineOrderList;
     }
 
     @NonNull
@@ -35,20 +36,20 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
 
     @Override
     public int getItemCount() {
-        return timelineOrderList.size();
+        return trackingOrderList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TimelineOrder timeline = timelineOrderList.get(position);
+        TrackingOrder trackingOrder = trackingOrderList.get(position);
         if (position == 0) {
             holder.getLineTop().setVisibility(View.GONE);
             holder.getCurrent().setVisibility(View.VISIBLE);
             holder.getCircle().setVisibility(View.INVISIBLE);
             holder.getTxtStatus().setTextColor(Color.parseColor("#323232"));
         }
-        holder.getTxtStatus().setText(timeline.getStatus());
-        holder.getTxtTime().setText(timeline.getTimeFormat());
+        holder.getTxtStatus().setText(trackingOrder.getStatus());
+        holder.getTxtTime().setText(trackingOrder.getTimeFormat());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

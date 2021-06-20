@@ -81,4 +81,11 @@ public final class Product {
     public Double getDiscount() {
         return Double.parseDouble(discount);
     }
+
+    public String getDiscountToString() {
+        if (Double.parseDouble(discount) > 0) {
+            return NumberHelper.getInstance().percentFormat(Double.parseDouble(discount) * 100);
+        }
+        return "";
+    }
 }

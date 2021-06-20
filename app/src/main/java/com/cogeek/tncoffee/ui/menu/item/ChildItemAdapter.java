@@ -1,5 +1,6 @@
 package com.cogeek.tncoffee.ui.menu.item;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Product;
-import com.cogeek.tncoffee.utils.NumberHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +44,8 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product item = itemList.get(position);
         holder.getTxtItemName().setText(item.getName());
-        holder.getTxtPrice().setText(NumberHelper.getInstance().currencyFormat(item.getPrice()));
+        holder.getTxtPrice().setText(item.getFinalPriceToString());
+        holder.getTxtDiscount().setText(item.getDiscountToString());
 
         Picasso.get()
                 .load(item.getImage())
@@ -60,16 +61,17 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView txtItemName;
-        private final TextView txtPrice;
+        private final TextView txtItemName,txtPrice,txtDiscount;
         private final RoundedImageView imageItem;
         private OnChildListener onChildListener;
 
         public ViewHolder(@NonNull View v, OnChildListener onChildClickListener) {
             super(v);
-            txtItemName = v.findViewById(R.id.txtItemName);
-            txtPrice = v.findViewById(R.id.txtPrice);
-            imageItem = v.findViewById(R.id.imageItem_BottomSheet);
+            txtItemName = v.findViewById(R.id.txt_cell_name);
+            txtPrice = v.findViewById(R.id.txt_cell_price);
+            imageItem = v.findViewById(R.id.img_item_cell);
+            txtDiscount = v.findViewById(R.id.txt_cell_discount);
+//            txtDiscount.setPaintFlags(txtDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             this.onChildListener = onChildClickListener;
             v.setOnClickListener(this);
         }
@@ -84,6 +86,10 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
 
         public RoundedImageView getImageItem() {
             return imageItem;
+        }
+
+        public TextView getTxtDiscount() {
+            return txtDiscount;
         }
 
         @Override

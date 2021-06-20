@@ -75,7 +75,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RoundedImageView imageView = view.findViewById(R.id.imageItem_BottomSheet);
+        RoundedImageView imageView = view.findViewById(R.id.img_item_cell);
         TextView txtName = view.findViewById(R.id.txtItemName_BottomSheet);
         TextView txtPrice = view.findViewById(R.id.txtItemPrice_BottomSheet);
         TextView txtDescription = view.findViewById(R.id.txtItemDescription_BottomSheet);

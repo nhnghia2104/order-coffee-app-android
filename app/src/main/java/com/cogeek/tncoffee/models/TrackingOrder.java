@@ -1,6 +1,7 @@
 package com.cogeek.tncoffee.models;
 
 import com.cogeek.tncoffee.utils.NumberHelper;
+import com.cogeek.tncoffee.utils.StringHelper;
 import com.google.gson.annotations.SerializedName;
 
 public class TrackingOrder {
@@ -29,6 +30,6 @@ public class TrackingOrder {
     }
 
     public String getStatus() {
-        return status;
+        return StringHelper.getInstance().capitalize(status);
     }
 }
