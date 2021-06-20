@@ -65,13 +65,15 @@ public class HomeFragment extends Fragment {
             "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg"
     };
 
+    private ItemViewModel itemViewModel;
+
     private HorizontalItemAdapter adapterSaleItem;
     private RecyclerView rvSaleProduct;
     private List<Product> saleProductList;
-    private ItemViewModel itemViewModel;
 
-    private HorizontalItemAdapter adapterTopProduct;
+    private HorizontalItemAdapter adapterTopItem;
     private RecyclerView rvTopProduct;
+    private List<Product> topProductList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,6 +95,7 @@ public class HomeFragment extends Fragment {
             databaseReference.addValueEventListener(notificationValueEventListner);
         }
         rvSaleProduct = view.findViewById(R.id.rv_sale_product);
+        rvTopProduct = view.findViewById(R.id.rv_top_product);
         imgBackground = view.findViewById(R.id.img_background_home);
         Picasso.get()
                 .load("https://www.rebgv.org/content/dam/rebgv_org_content/images/strata%20pets.jpg")
@@ -110,6 +113,7 @@ public class HomeFragment extends Fragment {
 //        setUpSlider();
         addEvent();
         setupSaleAdapter();
+        setupTopProductAdapter();
     }
 
     private void setupSaleAdapter() {
@@ -139,11 +143,49 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void setupTopProductAdapter() {
+        topProductList = new ArrayList<>();
+        adapterTopItem = new HorizontalItemAdapter(topProductList);
+        adapterTopItem.setOnChildListener(onChildTopItemListener);
+        rvTopProduct.setAdapter(adapterTopItem);
+        rvTopProduct.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false));
+
+        Call<List<Product>> call = productApi.getTopProducts();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()) {
+                    topProductList.clear();
+                    List<Product> responseList = response.body();
+                    topProductList.addAll(responseList);
+                    adapterTopItem.notifyDataSetChanged();
+                    Log.i("Top product", "received");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     HorizontalItemAdapter.OnChildListener onChildSaleItemListener = new HorizontalItemAdapter.OnChildListener() {
         @Override
         public void onChildClick(int position) {
             ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
             Product item = saleProductList.get(position);
+            itemViewModel.selectItem(item);
+            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+        }
+    };
+
+    HorizontalItemAdapter.OnChildListener onChildTopItemListener = new HorizontalItemAdapter.OnChildListener() {
+        @Override
+        public void onChildClick(int position) {
+            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+            Product item = topProductList.get(position);
             itemViewModel.selectItem(item);
             bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
         }

@@ -52,6 +52,7 @@
                     android:layout_height="match_parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_top_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -59,18 +60,35 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout_sale_product">
 
+                        <ImageView
+                            android:id="@+id/imageView16"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="10dp"
+                            android:tint="@color/zcafe_orange"
+                            app:layout_constraintBottom_toTopOf="@+id/rv_top_product"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_podium" />
+
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sản phẩm bán chạy"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Top sản phẩm bán chạy"
+                            android:textColor="@color/zcafe_black"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toEndOf="@+id/imageView16"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_top_product"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:clipToPadding="false"
                             android:orientation="horizontal"
                             android:padding="10dp"
@@ -84,23 +102,39 @@
                         android:id="@+id/layout_sale_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imageView17"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toTopOf="@+id/rv_sale_product"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_light" />
 
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-medium"
                             android:text="Sản phẩm đang giảm giá"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:textColor="@color/zcafe_black"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toEndOf="@+id/imageView17"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_sale_product"
                             android:layout_width="409dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:clipToPadding="false"
                             android:orientation="horizontal"
                             android:padding="10dp"

@@ -43,7 +43,12 @@ public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.getTxtPrice().setText(product.getFinalPriceToString());
-        holder.getTxtDiscount().setText(product.getDiscountToString());
+        if (product.getDiscount() > 0) {
+            holder.getTxtDiscount().setText(product.getDiscountToString());
+        }
+        else {
+            holder.hideBadgeLayout();
+        }
 
         Picasso.get()
                 .load(product.getImage())
@@ -61,6 +66,7 @@ public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAd
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imgProduct;
         private TextView txtPrice, txtDiscount;
+        private View layoutBadge;
         private OnChildListener onChildListener;
 
         public ViewHolder(@NonNull View itemView, OnChildListener onChildListener) {
@@ -69,7 +75,12 @@ public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAd
             imgProduct = itemView.findViewById(R.id.img_sale_product);
             txtDiscount = itemView.findViewById(R.id.txt_sale_discount);
             txtPrice = itemView.findViewById(R.id.txt_sale_price);
+            layoutBadge = itemView.findViewById(R.id.layout_badge);
             itemView.setOnClickListener(this);
+        }
+
+        public void hideBadgeLayout() {
+            layoutBadge.setVisibility(View.GONE);
         }
 
         public ImageView getImgProduct() {

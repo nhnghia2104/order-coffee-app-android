@@ -16,4 +16,7 @@ public interface ProductApi {
     @GET("product/getLimitSaleProducts")
     Call<List<Product>> getLimitSaleProducts();
 
+    @GET("product/getTopProducts")
+    Call<List<Product>> getTopProducts();
+
 }
