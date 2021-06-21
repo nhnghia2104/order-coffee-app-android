@@ -53,29 +53,29 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        super.onActivityResult();
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(R.layout.fragment_login_new, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnLoginGoogle = view.findViewById(R.id.btnLoginGoogle);
-        view.findViewById(R.id.btnLoginGoogle).setOnClickListener((v) -> {
-            loginWithGoogle();
-        });
+//        btnLoginGoogle = view.findViewById(R.id.btnLoginGoogle);
+//        view.findViewById(R.id.btnLoginGoogle).setOnClickListener((v) -> {
+//            loginWithGoogle();
+//        });
 
         btnOk = view.findViewById(R.id.btnOk);
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
-        txtSignUp = view.findViewById(R.id.txtSignUp);
-
-
-        txtSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        txtSignUp = view.findViewById(R.id.txtSignUp);
+//
+//
+//        txtSignUp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
 

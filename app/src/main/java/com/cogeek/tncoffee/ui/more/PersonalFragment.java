@@ -25,7 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class MoreFragment extends Fragment {
+public class PersonalFragment extends Fragment {
 
     private ListView listView;
     private StoreAdapter storeAdapter;
@@ -37,7 +37,7 @@ public class MoreFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_more, container, false);
+        View root = inflater.inflate(R.layout.fragment_personal, container, false);
 //        ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
 //        if (actionBar != null) {
 //            actionBar.setDisplayHomeAsUpEnabled(false);
@@ -48,7 +48,7 @@ public class MoreFragment extends Fragment {
     }
 
     private void openUserInfo() {
-        NavHostFragment.findNavController(MoreFragment.this).navigate(R.id.action_navigation_more_to_userInfoFragment);
+        NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userInfoFragment);
     }
 
 
@@ -84,7 +84,7 @@ public class MoreFragment extends Fragment {
         public void onClick(View v) {
             Bundle bundle = new Bundle();
             bundle.putString("id", user.getUid());
-            NavHostFragment.findNavController(MoreFragment.this).navigate(R.id.action_navigation_more_to_userOrderHistoryFragment,bundle);
+            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userOrderHistoryFragment,bundle);
         }
     };
 }

@@ -19,8 +19,8 @@
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="com.cogeek.tncoffee.ui.more.MoreFragment"
-        tools:layout="@layout/fragment_more"
+        android:name="com.cogeek.tncoffee.ui.more.PersonalFragment"
+        tools:layout="@layout/fragment_personal"
         android:label="Khác" >
         <action
             android:id="@+id/action_navigation_more_to_userInfoFragment"

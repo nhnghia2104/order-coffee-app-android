@@ -1,6 +1,7 @@
     package com.cogeek.tncoffee.ui.menu;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,21 +9,29 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cogeek.tncoffee.api.ProductApi;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
+import com.cogeek.tncoffee.models.Category;
+import com.cogeek.tncoffee.models.CategoryItem;
 import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
+import com.cogeek.tncoffee.ui.menu.category.CategoryAdapter;
+import com.cogeek.tncoffee.ui.menu.category.CategoryBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.item.MainItemAdapter;
 import com.cogeek.tncoffee.utils.NetworkProvider;
@@ -34,6 +43,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,25 +63,74 @@ public class MenuFragment extends Fragment {
     private View header;
     private SearchView searchView;
     private Button btnOpenCart;
+    private View layoutCategory;
 
-    private DatabaseReference databaseReference;
+    private Spinner categoriesSpinner;
+    private List<CategoryItem> categoryItems;
+    private CategoryAdapter categoryAdapter;
+
+    private BlurView blurView;
+    RecyclerView.SmoothScroller smoothScroller;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
         layoutManager = new LinearLayoutManager(getContext());
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        smoothScroller = new LinearSmoothScroller(requireContext()) {
+            @Override protected int getVerticalSnapPreference() {
+                return LinearSmoothScroller.SNAP_TO_START;
+            }
+
+            @Override
+            protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                return 15f / displayMetrics.densityDpi;
+            }
+        };
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.view = view;
-        fakeData();
-        addControl();
-        addEvent();
+        categoryList = new ArrayList<>();
 
+        btnOpenCart = view.findViewById(R.id.btnOpenCart);
+        recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
+        mainItemAdapter = new MainItemAdapter(categoryList);
+        mainItemAdapter.setOnItemListener(itemListener);
+        recyclerViewListItem.setLayoutManager(layoutManager);
+        recyclerViewListItem.setAdapter(mainItemAdapter);
+
+        addEvent();
+        setupMainContent();
+        categoriesSpinner = view.findViewById(R.id.spinner_category);
+        setupCategorySpinner();
+        blurView = view.findViewById(R.id.blur_layout);
+        blurBackground();
+    }
+    private void blurBackground() {
+        float radius = 20f;
+
+        View decorView = getActivity().getWindow().getDecorView();
+        //ViewGroup you want to start blur from. Choose root as close to BlurView in hierarchy as possible.
+        ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
+        //Set drawable to draw in the beginning of each blurred frame (Optional).
+        //Can be used in case your layout has a lot of transparent space and your content
+        //gets kinda lost after after blur is applied.
+        Drawable windowBackground = decorView.getBackground();
+
+        blurView.setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(getContext()))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true); // Or false if it's in a scrolling container or might be animated
+    }
+
+    private void setupMainContent() {
         ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
         Call<List<com.cogeek.tncoffee.models.Category>> call = productApi.getCategories();
 
@@ -82,7 +142,11 @@ public class MenuFragment extends Fragment {
                     List<com.cogeek.tncoffee.models.Category> categories = response.body();
                     categoryList.addAll(categories);
                     mainItemAdapter.notifyDataSetChanged();
-                    Log.i("All product", "Received");
+
+                    /* setup spinner */
+                    categoryItems.clear();
+                    categoryItems.addAll(parseCategoryItem(categories));
+                    categoryAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -91,15 +155,6 @@ public class MenuFragment extends Fragment {
 
             }
         });
-    }
-
-    private void addControl() {
-        btnOpenCart = view.findViewById(R.id.btnOpenCart);
-        recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
-        mainItemAdapter = new MainItemAdapter(categoryList);
-        mainItemAdapter.setOnItemListener(itemListener);
-        recyclerViewListItem.setLayoutManager(layoutManager);
-        recyclerViewListItem.setAdapter(mainItemAdapter);
     }
 
     MainItemAdapter.OnItemListener itemListener = new MainItemAdapter.OnItemListener() {
@@ -114,14 +169,6 @@ public class MenuFragment extends Fragment {
     };
 
     private void addEvent() {
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_Order_to_MenuItem);
-                ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
-                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
-            }
-        });*/
 
 //        recyclerViewListItem.setOnClickListener(new );
 
@@ -186,32 +233,38 @@ public class MenuFragment extends Fragment {
         });
     }
 
-    private void fakeData() {
-        categoryList = new ArrayList<>();
+    private void setupCategorySpinner() {
+        categoryItems = new ArrayList<>();
+        categoryAdapter = new CategoryAdapter(getContext(), R.layout.category_spinner_row, categoryItems);
+        categoriesSpinner.setAdapter(categoryAdapter);
 
-//        List<Item> list1 = new ArrayList<>();
-//        list1.add(new Item("Trà Sữa êi", "em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm em non lắm", 10, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-//        list1.add(new Item("Trà Sữa êi", "em non lắm", 10000, "http://10.0.2.2:2104/01/img_product/kit_cat10l_huong_phan_thom_68a252dc5958421a8752e816fa3287c8_65f162cd6b5e443094fd85d4800a6d07_large.webp"));
-//        list1.add(new Item("Trà Sữa êi", "em non lắm", 12000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-//
-//        List<Item> list2 = new ArrayList<>();
-//        list2.add(new Item("Trà Sữa êi", "em non lắm", 18000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-//        list2.add(new Item("Trà Sữa êi", "em non lắm", 22000, "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"));
-//
-//        categoryList.add(new Category("Trà sữa", list1));
-//        categoryList.add(new Category("Cà phê", list2));
+        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                recyclerViewListItem.scrollToPosition(position);
+                smoothScroller.setTargetPosition(position);
+//                layoutManager.startSmoothScroll(smoothScroller);
+                recyclerViewListItem.getLayoutManager().startSmoothScroll(smoothScroller);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    private ValueEventListener categoryValueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+    private List<CategoryItem> parseCategoryItem(List<Category> categories) {
+        List<CategoryItem> result = new ArrayList<>();
+        for (Category item: categories ) {
+            result.add(new CategoryItem(item.getName(), findIcon(item.getName())));
         }
+        return result;
+    }
 
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
+    private int findIcon(String name) {
+        return 0;
+    }
 
-        }
-    };
 }
+

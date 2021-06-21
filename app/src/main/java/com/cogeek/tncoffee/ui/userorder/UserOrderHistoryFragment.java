@@ -17,9 +17,7 @@ import android.widget.ProgressBar;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.OrderApi;
-import com.cogeek.tncoffee.api.UserApi;
 import com.cogeek.tncoffee.models.OrderHistoryOverview;
-import com.cogeek.tncoffee.ui.more.MoreFragment;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 
 import java.util.ArrayList;

@@ -6,11 +6,11 @@
         <item name="colorPrimaryVariant">@color/zcafe_orange</item>
         <item name="colorOnPrimary">@color/zcafe_orange</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/new_pink</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/zcafe_black</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/new_purple</item>
         <!--Back button-->
         <item name="homeAsUpIndicator">@drawable/ic_baseline_arrow_back_ios_new_24</item>
         <!--Enable window content transition-->
