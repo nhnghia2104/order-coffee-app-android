@@ -16,15 +16,6 @@ public class Cart {
         }
     }
 
-    public boolean findAndAddItem(ItemCart item) {
-        for (ItemCart itemCart: itemList) {
-            if (itemCart.getId().equals(item.getId())) {
-                itemCart.increaseQuantity();
-            }
-        }
-        return false;
-    }
-
     public List<ItemCart> getItemList() {
         return itemList;
     }
