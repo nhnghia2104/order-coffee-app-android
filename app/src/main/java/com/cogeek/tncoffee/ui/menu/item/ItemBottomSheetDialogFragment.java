@@ -78,7 +78,7 @@ public class ItemBottomSheetDialogFragment extends BottomSheetDialogFragment {
         RoundedImageView imageView = view.findViewById(R.id.img_item_cell);
         TextView txtName = view.findViewById(R.id.txtItemName_BottomSheet);
         TextView txtPrice = view.findViewById(R.id.txtItemPrice_BottomSheet);
-        TextView txtDescription = view.findViewById(R.id.txtItemDescription_BottomSheet);
+        TextView txtDescription = view.findViewById(R.id.txt_product_des);
         ImageView btnImageClose = view.findViewById(R.id.btnImageClose_BottomSheet);
         btnIncrease = view.findViewById(R.id.btnIncreaseQty);
         btnDecrease = view.findViewById(R.id.btnDecreaseQty);

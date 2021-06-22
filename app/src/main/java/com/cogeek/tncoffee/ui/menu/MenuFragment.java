@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,14 +32,9 @@ import com.cogeek.tncoffee.models.CategoryItem;
 import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.ui.cart.CartBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.category.CategoryAdapter;
-import com.cogeek.tncoffee.ui.menu.category.CategoryBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.item.MainItemAdapter;
 import com.cogeek.tncoffee.utils.NetworkProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,11 +156,12 @@ public class MenuFragment extends Fragment {
     MainItemAdapter.OnItemListener itemListener = new MainItemAdapter.OnItemListener() {
         @Override
         public void onItemClick(int section, int row) {
-            Log.i("click item at", "section: " + section + ", row: " + row);
-            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+//            Log.i("click item at", "section: " + section + ", row: " + row);
+//            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
+//            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
             Product item = categoryList.get(section).getItems().get(row);
             itemViewModel.selectItem(item);
-            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+            NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_menu_open_item);
         }
     };
 
@@ -227,8 +224,9 @@ public class MenuFragment extends Fragment {
         btnOpenCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartBottomSheetDialogFragment cartBottomSheetDialogFragment = new CartBottomSheetDialogFragment();
-                cartBottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Detail Item");
+//                CartBottomSheetDialogFragment cartBottomSheetDialogFragment = new CartBottomSheetDialogFragment();
+//                cartBottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Detail Item");
+                NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_navigation_menu_to_cartFragment);
             }
         });
     }

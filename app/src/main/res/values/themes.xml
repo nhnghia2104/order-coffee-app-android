@@ -3,8 +3,8 @@
     <style name="Theme.TNCoffee" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/zcafe_black</item>
-        <item name="colorPrimaryVariant">@color/zcafe_orange</item>
-        <item name="colorOnPrimary">@color/zcafe_orange</item>
+        <item name="colorPrimaryVariant">@color/new_pink</item>
+        <item name="colorOnPrimary">@color/new_pink</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/new_pink</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -53,6 +53,11 @@
     <style name="BottomNavigationViewStyle.TextAppearance" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
+    </style>
+<!--    Rating bar-->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/zcafe_orange_65</item>
+        <item name="colorControlActivated">@color/zcafe_orange</item>
     </style>
 
 </resources>

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.makeramen.roundedimageview.RoundedImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/imageSlide"
-    android:adjustViewBounds="true"
-    app:riv_corner_radius="20dp"
-    android:src="@drawable/ic_zcafe_hint"
-    >
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:cardMaxElevation="5dp">
 
-</com.makeramen.roundedimageview.RoundedImageView>
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageSlide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_zcafe_hint"
+        app:riv_corner_radius="10dp">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+</com.google.android.material.card.MaterialCardView>

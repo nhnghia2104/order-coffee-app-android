@@ -53,6 +53,11 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
                 .fit()
                 .centerInside()
                 .into(holder.getImageItem());
+
+        if (item.getAvg() > 0) {
+            holder.getTxtRate().setText(item.getAvg() + "");
+            holder.showRateLayout();
+        }
     }
 
     @Override
@@ -61,8 +66,9 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView txtItemName,txtPrice,txtDiscount;
+        private final TextView txtItemName,txtPrice,txtDiscount, txtRate;
         private final RoundedImageView imageItem;
+        private final View layoutRate;
         private OnChildListener onChildListener;
 
         public ViewHolder(@NonNull View v, OnChildListener onChildClickListener) {
@@ -72,6 +78,9 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
             imageItem = v.findViewById(R.id.img_item_cell);
             txtDiscount = v.findViewById(R.id.txt_cell_discount);
 //            txtDiscount.setPaintFlags(txtDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            txtRate = v.findViewById(R.id.txt_rate_product);
+            layoutRate = v.findViewById(R.id.layout_rate_avg);
+            layoutRate.setVisibility(View.GONE);
             this.onChildListener = onChildClickListener;
             v.setOnClickListener(this);
         }
@@ -90,6 +99,14 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
 
         public TextView getTxtDiscount() {
             return txtDiscount;
+        }
+
+        public TextView getTxtRate() {
+            return txtRate;
+        }
+
+        public void showRateLayout() {
+            layoutRate.setVisibility(View.VISIBLE);
         }
 
         @Override

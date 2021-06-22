@@ -2,6 +2,7 @@ package com.cogeek.tncoffee.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -24,8 +26,11 @@ import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.models_old.Notification;
 import com.cogeek.tncoffee.ui.home.sale.HorizontalItemAdapter;
 import com.cogeek.tncoffee.ui.menu.ItemViewModel;
+import com.cogeek.tncoffee.ui.menu.MenuFragment;
 import com.cogeek.tncoffee.ui.menu.item.ItemBottomSheetDialogFragment;
+import com.cogeek.tncoffee.utils.MyConfig;
 import com.cogeek.tncoffee.utils.NetworkProvider;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,9 +65,9 @@ public class HomeFragment extends Fragment {
     private DatabaseReference databaseReference;
 
     String[] imageUrls = new String[]{
-            "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg",
-            "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg",
-            "https://bratus.co/wp-content/uploads/2019/03/logo-zcafe-cafe-coffee-logo-logotype-vietnam.jpg"
+            MyConfig.self().BASE_URL + "img/background1.jpg",
+            MyConfig.self().BASE_URL + "img/background2.jpg",
+            MyConfig.self().BASE_URL + "img/background3.jpg"
     };
 
     private ItemViewModel itemViewModel;
@@ -86,7 +91,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         if (IS_DEBUG) {
             fakeData();
         }
@@ -97,12 +101,12 @@ public class HomeFragment extends Fragment {
         rvSaleProduct = view.findViewById(R.id.rv_sale_product);
         rvTopProduct = view.findViewById(R.id.rv_top_product);
         imgBackground = view.findViewById(R.id.img_background_home);
-        Picasso.get()
-                .load("https://www.rebgv.org/content/dam/rebgv_org_content/images/strata%20pets.jpg")
-                .fit()
-                .placeholder(R.drawable.ic_zcafe_hint)
-                .centerCrop()
-                .into(imgBackground);
+//        Picasso.get()
+//                .load("https://www.rebgv.org/content/dam/rebgv_org_content/images/strata%20pets.jpg")
+//                .fit()
+//                .placeholder(R.drawable.ic_zcafe_hint)
+//                .centerCrop()
+//                .into(imgBackground);
 
 //        listView = view.findViewById(R.id.lvNotification);
 //        adapter = new NotificationAdapter(getActivity(), R.layout.notification, notificationArrayList);
@@ -114,6 +118,10 @@ public class HomeFragment extends Fragment {
         addEvent();
         setupSaleAdapter();
         setupTopProductAdapter();
+
+        viewPager2 = view.findViewById(R.id.viewPagerInageSlider);
+        indicator = view.findViewById(R.id.indicator);
+        setUpSlider();
     }
 
     private void setupSaleAdapter() {
@@ -174,20 +182,18 @@ public class HomeFragment extends Fragment {
     HorizontalItemAdapter.OnChildListener onChildSaleItemListener = new HorizontalItemAdapter.OnChildListener() {
         @Override
         public void onChildClick(int position) {
-            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
             Product item = saleProductList.get(position);
             itemViewModel.selectItem(item);
-            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+            NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_home_open_item);
         }
     };
 
     HorizontalItemAdapter.OnChildListener onChildTopItemListener = new HorizontalItemAdapter.OnChildListener() {
         @Override
         public void onChildClick(int position) {
-            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
             Product item = topProductList.get(position);
             itemViewModel.selectItem(item);
-            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
+            NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_home_open_item);
         }
     };
 
@@ -208,9 +214,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpSlider() {
-        viewPager2 = header.findViewById(R.id.viewPagerInageSlider);
-        indicator = header.findViewById(R.id.indicator);
-
 
         SliderAdapter sliderAdapter = new SliderAdapter(imageUrls, viewPager2);
         viewPager2.setAdapter(sliderAdapter);
@@ -231,7 +234,7 @@ public class HomeFragment extends Fragment {
         });
 
         viewPager2.setPageTransformer(compositePageTransformer);
-        slideHandler = new Handler();
+        slideHandler = new Handler(Looper.getMainLooper());
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -276,13 +279,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-//        slideHandler.removeCallbacks(sliderRunnable);
+        slideHandler.removeCallbacks(sliderRunnable);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        slideHandler.postDelayed(sliderRunnable, 4000);
+        slideHandler.postDelayed(sliderRunnable, 4000);
     }
 
     private void fakeData() {

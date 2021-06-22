@@ -9,12 +9,29 @@
         android:id="@+id/navigation_home"
         android:name="com.cogeek.tncoffee.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="Trang chủ" />
+        android:label="Trang chủ" >
+        <action
+            android:id="@+id/action_navigation_home_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_home_open_item"
+            app:destination="@id/itemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_menu"
         android:name="com.cogeek.tncoffee.ui.menu.MenuFragment"
         tools:layout="@layout/fragment_menu"
         android:label="Đặt món">
+        <action
+            android:id="@+id/action_navigation_menu_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_menu_open_item"
+            app:destination="@id/itemFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +55,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_navigation_more_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -77,5 +97,15 @@
         android:name="com.cogeek.tncoffee.ui.userorder.tracking.OrderTrackingFragment"
         android:label="fragment_order_tracking"
         tools:layout="@layout/fragment_order_tracking" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.cogeek.tncoffee.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.cogeek.tncoffee.ui.menu.item.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item" />
 
 </navigation>

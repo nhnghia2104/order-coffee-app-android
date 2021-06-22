@@ -46,6 +46,15 @@ public final class Product {
     @SerializedName("view")
     private  String view;
 
+    @SerializedName("avgpts")
+    private  String avg;
+
+    @SerializedName("amountVote")
+    private  String amountVote;
+
+    public Product() {
+    }
+
     public String getId() {
         return id;
     }
@@ -64,6 +73,18 @@ public final class Product {
 
     public Double getPrice() {
         return Double.parseDouble(price);
+    }
+
+    public Float getAvg() {
+        return Float.parseFloat(avg);
+    }
+
+    public int getAmountVote() {
+        return Integer.parseInt(amountVote);
+    }
+
+    public String getAvgToString() {
+        return NumberHelper.getInstance().floatFormatDefault(getAvg());
     }
 
     public Double getFinalPrice() {

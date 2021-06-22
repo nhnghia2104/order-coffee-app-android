@@ -32,7 +32,7 @@ public class CartViewModel extends AndroidViewModel {
             loadCart();
         }
         for (ItemCart item : cart.getItemList()) {
-            if (item.getId() == itemCart.getId()) {
+            if (itemCart.getId().equals(item.getId())) {
                 item.increaseQuantity();
                 saveCart();
                 return;

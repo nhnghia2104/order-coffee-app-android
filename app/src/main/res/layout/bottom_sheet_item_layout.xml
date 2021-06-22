@@ -51,7 +51,6 @@
                             app:srcCompat="@drawable/ic_z_favorite" />
 
                         <TextView
-                            android:id="@+id/txtItemName_BottomSheet"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -81,7 +80,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/txtItemName_BottomSheet" />
 
                         <TextView
-                            android:id="@+id/txtItemDescription_BottomSheet"
+                            android:id="@+id/m"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
@@ -94,7 +93,6 @@
                             app:layout_constraintTop_toBottomOf="@+id/txtItemPrice_BottomSheet" />
 
                         <com.makeramen.roundedimageview.RoundedImageView
-                            android:id="@+id/img_item_cell"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             app:layout_constraintDimensionRatio="1"

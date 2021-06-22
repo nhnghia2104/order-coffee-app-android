@@ -24,6 +24,12 @@ public class NumberHelper {
         return formattedNumber;
     }
 
+    public String floatFormatDefault(float number) {
+        NumberFormat formatter = new DecimalFormat("0.#");
+        String formattedNumber = formatter.format(number);
+        return formattedNumber;
+    }
+
     public String percentFormat(double number) {
         NumberFormat formatter = new DecimalFormat("0.#");
         String formattedNumber = formatter.format(number);
