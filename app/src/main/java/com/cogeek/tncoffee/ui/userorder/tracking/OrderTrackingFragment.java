@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.TimelineOrder;
 import com.cogeek.tncoffee.models.TrackingOrder;
+import com.cogeek.tncoffee.ui.userorder.detail.UserOrderDetailFragment;
 import com.cogeek.tncoffee.ui.userorder.detail.UserOrderDetailViewModel;
 
 import java.util.List;
@@ -53,6 +55,8 @@ public class OrderTrackingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new OrderTrackingAdapter(trackingOrderList);
         recyclerView.setAdapter(adapter);
-
+        view.findViewById(R.id.btn_close).setOnClickListener(v -> {
+            NavHostFragment.findNavController(OrderTrackingFragment.this).popBackStack();
+        });
     }
 }

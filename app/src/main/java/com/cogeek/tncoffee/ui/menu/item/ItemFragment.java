@@ -24,6 +24,7 @@ import com.cogeek.tncoffee.models.ItemCart;
 import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.ui.cart.CartViewModel;
 import com.cogeek.tncoffee.ui.menu.ItemViewModel;
+import com.cogeek.tncoffee.ui.review.ReviewBottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
 public class ItemFragment extends Fragment {
@@ -36,6 +37,7 @@ public class ItemFragment extends Fragment {
     private Button btnAddToCart;
     private ImageButton btnClose;
     private RatingBar ratingBar;
+    private View layoutReview;
 
     public ItemFragment() {
     }
@@ -72,6 +74,7 @@ public class ItemFragment extends Fragment {
         txtRatingValue = view.findViewById(R.id.txt_rating_item_des);
         ratingBar = view.findViewById(R.id.rating_item_value);
         btnClose = view.findViewById(R.id.btn_close);
+        layoutReview = view.findViewById(R.id.layout_review);
 
         /* =========================================== */
 
@@ -107,6 +110,16 @@ public class ItemFragment extends Fragment {
         btnAddToCart.setOnClickListener(v -> {
             addItemToCart();
         });
+
+        layoutReview.setOnClickListener(v -> {
+//            NavHostFragment.findNavController(ItemFragment.this).navigate(R.id.action_item_to_review);
+            ReviewBottomSheetDialogFragment bottomSheetDialog = new ReviewBottomSheetDialogFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("productId", product.getId());
+            bottomSheetDialog.setArguments(bundle);
+            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Review");
+        });
+
     }
 
     private void addItemToCart() {

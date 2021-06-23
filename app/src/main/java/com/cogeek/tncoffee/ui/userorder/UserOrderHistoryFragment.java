@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.cogeek.tncoffee.R;
@@ -35,6 +36,7 @@ public class UserOrderHistoryFragment extends Fragment {
     private UserOrderOverviewAdapter adapter;
     private List<OrderHistoryOverview> listOrder;
     private ProgressBar progressBar;
+    private ImageButton btnClose;
 
     public UserOrderHistoryFragment() {
         // Required empty public constructor
@@ -85,6 +87,10 @@ public class UserOrderHistoryFragment extends Fragment {
             public void onFailure(Call<List<OrderHistoryOverview>> call, Throwable t) {
                 Log.e("UserOrderHistory", t.getMessage());
             }
+        });
+
+        view.findViewById(R.id.btn_close).setOnClickListener(v -> {
+            NavHostFragment.findNavController(UserOrderHistoryFragment.this).popBackStack();
         });
     }
 

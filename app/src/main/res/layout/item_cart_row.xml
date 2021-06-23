@@ -5,21 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_border_bottom"
-    android:paddingStart="20dp"
-    android:paddingTop="15dp"
-    android:paddingEnd="20dp"
-    android:paddingBottom="15dp">
+    android:paddingStart="10dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp">
 
+
+    <ImageButton
+        android:id="@+id/btn_delete_cart"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout7"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_delete"
+        app:tint="@color/zcafe_black" />
 
     <ImageView
         android:id="@+id/img_item_cart"
-        android:layout_width="0dp"
+        android:layout_width="70dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_item_final_price_cart"
-        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txt_item_name_cart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả"
+        android:textColor="@color/zcafe_black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_item_cart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_item_price_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="48.000đ"
+        android:textColor="@color/colorIconInActive"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_item_final_price_cart"
+        app:layout_constraintStart_toEndOf="@+id/txt_item_final_price_cart" />
 
     <TextView
         android:id="@+id/txt_item_final_price_cart"
@@ -32,21 +71,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txt_item_name_cart"
         app:layout_constraintTop_toBottomOf="@+id/txt_item_name_cart" />
-
-    <TextView
-        android:id="@+id/txt_item_name_cart"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:ellipsize="end"
-        android:lines="1"
-        android:text="Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả Trà Đào Cam Sả"
-        android:textColor="@color/zcafe_black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_item_cart"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
@@ -99,30 +123,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/txt_item_price_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="48.000đ"
-        android:textColor="@color/colorIconInActive"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_item_final_price_cart"
-        app:layout_constraintStart_toEndOf="@+id/txt_item_final_price_cart" />
-
-    <ImageButton
-        android:id="@+id/btn_delete_cart"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="45dp"
-        android:background="@color/white"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout7"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_delete_24"
-        app:tint="#D30808" />
 </androidx.constraintlayout.widget.ConstraintLayout>

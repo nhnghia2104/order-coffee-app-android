@@ -2,18 +2,13 @@ package com.cogeek.tncoffee.models;
 
 public class CategoryItem {
     private String name;
-    private int icon;
 
-    public CategoryItem(String name, int icon) {
+    public CategoryItem(String name) {
         this.name = name;
-        this.icon = icon;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getIcon() {
-        return icon;
-    }
 }

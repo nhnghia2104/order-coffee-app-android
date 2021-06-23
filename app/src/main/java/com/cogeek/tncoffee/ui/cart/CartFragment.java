@@ -87,7 +87,7 @@ public class CartFragment extends Fragment {
         }
 
         view.findViewById(R.id.btn_close).setOnClickListener(v -> {
-            NavHostFragment.findNavController(CartFragment.this).popBackStack();
+            NavHostFragment.findNavController(CartFragment.this).navigate(R.id.action_cartFragment_to_navigation_menu);
         });
     }
 
@@ -117,7 +117,8 @@ public class CartFragment extends Fragment {
         @Override
         public void onClick(View v) {
             if (cartDetails.size() > 0) {
-                createOrder();
+//                createOrder();
+                NavHostFragment.findNavController(CartFragment.this).navigate(R.id.action_cartFragment_to_orderFragment);
             }
         }
     };

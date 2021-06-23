@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.cogeek.tncoffee.MainActivity;
 import com.cogeek.tncoffee.api.ProductApi;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.SearchItemActivity;
@@ -35,6 +38,8 @@ import com.cogeek.tncoffee.ui.menu.category.CategoryAdapter;
 import com.cogeek.tncoffee.ui.menu.item.ItemBottomSheetDialogFragment;
 import com.cogeek.tncoffee.ui.menu.item.MainItemAdapter;
 import com.cogeek.tncoffee.utils.NetworkProvider;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,17 +54,19 @@ public class MenuFragment extends Fragment {
 
     private RecyclerView recyclerViewListItem;
     private MainItemAdapter mainItemAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+//    private RecyclerView.LayoutManager layoutManager;
     private ItemViewModel itemViewModel;
     private List<com.cogeek.tncoffee.models.Category> categoryList;
+    private List<com.cogeek.tncoffee.models.Category> filteredList;
     private TextView stickyView;
     private View heroImageView;
     private View stickyViewSpacer;
     private View view;
     private View header;
     private SearchView searchView;
-    private Button btnOpenCart;
+    private AppCompatImageButton btnOpenCart;
     private View layoutCategory;
+    private TabLayout tabsCategory;
 
     private Spinner categoriesSpinner;
     private List<CategoryItem> categoryItems;
@@ -73,7 +80,7 @@ public class MenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
-        layoutManager = new LinearLayoutManager(getContext());
+//        layoutManager = new LinearLayoutManager(getContext());
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         smoothScroller = new LinearSmoothScroller(requireContext()) {
             @Override protected int getVerticalSnapPreference() {
@@ -92,20 +99,22 @@ public class MenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         categoryList = new ArrayList<>();
+        filteredList = new ArrayList<>();
 
-        btnOpenCart = view.findViewById(R.id.btnOpenCart);
+        btnOpenCart = view.findViewById(R.id.btn_open_cart);
         recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
-        mainItemAdapter = new MainItemAdapter(categoryList);
+        mainItemAdapter = new MainItemAdapter(filteredList);
         mainItemAdapter.setOnItemListener(itemListener);
-        recyclerViewListItem.setLayoutManager(layoutManager);
+        recyclerViewListItem.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewListItem.setAdapter(mainItemAdapter);
+        tabsCategory = view.findViewById(R.id.tabs_category);
 
         addEvent();
         setupMainContent();
-        categoriesSpinner = view.findViewById(R.id.spinner_category);
-        setupCategorySpinner();
-        blurView = view.findViewById(R.id.blur_layout);
-        blurBackground();
+//        categoriesSpinner = view.findViewById(R.id.spinner_category);
+//        setupCategorySpinner();
+
+
     }
     private void blurBackground() {
         float radius = 20f;
@@ -127,30 +136,38 @@ public class MenuFragment extends Fragment {
     }
 
     private void setupMainContent() {
-        ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
-        Call<List<com.cogeek.tncoffee.models.Category>> call = productApi.getCategories();
+//        ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
+//        Call<List<com.cogeek.tncoffee.models.Category>> call = productApi.getCategories();
+//
+//        call.enqueue(new Callback<List<com.cogeek.tncoffee.models.Category>>() {
+//            @Override
+//            public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<com.cogeek.tncoffee.models.Category>> response) {
+//                if (response.isSuccessful()) {
+//                    categoryList.clear();
+//                    filteredList.clear();
+//                    List<com.cogeek.tncoffee.models.Category> categories = response.body();
+//                    categoryList.addAll(categories);
+//                    filteredList.addAll(categories);
+//                    mainItemAdapter.notifyDataSetChanged();
+//
+//                    /* setup spinner */
+//                    categoryItems.clear();
+//                    categoryItems.addAll(parseCategoryItem(categories));
+////                    categoryAdapter.notifyDataSetChanged();
+//                    setupTabsCategory();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<com.cogeek.tncoffee.models.Category>> call, Throwable t) {
+//
+//            }
+//        });
 
-        call.enqueue(new Callback<List<com.cogeek.tncoffee.models.Category>>() {
-            @Override
-            public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<com.cogeek.tncoffee.models.Category>> response) {
-                if (response.isSuccessful()) {
-                    categoryList.clear();
-                    List<com.cogeek.tncoffee.models.Category> categories = response.body();
-                    categoryList.addAll(categories);
-                    mainItemAdapter.notifyDataSetChanged();
-
-                    /* setup spinner */
-                    categoryItems.clear();
-                    categoryItems.addAll(parseCategoryItem(categories));
-                    categoryAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<com.cogeek.tncoffee.models.Category>> call, Throwable t) {
-
-            }
-        });
+        categoryList = ((MainActivity)getActivity()).getProducts();
+        filteredList.addAll(categoryList);
+        mainItemAdapter.notifyDataSetChanged();
+        setupTabsCategory();
     }
 
     MainItemAdapter.OnItemListener itemListener = new MainItemAdapter.OnItemListener() {
@@ -159,7 +176,7 @@ public class MenuFragment extends Fragment {
 //            Log.i("click item at", "section: " + section + ", row: " + row);
 //            ItemBottomSheetDialogFragment bottomSheetDialog = new ItemBottomSheetDialogFragment();
 //            bottomSheetDialog.show(getActivity().getSupportFragmentManager(), "Detail Item");
-            Product item = categoryList.get(section).getItems().get(row);
+            Product item = filteredList.get(section).getItems().get(row);
             itemViewModel.selectItem(item);
             NavHostFragment.findNavController(MenuFragment.this).navigate(R.id.action_menu_open_item);
         }
@@ -231,6 +248,43 @@ public class MenuFragment extends Fragment {
         });
     }
 
+    private void setupTabsCategory() {
+        tabsCategory.removeAllTabs();
+        categoryItems = ((MainActivity)getActivity()).getCategoryItems();
+        for(CategoryItem item : categoryItems) {
+            tabsCategory.addTab(tabsCategory.newTab().setText(item.getName()));
+        }
+
+        tabsCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                setFilteredList(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private void setFilteredList(int position) {
+        if (position == 0) {
+            filteredList.clear();
+            filteredList.addAll(categoryList);
+            mainItemAdapter.notifyDataSetChanged();
+        } else {
+            filteredList.clear();
+            filteredList.addAll(categoryList.subList(position - 1, position));
+            mainItemAdapter.notifyDataSetChanged();
+        }
+    }
+
     private void setupCategorySpinner() {
         categoryItems = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(getContext(), R.layout.category_spinner_row, categoryItems);
@@ -252,17 +306,8 @@ public class MenuFragment extends Fragment {
         });
     }
 
-    private List<CategoryItem> parseCategoryItem(List<Category> categories) {
-        List<CategoryItem> result = new ArrayList<>();
-        for (Category item: categories ) {
-            result.add(new CategoryItem(item.getName(), findIcon(item.getName())));
-        }
-        return result;
-    }
 
-    private int findIcon(String name) {
-        return 0;
-    }
+
 
 }
 

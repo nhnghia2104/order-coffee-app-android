@@ -81,7 +81,7 @@
                     android:id="@+id/txtPriceFinal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="169.000đ"
+                    android:text="0đ"
                     android:textColor="@color/zcafe_black"
                     android:textSize="20sp"
                     android:textStyle="bold"

@@ -1,9 +1,11 @@
 package com.cogeek.tncoffee.ui.menu.item;
 
 import android.graphics.Paint;
+import android.provider.Telephony;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,7 +57,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
                 .into(holder.getImageItem());
 
         if (item.getAvg() > 0) {
-            holder.getTxtRate().setText(item.getAvg() + "");
+            holder.getRatingBar().setRating(item.getAvg());
             holder.showRateLayout();
         }
     }
@@ -66,9 +68,10 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView txtItemName,txtPrice,txtDiscount, txtRate;
+        private final TextView txtItemName,txtPrice,txtDiscount;//, txtRate;
         private final RoundedImageView imageItem;
         private final View layoutRate;
+        private final RatingBar ratingBar;
         private OnChildListener onChildListener;
 
         public ViewHolder(@NonNull View v, OnChildListener onChildClickListener) {
@@ -78,9 +81,10 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
             imageItem = v.findViewById(R.id.img_item_cell);
             txtDiscount = v.findViewById(R.id.txt_cell_discount);
 //            txtDiscount.setPaintFlags(txtDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            txtRate = v.findViewById(R.id.txt_rate_product);
+//            txtRate = v.findViewById(R.id.txt_rate_product);
+            ratingBar = v.findViewById(R.id.ratingBar);
             layoutRate = v.findViewById(R.id.layout_rate_avg);
-            layoutRate.setVisibility(View.GONE);
+            layoutRate.setVisibility(View.INVISIBLE);
             this.onChildListener = onChildClickListener;
             v.setOnClickListener(this);
         }
@@ -101,8 +105,8 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
             return txtDiscount;
         }
 
-        public TextView getTxtRate() {
-            return txtRate;
+        public RatingBar getRatingBar() {
+            return ratingBar;
         }
 
         public void showRateLayout() {

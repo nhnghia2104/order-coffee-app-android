@@ -20,8 +20,9 @@ import java.util.List;
 public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHolder> {
 
     private List<com.cogeek.tncoffee.models.Category> categoryList;
-    private RecyclerView.LayoutManager layoutManager;
+//    private RecyclerView.LayoutManager layoutManager;
     private  OnItemListener onItemListener;
+    private ViewGroup parent;
 
     public interface OnItemListener {
         void onItemClick(int section, int row);
@@ -45,7 +46,8 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section,
                 parent,
                 false);
-        layoutManager = new GridLayoutManager(parent.getContext(),2);
+//        layoutManager = new GridLayoutManager(parent.getContext(),2);
+        this.parent = parent;
         return new MainItemAdapter.ViewHolder(v);
     }
 
@@ -58,7 +60,8 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
 
         items.addAll(category.getItems());
 
-        holder.getTxtSectionName().setText(sectionName);
+//        holder.getTxtSectionName().setText(sectionName);
+        holder.getTxtSectionName().setVisibility(View.GONE);
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(items);
         childItemAdapter.setOnChildListener(new ChildItemAdapter.OnChildListener() {
             @Override
@@ -69,7 +72,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.ViewHo
                 }
             }
         });
-        holder.getChildRecyclerView().setLayoutManager(layoutManager);
+        holder.getChildRecyclerView().setLayoutManager(new GridLayoutManager(parent.getContext(),2));
         holder.getChildRecyclerView().setAdapter(childItemAdapter);
         childItemAdapter.notifyDataSetChanged();
     }

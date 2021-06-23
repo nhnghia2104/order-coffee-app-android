@@ -50,7 +50,7 @@ public class SharedHelper {
 
     public Cart getCart() {
         Gson gson = new Gson();
-        Log.e("cart", preferences.getString(CART_KEY,"[]"));
+        Log.e("cart", preferences.getString(CART_KEY,""));
         return gson.fromJson(preferences.getString(CART_KEY, ""), Cart.class);
     }
 

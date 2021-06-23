@@ -57,6 +57,11 @@ public class NumberHelper {
         }
     }
 
+    public String dateFormat(long time) {
+        return new SimpleDateFormat("HH:mm, dd/MM/yyyy")
+                .format(new Date(time));
+    }
+
     private double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 

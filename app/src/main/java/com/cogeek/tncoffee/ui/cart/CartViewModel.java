@@ -66,6 +66,7 @@ public class CartViewModel extends AndroidViewModel {
 
     private void loadCart() {
         Cart temp = SharedHelper.getInstance(getApplication()).getCart();
+        Log.e("cart nè", temp.getItemList().toString());
         if (temp != null) {
             mCart.setValue(temp);
         }

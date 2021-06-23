@@ -21,6 +21,7 @@ import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.OrderApi;
 import com.cogeek.tncoffee.models.Order;
 import com.cogeek.tncoffee.models.OrderDetail;
+import com.cogeek.tncoffee.ui.userorder.UserOrderHistoryFragment;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.cogeek.tncoffee.utils.NumberHelper;
 
@@ -83,6 +84,9 @@ public class UserOrderDetailFragment extends Fragment {
             public void onFailure(Call<Order> call, Throwable t) {
 
             }
+        });
+        view.findViewById(R.id.btn_close).setOnClickListener(v -> {
+            NavHostFragment.findNavController(UserOrderDetailFragment.this).popBackStack();
         });
     }
 
