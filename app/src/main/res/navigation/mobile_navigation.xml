@@ -53,34 +53,4 @@
         android:label="fragment_user_order_history"
         tools:layout="@layout/fragment_user_order_history" />
 
-    <fragment
-        android:id="@+id/sign_in_fragment"
-        android:name="com.cogeek.tncoffee.ui.auth.LoginFragment"
-        android:label="Sign in Fragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/signin_to_signup_fragment"
-            app:destination="@id/sign_up_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/sign_up_fragment"
-        android:name="com.cogeek.tncoffee.ui.auth.SignUpFragment"
-        android:label="Sign up Fragment"
-        tools:layout="@layout/fragment_signup">
-        <action
-            android:id="@+id/signup_to_signin_fragment"
-            app:destination="@id/sign_in_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-    </fragment>
-
 </navigation>

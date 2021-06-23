@@ -10,15 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.UserApi;
@@ -28,6 +27,8 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,9 +42,8 @@ public class LoginFragment extends Fragment {
     private Button btnOk;
     private EditText editUsername;
     private EditText editPassword;
-    private ConstraintLayout layoutSignUp;
     private LoginFragmentListener listener;
-    //private TextView txtSignUp;
+    private TextView txtSignUp;
     private static final int RC_SIGN_IN = 123;
 
     public interface LoginFragmentListener {
@@ -67,11 +67,14 @@ public class LoginFragment extends Fragment {
         btnOk = view.findViewById(R.id.btnOk);
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
-        //txtSignUp = view.findViewById(R.id.txtSignUp);
-        layoutSignUp = view.findViewById(R.id.layoutSignUp);
+        txtSignUp = view.findViewById(R.id.txtSignUp);
 
-        layoutSignUp.setOnClickListener(v -> {
-            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.signin_to_signup_fragment);
+
+        txtSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
         });
 
 

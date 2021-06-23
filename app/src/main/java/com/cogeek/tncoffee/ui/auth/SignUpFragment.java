@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.cogeek.tncoffee.R;
 
@@ -24,7 +23,7 @@ public class SignUpFragment extends Fragment {
     private EditText editPhoneNumber_signup;
     private EditText editEmail_signup;
     private EditText editPassword_signup;
-    //private TextView txtSignIn;
+    private TextView txtSignIn;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class SignUpFragment extends Fragment {
         editPhoneNumber_signup = view.findViewById(R.id.editPhoneNumber_signup);
         editEmail_signup = view.findViewById(R.id.editEmail_signup);
         editPassword_signup = view.findViewById(R.id.editPassword_signup);
-        //txtSignIn = view.findViewById(R.id.txtSignIn);
+        txtSignIn = view.findViewById(R.id.txtSignIn);
 
         //get data
         btnSignUp.setOnClickListener(v -> {
@@ -52,8 +51,11 @@ public class SignUpFragment extends Fragment {
         });
 
         //allready have account, signin
-        view.findViewById(R.id.layoutSignIn).setOnClickListener(v -> {
-            NavHostFragment.findNavController(SignUpFragment.this).navigate(R.id.signup_to_signin_fragment);
+        txtSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
         });
 
     }
