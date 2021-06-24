@@ -18,7 +18,6 @@ import android.view.View;
 import com.cogeek.tncoffee.api.ProductApi;
 import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.CategoryItem;
-import com.cogeek.tncoffee.utils.BottomNavigationViewHelper;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.cogeek.tncoffee.utils.SharedHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.userOrderHistoryFragment:
                     case R.id.userOrderDetailFragment:
                     case R.id.orderTrackingFragment:
+                    case R.id.userReviewProductFragment:
                         hideBottomNavView();
                         break;
                     default:

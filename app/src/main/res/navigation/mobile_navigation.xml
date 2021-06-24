@@ -36,28 +36,41 @@
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="com.cogeek.tncoffee.ui.more.PersonalFragment"
+        android:name="com.cogeek.tncoffee.ui.personal.PersonalFragment"
         tools:layout="@layout/fragment_personal"
         android:label="Khác" >
         <action
             android:id="@+id/action_navigation_more_to_userInfoFragment"
             app:destination="@id/userInfoFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
             />
         <action
             android:id="@+id/action_navigation_more_to_userOrderHistoryFragment"
             app:destination="@id/userOrderHistoryFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_navigation_more_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_navigation_more_to_userProductFragment"
+            app:destination="@id/userProductFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_navigation_more_to_userReviewOverviewFragment"
+            app:destination="@id/userReviewProductFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -128,5 +141,15 @@
         android:name="com.cogeek.tncoffee.ui.order.OrderFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/userProductFragment"
+        android:name="com.cogeek.tncoffee.ui.userproduct.UserProductHistoryFragment"
+        android:label="fragment_user_product"
+        tools:layout="@layout/fragment_user_product" />
+    <fragment
+        android:id="@+id/userReviewProductFragment"
+        android:name="com.cogeek.tncoffee.ui.userreview.UserReviewProductFragment"
+        android:label="fragment_user_review_overview"
+        tools:layout="@layout/fragment_user_review_product" />
 
 </navigation>

@@ -35,7 +35,7 @@ public class OrderDetail {
     }
 
     public String getImage() {
-        return MyConfig.self().BASE_URL + image;
+        return MyConfig.self().getBASE_URL() + image;
     }
 
     public String getAmount() {

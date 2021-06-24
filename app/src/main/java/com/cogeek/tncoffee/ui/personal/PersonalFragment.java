@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.ui.more;
+package com.cogeek.tncoffee.ui.personal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,24 +32,15 @@ public class PersonalFragment extends Fragment {
     private ArrayList<Store> arrayList;
     private ImageView imgUserInfo;
     private TextView txtUserName;
-    private ConstraintLayout layoutOrder;
+    private ConstraintLayout layoutOrder, layoutProductHistory, layoutMyReview, layoutReviewProduct;
     private User user;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_personal, container, false);
-//        ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(false);
-//        }
-
-
         return root;
     }
 
-    private void openUserInfo() {
-        NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userInfoFragment);
-    }
 
 
     @Override
@@ -61,12 +52,23 @@ public class PersonalFragment extends Fragment {
         imgUserInfo = view.findViewById(R.id.img_user_avt);
         txtUserName = view.findViewById(R.id.txt_user_name);
         layoutOrder = view.findViewById(R.id.layout_user_order);
+        layoutProductHistory = view.findViewById(R.id.layout_user_product_history);
+        layoutReviewProduct = view.findViewById(R.id.layout_review_product);
 
         user = SharedHelper.getInstance(getActivity()).getUserProfile();
 
         txtUserName.setText(user.getFullName());
-        Picasso.get().load(user.getAvatar()).placeholder(R.drawable.ic_zcafe_hint).centerCrop().fit().into(imgUserInfo);
+        Picasso.get()
+                .load(user.getAvatar())
+                .placeholder(R.drawable.ic_user)
+                .error(R.drawable.ic_user)
+                .centerCrop()
+                .fit()
+                .into(imgUserInfo);
         layoutOrder.setOnClickListener(onClickLayoutOrder);
+        imgUserInfo.setOnClickListener(onClickUserAvatar);
+        layoutProductHistory.setOnClickListener(onClickProductBought);
+        layoutReviewProduct.setOnClickListener(onClickReviewProduct);
     }
 
 
@@ -87,4 +89,43 @@ public class PersonalFragment extends Fragment {
             NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userOrderHistoryFragment,bundle);
         }
     };
+
+    View.OnClickListener onClickUserAvatar = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openUserInfo();
+        }
+    };
+
+    View.OnClickListener onClickProductBought = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", user.getUid());
+            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userProductFragment,bundle);
+        }
+    };
+
+    View.OnClickListener onClickMyReview = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", user.getUid());
+            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userProductFragment,bundle);
+        }
+    };
+
+    View.OnClickListener onClickReviewProduct = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", user.getUid());
+            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userReviewOverviewFragment,bundle);
+        }
+    };
+
+
+    private void openUserInfo() {
+        NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userInfoFragment);
+    }
 }
