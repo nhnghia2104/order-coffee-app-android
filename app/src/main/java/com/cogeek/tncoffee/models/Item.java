@@ -1,4 +1,4 @@
-package com.cogeek.tncoffee.models_old;
+package com.cogeek.tncoffee.models;
 
 public class Item {
     String name;

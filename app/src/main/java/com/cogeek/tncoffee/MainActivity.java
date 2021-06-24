@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.userOrderDetailFragment:
                     case R.id.orderTrackingFragment:
                     case R.id.userReviewProductFragment:
+                    case R.id.myReviewFragment:
+                    case R.id.userAddressFragment:
+                    case R.id.addressDetailFragment:
                         hideBottomNavView();
                         break;
                     default:

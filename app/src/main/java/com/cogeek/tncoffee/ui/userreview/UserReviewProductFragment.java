@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.ReviewApi;
 import com.cogeek.tncoffee.models.Product;
+import com.cogeek.tncoffee.ui.menu.item.ChildItemAdapter;
+import com.cogeek.tncoffee.ui.userreview.write.WriteReviewDialogFragment;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 
 import java.util.ArrayList;
@@ -59,7 +62,25 @@ public class UserReviewProductFragment extends Fragment {
         adapter = new UserReviewProductAdapter(productList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-
+        adapter.setOnChildListener(new ChildItemAdapter.OnChildListener() {
+            @Override
+            public void onChildClick(int position) {
+                WriteReviewDialogFragment dialogFragment = new WriteReviewDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("productId", productList.get(position).getId());
+                bundle.putString("userId", mID);
+                dialogFragment.setArguments(bundle);
+                dialogFragment.setOnReviewSendListener(new WriteReviewDialogFragment.OnReviewSendListener() {
+                    @Override
+                    public void onSent(boolean sent) {
+                        if (sent) {
+                            loadData();
+                        }
+                    }
+                });
+                dialogFragment.show(getActivity().getSupportFragmentManager(),"write review");
+            }
+        });
         loadData();
 
         view.findViewById(R.id.btn_close).setOnClickListener(v -> {

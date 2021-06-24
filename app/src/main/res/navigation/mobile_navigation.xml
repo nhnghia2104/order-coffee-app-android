@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,10 +26,10 @@
         <action
             android:id="@+id/action_navigation_menu_to_cartFragment"
             app:destination="@id/cartFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_menu_open_item"
             app:destination="@id/itemFragment" />
@@ -42,35 +43,49 @@
         <action
             android:id="@+id/action_navigation_more_to_userInfoFragment"
             app:destination="@id/userInfoFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
         <action
             android:id="@+id/action_navigation_more_to_userOrderHistoryFragment"
             app:destination="@id/userOrderHistoryFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_navigation_more_to_cartFragment"
             app:destination="@id/cartFragment" />
         <action
             android:id="@+id/action_navigation_more_to_userProductFragment"
             app:destination="@id/userProductFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_navigation_more_to_userReviewOverviewFragment"
             app:destination="@id/userReviewProductFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"/>
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_navigation_more_to_myReviewFragment"
+            app:destination="@id/myReviewFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_navigation_more_to_userAddressFragment"
+            app:destination="@id/userAddressFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -151,5 +166,28 @@
         android:name="com.cogeek.tncoffee.ui.userreview.UserReviewProductFragment"
         android:label="fragment_user_review_overview"
         tools:layout="@layout/fragment_user_review_product" />
+    <fragment
+        android:id="@+id/myReviewFragment"
+        android:name="com.cogeek.tncoffee.ui.userreview.myreview.MyReviewFragment"
+        android:label="fragment_my_review"
+        tools:layout="@layout/fragment_my_review" />
+    <fragment
+        android:id="@+id/userAddressFragment"
+        android:name="com.cogeek.tncoffee.ui.useraddress.UserAddressFragment"
+        android:label="fragment_user_address"
+        tools:layout="@layout/fragment_user_address" >
+        <action
+            android:id="@+id/action_userAddressFragment_to_addressDetailFragment"
+            app:destination="@id/addressDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressDetailFragment"
+        android:name="com.cogeek.tncoffee.ui.useraddress.detail.AddressDetailFragment"
+        android:label="fragment_address_detail"
+        tools:layout="@layout/fragment_address_detail" />
 
 </navigation>

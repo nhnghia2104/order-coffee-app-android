@@ -19,4 +19,17 @@ public interface ReviewApi {
     @FormUrlEncoded
     @POST("review/listShouldReviewOfCustomer")
     Call<List<Product>> getListProductShouldReview(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("review/writeReview")
+    Call<Review> writeReview(@Field("idProduct") String idProduct,
+                             @Field("idCustomer") String idCustomer,
+                             @Field("vote") float vote,
+                             @Field("head") String head,
+                             @Field("content") String content,
+                             @Field("date") long date);
+
+    @FormUrlEncoded
+    @POST("review/getListReviewOfCustomer")
+    Call<List<Review>> getListReviewOfCustomer(@Field("id") String id);
 }

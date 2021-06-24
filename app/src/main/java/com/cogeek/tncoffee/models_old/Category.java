@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.models_old;
 
+import com.cogeek.tncoffee.models.Item;
+
 import java.util.List;
 
 public class Category {

@@ -32,7 +32,7 @@ public class PersonalFragment extends Fragment {
     private ArrayList<Store> arrayList;
     private ImageView imgUserInfo;
     private TextView txtUserName;
-    private ConstraintLayout layoutOrder, layoutProductHistory, layoutMyReview, layoutReviewProduct;
+    private ConstraintLayout layoutOrder, layoutProductHistory, layoutMyReview, layoutReviewProduct, layoutAddres;
     private User user;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,6 +54,8 @@ public class PersonalFragment extends Fragment {
         layoutOrder = view.findViewById(R.id.layout_user_order);
         layoutProductHistory = view.findViewById(R.id.layout_user_product_history);
         layoutReviewProduct = view.findViewById(R.id.layout_review_product);
+        layoutMyReview = view.findViewById(R.id.layout_my_review);
+        layoutAddres = view.findViewById(R.id.layout_address);
 
         user = SharedHelper.getInstance(getActivity()).getUserProfile();
 
@@ -69,6 +71,8 @@ public class PersonalFragment extends Fragment {
         imgUserInfo.setOnClickListener(onClickUserAvatar);
         layoutProductHistory.setOnClickListener(onClickProductBought);
         layoutReviewProduct.setOnClickListener(onClickReviewProduct);
+        layoutMyReview.setOnClickListener(onClickMyReview);
+        layoutAddres.setOnClickListener(onClickAddress);
     }
 
 
@@ -111,7 +115,7 @@ public class PersonalFragment extends Fragment {
         public void onClick(View v) {
             Bundle bundle = new Bundle();
             bundle.putString("id", user.getUid());
-            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userProductFragment,bundle);
+            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_myReviewFragment,bundle);
         }
     };
 
@@ -121,6 +125,15 @@ public class PersonalFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("id", user.getUid());
             NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userReviewOverviewFragment,bundle);
+        }
+    };
+
+    View.OnClickListener onClickAddress = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", user.getUid());
+            NavHostFragment.findNavController(PersonalFragment.this).navigate(R.id.action_navigation_more_to_userAddressFragment,bundle);
         }
     };
 

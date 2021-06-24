@@ -23,6 +23,15 @@ public class Review {
     @SerializedName("content")
     private String content;
 
+    @SerializedName("image")
+    private String productImage;
+
+    @SerializedName("idProduct")
+    private String productId;
+
+    @SerializedName("productName")
+    private String productName;
+
     public String getDate() {
         return NumberHelper.getInstance().dateFormat(Long.parseLong(date));
     }
@@ -46,6 +55,20 @@ public class Review {
     public String getContent() {
         return content;
     }
+
+
+    public String getProductImage() {
+        return MyConfig.self().getBASE_URL() + productImage;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
 
 
 }
