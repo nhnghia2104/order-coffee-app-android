@@ -49,6 +49,7 @@
 
         <View
             android:id="@+id/v_circle_current"
+
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
