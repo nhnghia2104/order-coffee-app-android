@@ -3,7 +3,7 @@ package com.cogeek.tncoffee.utils;
 public class MyConfig {
     public final boolean IS_DEBUG = true;
     private final String DEBUG_URL = "http://10.0.2.2:2104/01/";
-    private final String DEPLOY_URL = "http://20.92.106.217:2104/01/";
+    private final String DEPLOY_URL = "http://20.58.163.19:2104/01/";
     private static MyConfig _instance;
     private MyConfig() {
     }
