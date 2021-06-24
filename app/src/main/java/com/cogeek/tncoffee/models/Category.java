@@ -15,6 +15,10 @@ public class Category {
     @SerializedName("name")
     public String name;
 
+    public Category(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

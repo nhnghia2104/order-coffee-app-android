@@ -14,6 +14,9 @@ import retrofit2.http.POST;
 public interface ProductApi {
 
     @GET("product/getProductsByCategories")
+    Call<List<Category>> getProducts();
+
+    @GET("product/getCategory")
     Call<List<Category>> getCategories();
 
     @GET("product/getLimitSaleProducts")

@@ -56,7 +56,7 @@ public class MenuFragment extends Fragment {
     private MainItemAdapter mainItemAdapter;
 //    private RecyclerView.LayoutManager layoutManager;
     private ItemViewModel itemViewModel;
-    private List<com.cogeek.tncoffee.models.Category> categoryList;
+    private List<com.cogeek.tncoffee.models.Category> productList;
     private List<com.cogeek.tncoffee.models.Category> filteredList;
     private TextView stickyView;
     private View heroImageView;
@@ -69,13 +69,11 @@ public class MenuFragment extends Fragment {
     private TabLayout tabsCategory;
 
     private Spinner categoriesSpinner;
-    private List<CategoryItem> categoryItems;
+    private List<Category> categoryItems;
     private CategoryAdapter categoryAdapter;
 
     private BlurView blurView;
     RecyclerView.SmoothScroller smoothScroller;
-
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -98,8 +96,9 @@ public class MenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        categoryList = new ArrayList<>();
+        productList = new ArrayList<>();
         filteredList = new ArrayList<>();
+        categoryItems = new ArrayList<>();
 
         btnOpenCart = view.findViewById(R.id.btn_open_cart);
         recyclerViewListItem = view.findViewById(R.id.recycler_view_item);
@@ -136,38 +135,50 @@ public class MenuFragment extends Fragment {
     }
 
     private void setupMainContent() {
-//        ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
-//        Call<List<com.cogeek.tncoffee.models.Category>> call = productApi.getCategories();
-//
-//        call.enqueue(new Callback<List<com.cogeek.tncoffee.models.Category>>() {
-//            @Override
-//            public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<com.cogeek.tncoffee.models.Category>> response) {
-//                if (response.isSuccessful()) {
-//                    categoryList.clear();
-//                    filteredList.clear();
-//                    List<com.cogeek.tncoffee.models.Category> categories = response.body();
-//                    categoryList.addAll(categories);
-//                    filteredList.addAll(categories);
-//                    mainItemAdapter.notifyDataSetChanged();
-//
-//                    /* setup spinner */
-//                    categoryItems.clear();
-//                    categoryItems.addAll(parseCategoryItem(categories));
-////                    categoryAdapter.notifyDataSetChanged();
-//                    setupTabsCategory();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<com.cogeek.tncoffee.models.Category>> call, Throwable t) {
-//
-//            }
-//        });
+        ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
+        Call<List<com.cogeek.tncoffee.models.Category>> callProduct = productApi.getProducts();
 
-        categoryList = ((MainActivity)getActivity()).getProducts();
-        filteredList.addAll(categoryList);
-        mainItemAdapter.notifyDataSetChanged();
-        setupTabsCategory();
+        callProduct.enqueue(new Callback<List<com.cogeek.tncoffee.models.Category>>() {
+            @Override
+            public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<com.cogeek.tncoffee.models.Category>> response) {
+                if (response.isSuccessful()) {
+                    productList.clear();
+                    filteredList.clear();
+                    List<com.cogeek.tncoffee.models.Category> categories = response.body();
+                    productList.addAll(categories);
+                    filteredList.addAll(categories);
+                    mainItemAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<com.cogeek.tncoffee.models.Category>> call, Throwable t) {
+
+            }
+        });
+
+        Call<List<Category>> callCategory = productApi.getCategories();
+        callCategory.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful()) {
+                    categoryItems.clear();
+                    categoryItems.add(new Category("Tất cả"));
+                    List<Category> responseData = response.body();
+                    categoryItems.addAll(responseData);
+                    setupTabsCategory();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
+            }
+        });
+//
+//        productList = new ArrayList<>();
+//        filteredList.addAll(productList);
+//        mainItemAdapter.notifyDataSetChanged();
     }
 
     MainItemAdapter.OnItemListener itemListener = new MainItemAdapter.OnItemListener() {
@@ -183,44 +194,6 @@ public class MenuFragment extends Fragment {
     };
 
     private void addEvent() {
-
-//        recyclerViewListItem.setOnClickListener(new );
-
-//        header.findViewById(R.id.vCurrentOrder).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i("click", "ngon click Curretnt Order rồi");
-//            }
-//        });
-
-//        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                /* Check if the first item is already reached to top.*/
-//                if (listView.getFirstVisiblePosition() == 0) {
-//                    View firstChild = listView.getChildAt(0);
-//                    int topY = 0;
-//                    if (firstChild != null) {
-//                        topY = firstChild.getTop();
-//                    }
-//
-//                    if (stickyView != null) {
-//                        int heroTopY = stickyViewSpacer.getTop();
-//                        stickyView.setY(Math.max(0, heroTopY + topY));
-//                    }
-//
-//                    /* Set the image to scroll half of the amount that of ListView */
-//                    if (heroImageView != null) {
-//                        heroImageView.setY(topY * 0.5f);
-//                    }
-//                }
-//            }
-//        });
 
         if (searchView != null) {
             searchView.setOnSearchClickListener(new View.OnClickListener() {
@@ -250,8 +223,7 @@ public class MenuFragment extends Fragment {
 
     private void setupTabsCategory() {
         tabsCategory.removeAllTabs();
-        categoryItems = ((MainActivity)getActivity()).getCategoryItems();
-        for(CategoryItem item : categoryItems) {
+        for(Category item : categoryItems) {
             tabsCategory.addTab(tabsCategory.newTab().setText(item.getName()));
         }
 
@@ -276,38 +248,13 @@ public class MenuFragment extends Fragment {
     private void setFilteredList(int position) {
         if (position == 0) {
             filteredList.clear();
-            filteredList.addAll(categoryList);
+            filteredList.addAll(productList);
             mainItemAdapter.notifyDataSetChanged();
         } else {
             filteredList.clear();
-            filteredList.addAll(categoryList.subList(position - 1, position));
+            filteredList.addAll(productList.subList(position - 1, position));
             mainItemAdapter.notifyDataSetChanged();
         }
     }
-
-    private void setupCategorySpinner() {
-        categoryItems = new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(getContext(), R.layout.category_spinner_row, categoryItems);
-        categoriesSpinner.setAdapter(categoryAdapter);
-
-        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                recyclerViewListItem.scrollToPosition(position);
-                smoothScroller.setTargetPosition(position);
-//                layoutManager.startSmoothScroll(smoothScroller);
-                recyclerViewListItem.getLayoutManager().startSmoothScroll(smoothScroller);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-
-
-
 }
 
