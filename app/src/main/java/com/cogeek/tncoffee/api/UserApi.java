@@ -16,6 +16,14 @@ public interface UserApi {
     Call<User> authenticate(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
+    @POST("user/register")
+    Call<User> register(@Field("username") String username, @Field("password") String password, @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("user/forgotPassword")
+    Call<User> forgotPassword(@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("user/getListOrder")
     Call<List<OrderHistoryOverview>> getListOrder(@Field("id") String id);
 }

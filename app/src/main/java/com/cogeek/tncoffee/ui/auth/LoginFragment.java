@@ -1,6 +1,5 @@
 package com.cogeek.tncoffee.ui.auth;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.cogeek.tncoffee.LaunchActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.UserApi;
 import com.cogeek.tncoffee.models.ErrorResponse;
@@ -30,9 +28,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,6 +49,7 @@ public class LoginFragment extends Fragment {
     public interface LoginFragmentListener {
         void onCompleteLogin(User user);
         void onClickSignup();
+        void onClickForgotPassword();
     }
 
     @Override
@@ -72,7 +69,7 @@ public class LoginFragment extends Fragment {
         loading.setCancelable(true);
         loading.setMessage("Đang xác thực");
         loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        btnOk = view.findViewById(R.id.btn_signin);
+        btnOk = view.findViewById(R.id.btn_send_password);
         btnSignup = view.findViewById(R.id.btn_signup);
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
@@ -117,6 +114,9 @@ public class LoginFragment extends Fragment {
             listener.onClickSignup();
         });
 
+        view.findViewById(R.id.txt_forgot).setOnClickListener(v-> {
+            listener.onClickForgotPassword();
+        });
     }
 
     private void loginWithGoogle() {
