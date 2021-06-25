@@ -76,10 +76,14 @@ public class User {
     }
 
     public String getAvatar() {
-        return MyConfig.self().BASE_URL + avatar;
+        return MyConfig.self().getBASE_URL() + avatar;
     }
 
     public UserAddress getUserAddress() {
         return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
     }
 }

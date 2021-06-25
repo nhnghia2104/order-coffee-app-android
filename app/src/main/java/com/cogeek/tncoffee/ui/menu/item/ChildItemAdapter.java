@@ -5,6 +5,7 @@ import android.provider.Telephony;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -52,8 +53,8 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
         Picasso.get()
                 .load(item.getImage())
                 .placeholder(R.drawable.ic_zcafe_hint)
-                .fit()
                 .centerInside()
+                .fit()
                 .into(holder.getImageItem());
 
         if (item.getAvg() > 0) {
@@ -69,7 +70,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView txtItemName,txtPrice,txtDiscount;//, txtRate;
-        private final RoundedImageView imageItem;
+        private final ImageView imageItem;
         private final View layoutRate;
         private final RatingBar ratingBar;
         private OnChildListener onChildListener;
@@ -97,7 +98,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.View
             return txtPrice;
         }
 
-        public RoundedImageView getImageItem() {
+        public ImageView getImageItem() {
             return imageItem;
         }
 

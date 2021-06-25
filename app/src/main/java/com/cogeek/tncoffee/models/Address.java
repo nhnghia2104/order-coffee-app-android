@@ -33,6 +33,10 @@ public class Address {
                 '}';
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -55,5 +59,41 @@ public class Address {
 
     public String getPhone() {
         return phone;
+    }
+
+    public Address() {
+    }
+
+    public Address(String firstName, String lastName, String city, String address, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.address = address;
+        this.phone = phone;
+        this.email = "";
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

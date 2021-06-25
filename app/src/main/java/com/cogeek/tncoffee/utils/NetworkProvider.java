@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.utils;
 
+import android.util.Log;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -18,11 +20,14 @@ public final class NetworkProvider {
     public Retrofit retrofit;
 
     private NetworkProvider() {
+        String baseUrl = MyConfig.self().getBASE_URL() + "index.php/mobile/";
+        Log.e("BaseURL", baseUrl);
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:2104/01/index.php/mobile/")
-//                .baseUrl("https://10.0.2.2:5001/api/")
+//                .baseUrl("http://20.58.161.221:2104/01/index.php/mobile/")
+//                .baseUrl("http://10.0.2.2:2104/01/index.php/mobile/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-//                .client(getUnsafeOkHttpClient())
+                .client(getUnsafeOkHttpClient())
                 .build();
     }
     public static NetworkProvider self() {

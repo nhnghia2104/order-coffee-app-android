@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.OrderDetail;
-import com.cogeek.tncoffee.ui.userorder.UserOrderOverviewAdapter;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -55,9 +54,9 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         private final TextView txtOrderDetailName, txtOrderDetailPrice;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtOrderDetailName = itemView.findViewById(R.id.txt_order_detail_name);
+            txtOrderDetailName = itemView.findViewById(R.id.txt_product_detail_name);
             txtOrderDetailPrice = itemView.findViewById(R.id.txt_order_detail_price);
-            imgOrderDetail = itemView.findViewById(R.id.img_order_detail);
+            imgOrderDetail = itemView.findViewById(R.id.img_product_user);
         }
 
         public RoundedImageView getImgOrderDetail() {

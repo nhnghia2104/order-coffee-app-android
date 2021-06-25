@@ -68,7 +68,7 @@ public class OrderHistoryOverview {
     }
 
     public String getProductImage() {
-        return MyConfig.self().BASE_URL + productImage;
+        return MyConfig.self().getBASE_URL() + productImage;
     }
 
     public String getProductName() {

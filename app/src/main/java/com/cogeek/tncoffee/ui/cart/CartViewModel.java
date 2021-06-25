@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.cogeek.tncoffee.models.Cart;
 import com.cogeek.tncoffee.models.ItemCart;
-import com.cogeek.tncoffee.models_old.Item;
+import com.cogeek.tncoffee.models.Item;
 import com.cogeek.tncoffee.utils.SharedHelper;
 
 public class CartViewModel extends AndroidViewModel {
@@ -66,9 +66,9 @@ public class CartViewModel extends AndroidViewModel {
 
     private void loadCart() {
         Cart temp = SharedHelper.getInstance(getApplication()).getCart();
-        Log.e("cart nè", temp.getItemList().toString());
         if (temp != null) {
             mCart.setValue(temp);
+            cart = mCart.getValue();
         }
     }
 

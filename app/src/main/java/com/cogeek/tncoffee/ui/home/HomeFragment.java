@@ -65,9 +65,9 @@ public class HomeFragment extends Fragment {
     private DatabaseReference databaseReference;
 
     String[] imageUrls = new String[]{
-            MyConfig.self().BASE_URL + "img/background1.jpg",
-            MyConfig.self().BASE_URL + "img/background2.jpg",
-            MyConfig.self().BASE_URL + "img/background3.jpg"
+            MyConfig.self().getBASE_URL() + "img/background1.jpg",
+            MyConfig.self().getBASE_URL() + "img/background2.jpg",
+            MyConfig.self().getBASE_URL() + "img/background3.jpg"
     };
 
     private ItemViewModel itemViewModel;

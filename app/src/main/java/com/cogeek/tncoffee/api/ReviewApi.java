@@ -1,6 +1,7 @@
 package com.cogeek.tncoffee.api;
 
 import com.cogeek.tncoffee.models.OrderHistoryOverview;
+import com.cogeek.tncoffee.models.Product;
 import com.cogeek.tncoffee.models.Review;
 
 import java.util.List;
@@ -14,4 +15,21 @@ public interface ReviewApi {
     @FormUrlEncoded
     @POST("review/getListReviewByProductId")
     Call<List<Review>> getListReviewByProductId(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("review/listShouldReviewOfCustomer")
+    Call<List<Product>> getListProductShouldReview(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("review/writeReview")
+    Call<Review> writeReview(@Field("idProduct") String idProduct,
+                             @Field("idCustomer") String idCustomer,
+                             @Field("vote") float vote,
+                             @Field("head") String head,
+                             @Field("content") String content,
+                             @Field("date") long date);
+
+    @FormUrlEncoded
+    @POST("review/getListReviewOfCustomer")
+    Call<List<Review>> getListReviewOfCustomer(@Field("id") String id);
 }

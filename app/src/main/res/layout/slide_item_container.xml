@@ -7,13 +7,19 @@
     app:cardElevation="5dp"
     app:cardMaxElevation="5dp">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageSlide"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_zcafe_hint"
-        app:riv_corner_radius="10dp">
+        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content" >
 
-    </com.makeramen.roundedimageview.RoundedImageView>
+        <ImageView
+            android:id="@+id/imageSlide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            android:src="@drawable/ic_zcafe_hint">
+
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+
 </com.google.android.material.card.MaterialCardView>

@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.ui.auth;
-
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,20 +18,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import com.cogeek.tncoffee.LaunchActivity;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.api.UserApi;
+import com.cogeek.tncoffee.models.ErrorResponse;
 import com.cogeek.tncoffee.models.User;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import org.w3c.dom.Text;
-
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,15 +42,17 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
     private Button btnLoginGoogle;
-    private Button btnOk;
+    private Button btnOk, btnSignup;
     private EditText editUsername;
     private EditText editPassword;
     private LoginFragmentListener listener;
     private TextView txtSignUp;
     private static final int RC_SIGN_IN = 123;
+    ProgressDialog loading = null;
 
     public interface LoginFragmentListener {
         void onCompleteLogin(User user);
+        void onClickSignup();
     }
 
     @Override
@@ -63,20 +68,14 @@ public class LoginFragment extends Fragment {
 //        view.findViewById(R.id.btnLoginGoogle).setOnClickListener((v) -> {
 //            loginWithGoogle();
 //        });
-
-        btnOk = view.findViewById(R.id.btnOk);
+        loading = new ProgressDialog(getContext());
+        loading.setCancelable(true);
+        loading.setMessage("Đang xác thực");
+        loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        btnOk = view.findViewById(R.id.btn_signin);
+        btnSignup = view.findViewById(R.id.btn_signup);
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
-//        txtSignUp = view.findViewById(R.id.txtSignUp);
-//
-//
-//        txtSignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
 
 
         btnOk.setOnClickListener(v -> {
@@ -84,7 +83,7 @@ public class LoginFragment extends Fragment {
             String password = editPassword.getText().toString();
             Log.i("username", username);
             Log.i("password", password);
-
+            loading.show();
             if (username != "" && password != "") {
                 UserApi userApi = NetworkProvider.self().retrofit.create(UserApi.class);
                 Call<User> call = userApi.authenticate(username,password);
@@ -95,14 +94,27 @@ public class LoginFragment extends Fragment {
                             User user = response.body();
                             listener.onCompleteLogin(user);
 //                            SharedHelper.getInstance(getContext()).setUserProfile(user);
+                            loading.dismiss();
+                        }
+                        else {
+                            loading.dismiss();
+                            Gson gson = new Gson();
+                            ErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(),ErrorResponse.class);
+                            new AlertDialog.Builder(getContext()).setTitle("Lỗi").setMessage(errorResponse.getMessage()).show();
                         }
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Log.e("toang",t.getMessage());
+                        loading.dismiss();
+                        new AlertDialog.Builder(getContext()).setTitle("Lỗi").setMessage("Đăng nhập thất bại\n vui lòng kiểm tra lại");
                     }
                 });
             }
+        });
+
+        btnSignup.setOnClickListener(v -> {
+            listener.onClickSignup();
         });
 
     }

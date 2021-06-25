@@ -14,11 +14,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import com.cogeek.tncoffee.api.ProductApi;
 import com.cogeek.tncoffee.models.Category;
 import com.cogeek.tncoffee.models.CategoryItem;
-import com.cogeek.tncoffee.utils.BottomNavigationViewHelper;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.cogeek.tncoffee.utils.SharedHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedHelper = SharedHelper.getInstance(this);
 //        setupActionBar();
         setupBottomNavBar();
-        getMainData();
     }
 
     @Override
@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.userOrderHistoryFragment:
                     case R.id.userOrderDetailFragment:
                     case R.id.orderTrackingFragment:
+                    case R.id.userReviewProductFragment:
+                    case R.id.myReviewFragment:
+                    case R.id.userAddressFragment:
+                    case R.id.addressDetailFragment:
                         hideBottomNavView();
                         break;
                     default:
@@ -94,50 +98,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.main_action_bar);
         getSupportActionBar().setElevation(0);
 
-    }
-
-    private void getMainData() {
-        mainData = new ArrayList<>();
-        categoryItems = new ArrayList<>();
-
-        ProductApi productApi = NetworkProvider.self().retrofit.create(ProductApi.class);
-        Call<List<Category>> call = productApi.getCategories();
-
-        call.enqueue(new Callback<List<Category>>() {
-            @Override
-            public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<Category>> response) {
-                if (response.isSuccessful()) {
-                    mainData.clear();
-                    List<com.cogeek.tncoffee.models.Category> categories = response.body();
-                    mainData.addAll(categories);
-
-                    categoryItems.clear();
-                    categoryItems.addAll(parseCategoryItem(mainData));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<com.cogeek.tncoffee.models.Category>> call, Throwable t) {
-                Log.e("erroor", "fail to load mainData" + t.getMessage());
-            }
-        });
-    }
-
-    public List<CategoryItem> getCategoryItems() {
-        return categoryItems;
-    }
-
-    private List<CategoryItem> parseCategoryItem(List<Category> categories) {
-        List<CategoryItem> result = new ArrayList<>();
-        result.add(new CategoryItem("Tất cả"));
-        for (Category item: categories ) {
-            result.add(new CategoryItem(item.getName()));
-        }
-        return result;
-    }
-
-    public List<Category> getProducts() {
-        return mainData;
     }
 
     private void logout() {
