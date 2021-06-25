@@ -22,5 +22,19 @@ public class UserAddress {
     public int getAddressDefaultIndex() {
         return addressDefaultIndex;
     }
+
+    public void setDefaultIndex(int idx) {
+        this.addressDefaultIndex = idx;
+    }
+
+    public void updateAddress(Address address, int index) {
+        addressList.get(index).setAddress(address.getAddress());
+        addressList.get(index).setCity(address.getCity());
+        addressList.get(index).setFirstName(address.getFirstName());
+        addressList.get(index).setLastName(address.getLastName());
+        addressList.get(index).setEmail(address.getEmail());
+        addressList.get(index).setPhone(address.getPhone());
+    }
+
 }
 

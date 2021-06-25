@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.cogeek.tncoffee.R;
 import com.cogeek.tncoffee.models.Address;
 import com.cogeek.tncoffee.models.User;
+import com.cogeek.tncoffee.models.UserAddress;
 import com.cogeek.tncoffee.ui.menu.ItemViewModel;
 import com.cogeek.tncoffee.ui.menu.item.ChildItemAdapter;
 import com.cogeek.tncoffee.ui.useraddress.AddressViewModel;
@@ -26,7 +27,7 @@ import com.cogeek.tncoffee.utils.SharedHelper;
 
 public class AddressDetailFragment extends Fragment {
 
-    private EditText name,phone,address,city;
+    private EditText txtName, txtPhone,txtAddress, txtCity;
     private CheckBox isDefault;
     private Address target;
     private Callback callback;
@@ -72,18 +73,18 @@ public class AddressDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        name = view.findViewById(R.id.edit_address_name);
-        phone = view.findViewById(R.id.edit_address_phone);
-        address = view.findViewById(R.id.edit_address_address);
-        city = view.findViewById(R.id.edit_address_city);
+        txtName = view.findViewById(R.id.edit_address_name);
+        txtPhone = view.findViewById(R.id.edit_address_phone);
+        txtAddress = view.findViewById(R.id.edit_address_address);
+        txtCity = view.findViewById(R.id.edit_address_city);
         isDefault = view.findViewById(R.id.checkBox_isDefault);
         btnSave = view.findViewById(R.id.btn_save);
 
         if (!createNew) {
-            name.setText(target.getFirstName() + " " + target.getLastName());
-            phone.setText(target.getPhone());
-            address.setText(target.getAddress());
-            city.setText(target.getCity());
+            txtName.setText(target.getFirstName() + " " + target.getLastName());
+            txtPhone.setText(target.getPhone());
+            txtAddress.setText(target.getAddress());
+            txtCity.setText(target.getCity());
             isDefault.setChecked(SharedHelper.getInstance(getContext()).getUserProfile().getUserAddress().getAddressDefaultIndex() == index);
         }
 
@@ -94,9 +95,39 @@ public class AddressDetailFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                User user = SharedHelper.getInstance(getContext()).getUserProfile();
+
                 if (createNew) {
 //                    chưa viết hihi
+                    String name = txtName.getText().toString();
+                    String city = txtCity.getText().toString();
+                    String phone = txtPhone.getText().toString();
+                    String address = txtAddress.getText().toString();
+                    Address newAddress = new Address(name, "", city, address, phone);
+                    UserAddress userAddress = user.getUserAddress();
+                    userAddress.getAddressList().add(newAddress);
+                    user.setUserAddress(userAddress);
+
+                    if (isDefault.isChecked()) { // default là thg cuối
+                        userAddress.setDefaultIndex(userAddress.getAddressList().size());
+                    }
+//                    SharedHelper.getInstance(getContext()).setUserProfile(user);
                 }
+                else {
+                    String name = txtName.getText().toString();
+                    String city = txtCity.getText().toString();
+                    String phone = txtPhone.getText().toString();
+                    String address = txtAddress.getText().toString();
+                    UserAddress userAddress = user.getUserAddress();
+                    userAddress.updateAddress(new Address(name, "", city, address, phone),index);
+
+                    if (isDefault.isChecked()) {
+                        userAddress.setDefaultIndex(index);
+                    }
+                }
+
+                SharedHelper.getInstance(getContext()).setUserProfile(user);
+                NavHostFragment.findNavController(AddressDetailFragment.this).popBackStack();
             }
         });
     }

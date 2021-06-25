@@ -82,4 +82,8 @@ public class User {
     public UserAddress getUserAddress() {
         return userAddress;
     }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
+    }
 }

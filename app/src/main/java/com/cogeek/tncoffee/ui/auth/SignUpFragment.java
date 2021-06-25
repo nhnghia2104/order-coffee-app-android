@@ -16,14 +16,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.cogeek.tncoffee.R;
+import com.cogeek.tncoffee.models.User;
 
 public class SignUpFragment extends Fragment {
-    private Button btnSignUp;
+    private Button btnSignUp, btnSignin;
     private EditText editUserName_signup;
     private EditText editPhoneNumber_signup;
     private EditText editEmail_signup;
     private EditText editPassword_signup;
     private TextView txtSignIn;
+    private SignupFragmentListener listener;
+
+    public interface SignupFragmentListener {
+        void onSignup(User user);
+        void onClickLogin();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,27 +42,23 @@ public class SignUpFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnSignUp = view.findViewById(R.id.btnSignUp);
-        editUserName_signup = view.findViewById(R.id.editUserName_signup);
-        editPhoneNumber_signup = view.findViewById(R.id.editPhoneNumber_signup);
-        editEmail_signup = view.findViewById(R.id.editEmail_signup);
-        editPassword_signup = view.findViewById(R.id.editPassword_signup);
-        txtSignIn = view.findViewById(R.id.txtSignIn);
+        btnSignUp = view.findViewById(R.id.btn_signup);
+        btnSignin = view.findViewById(R.id.btn_go_signin);
+
+        editUserName_signup = view.findViewById(R.id.editUsername);
+        editEmail_signup = view.findViewById(R.id.editEmail);
+        editPassword_signup = view.findViewById(R.id.editPassword);
 
         //get data
         btnSignUp.setOnClickListener(v -> {
             String username = editUserName_signup.getText().toString();
-            String phonenumber = editPhoneNumber_signup.getText().toString();
             String email = editEmail_signup.getText().toString();
             String password = editPassword_signup.getText().toString();
         });
 
         //allready have account, signin
-        txtSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
+        btnSignin.setOnClickListener( v -> {
+            listener.onClickLogin();
         });
 
     }

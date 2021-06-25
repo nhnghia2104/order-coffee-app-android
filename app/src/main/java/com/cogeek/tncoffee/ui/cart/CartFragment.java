@@ -25,6 +25,8 @@ import com.cogeek.tncoffee.models.Order;
 import com.cogeek.tncoffee.models.TimelineOrder;
 import com.cogeek.tncoffee.models.TrackingOrder;
 import com.cogeek.tncoffee.models.User;
+import com.cogeek.tncoffee.models.UserAddress;
+import com.cogeek.tncoffee.ui.useraddress.AddressViewModel;
 import com.cogeek.tncoffee.utils.NetworkProvider;
 import com.cogeek.tncoffee.utils.NumberHelper;
 import com.cogeek.tncoffee.utils.SharedHelper;
@@ -43,10 +45,12 @@ public class CartFragment extends Fragment {
     private CartViewModel cartViewModel;
     private List<ItemCart> cartDetails;
     private ItemCartAdapter itemCartAdapter;
+    private AddressViewModel addressViewModel;
     private RecyclerView recyclerView;
-    private TextView txtPriceFinal;
+    private TextView txtPriceFinal, txtAddress, txtName;
     private Button btnConfirmCart;
     private Double totalCart;
+    private boolean needCreateNewAddress = true;
 
     public CartFragment() {
         // Required empty public constructor
@@ -62,6 +66,7 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
+        addressViewModel = new ViewModelProvider(requireActivity()).get(AddressViewModel.class);
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         cartDetails = new ArrayList<>();
         return view;
@@ -79,6 +84,8 @@ public class CartFragment extends Fragment {
         txtPriceFinal = view.findViewById(R.id.txtPriceFinal);
         btnConfirmCart = view.findViewById(R.id.btnConfirmCart);
         btnConfirmCart.setOnClickListener(onConfirmCartListener);
+        txtName = view.findViewById(R.id.txt_ship_name);
+        txtAddress = view.findViewById(R.id.txt_ship_address);
 
         Cart cart = SharedHelper.getInstance(getActivity()).getCart();
         if ( cart != null) {
@@ -89,6 +96,21 @@ public class CartFragment extends Fragment {
         view.findViewById(R.id.btn_close).setOnClickListener(v -> {
             NavHostFragment.findNavController(CartFragment.this).navigate(R.id.action_cartFragment_to_navigation_menu);
         });
+        view.findViewById(R.id.layout_address_order).setOnClickListener(v-> {
+            NavHostFragment.findNavController(CartFragment.this).navigate(R.id.action_cartFragment_to_userAddressFragment);
+        });
+
+        addressViewModel.getCartSelected().observe(getActivity(), index -> {
+            if (index == -1) {
+                this.needCreateNewAddress = true;
+            }
+            else {
+                this.needCreateNewAddress = false;
+                User user = SharedHelper.getInstance(getContext()).getUserProfile();
+                loadAddress(user.getUserAddress().getAddressList().get(index));
+            }
+        });
+
     }
 
     ItemCartAdapter.OnItemListener onItemListener = new ItemCartAdapter.OnItemListener() {
@@ -116,12 +138,17 @@ public class CartFragment extends Fragment {
     View.OnClickListener onConfirmCartListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (cartDetails.size() > 0) {
-//                createOrder();
-                NavHostFragment.findNavController(CartFragment.this).navigate(R.id.action_cartFragment_to_orderFragment);
+            if (cartDetails.size() > 0 && !needCreateNewAddress) {
+                createOrder();
+//                NavHostFragment.findNavController(CartFragment.this).navigate(R.id.action_cartFragment_to_orderFragment);
             }
         }
     };
+
+    private void loadAddress(Address address) {
+            txtName.setText(address.getFullName() + " | " + address.getPhone());
+            txtAddress.setText(address.getAddress() + ", " + address.getCity());
+    }
 
     private void createOrder() {
 

@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -75,6 +76,11 @@ public class MenuFragment extends Fragment {
     private BlurView blurView;
     RecyclerView.SmoothScroller smoothScroller;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
@@ -90,12 +96,15 @@ public class MenuFragment extends Fragment {
                 return 15f / displayMetrics.densityDpi;
             }
         };
+
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        getActivity().setProgressBarIndeterminateVisibility(true);
+
         productList = new ArrayList<>();
         filteredList = new ArrayList<>();
         categoryItems = new ArrayList<>();

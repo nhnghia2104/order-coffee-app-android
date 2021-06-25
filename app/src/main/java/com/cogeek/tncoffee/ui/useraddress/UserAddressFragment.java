@@ -29,6 +29,7 @@ public class UserAddressFragment extends Fragment {
     private UserAddress userAddress;
     private UserAddressAdapter addressAdapter;
     private AddressViewModel addressViewModel;
+    private boolean isEditing = true;
 
     public UserAddressFragment() {
         // Required empty public constructor
@@ -38,7 +39,12 @@ public class UserAddressFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (getArguments() != null) { // is editing address
+//            mID = getArguments().getString(ARG_ID);
+        }
+        else { // is selecting address
+            isEditing = false;
+        }
     }
 
     @Override
@@ -67,8 +73,14 @@ public class UserAddressFragment extends Fragment {
         addressAdapter.setOnChildListener(new UserAddressAdapter.OnChildListener() {
             @Override
             public void onChildClick(int position) {
-                addressViewModel.setIndex(position);
-                NavHostFragment.findNavController(UserAddressFragment.this).navigate(R.id.action_userAddressFragment_to_addressDetailFragment);
+                if (isEditing) {
+                    addressViewModel.setIndex(position);
+                    NavHostFragment.findNavController(UserAddressFragment.this).navigate(R.id.action_userAddressFragment_to_addressDetailFragment);
+                }
+                else {
+                    addressViewModel.setCartSelected(position);
+                    NavHostFragment.findNavController(UserAddressFragment.this).popBackStack();
+                }
             }
         });
         view.findViewById(R.id.btn_close).setOnClickListener(v -> {
