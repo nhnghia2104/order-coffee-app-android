@@ -1,6 +1,7 @@
 package com.cogeek.tncoffee.ui.auth;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,22 @@ public class SignUpFragment extends Fragment {
             listener.onClickLogin();
         });
 
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof LoginFragment.LoginFragmentListener) {
+            listener = (SignUpFragment.SignupFragmentListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "must implement Fragment Listener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
     }
 
 }

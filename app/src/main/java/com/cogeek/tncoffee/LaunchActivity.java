@@ -78,13 +78,13 @@ public class LaunchActivity extends AppCompatActivity implements LoginFragment.L
     @Override
     public void onClickLogin() {
         LoginFragment fragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_right,
-                        R.anim.slide_out_left,
-                        R.anim.slide_in_left,
-                        R.anim.slide_out_right)
-                .replace(R.id.fragment_frame,fragment,LoginFragment.class.getSimpleName())
-                .addToBackStack(null)
-                .commit();
+        getSupportFragmentManager().popBackStack();
+//                .setCustomAnimations(R.anim.slide_in_right,
+//                        R.anim.slide_out_left,
+//                        R.anim.slide_in_left,
+//                        R.anim.slide_out_right)
+//                .replace(R.id.fragment_frame,fragment,LoginFragment.class.getSimpleName())
+//                .addToBackStack(null)
+//                .commit();
     }
 }
