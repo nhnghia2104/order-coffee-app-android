@@ -1,4 +1,4 @@
-    package com.cogeek.tncoffee.ui.menu;
+package com.cogeek.tncoffee.ui.menu;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -151,12 +151,14 @@ public class MenuFragment extends Fragment {
             @Override
             public void onResponse(Call<List<com.cogeek.tncoffee.models.Category>> call, Response<List<com.cogeek.tncoffee.models.Category>> response) {
                 if (response.isSuccessful()) {
-                    productList.clear();
-                    filteredList.clear();
                     List<com.cogeek.tncoffee.models.Category> categories = response.body();
-                    productList.addAll(categories);
-                    filteredList.addAll(categories);
-                    mainItemAdapter.notifyDataSetChanged();
+                    if (!productList.equals(categories)) {
+                        productList.clear();
+                        filteredList.clear();
+                        productList.addAll(categories);
+                        filteredList.addAll(categories);
+                        mainItemAdapter.notifyDataSetChanged();
+                    }
                 }
             }
 

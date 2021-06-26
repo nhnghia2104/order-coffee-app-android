@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.TNCoffee" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/zcafe_black</item>
+        <item name="colorPrimary">@color/new_purple</item>
         <item name="colorPrimaryVariant">@color/new_pink</item>
         <item name="colorOnPrimary">@color/new_pink</item>
         <!-- Secondary brand color. -->

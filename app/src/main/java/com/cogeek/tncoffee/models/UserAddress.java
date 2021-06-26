@@ -2,6 +2,7 @@ package com.cogeek.tncoffee.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAddress {
@@ -10,6 +11,10 @@ public class UserAddress {
 
     @SerializedName("default")
     private int addressDefaultIndex;
+
+    public UserAddress() {
+        this.addressList = new ArrayList<>();
+    }
 
     public List<Address> getAddressList() {
         return addressList;

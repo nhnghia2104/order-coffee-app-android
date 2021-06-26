@@ -1,5 +1,7 @@
 package com.cogeek.tncoffee.ui.cart;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -200,6 +202,12 @@ public class CartFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.i("non", "ngon");
                     cartViewModel.clearCart();
+                    new AlertDialog.Builder(getContext()).setMessage("Đặt hàng thành công").setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            NavHostFragment.findNavController(CartFragment.this).popBackStack();
+                        }
+                    }).show();
                 }
             }
             @Override

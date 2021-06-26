@@ -66,6 +66,9 @@ public class UserAddressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rv_address);
         userAddress = SharedHelper.getInstance(getContext()).getUserProfile().getUserAddress();
+        if (userAddress == null) {
+            userAddress = new UserAddress();
+        }
         addressAdapter = new UserAddressAdapter(userAddress);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(addressAdapter);

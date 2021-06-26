@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Z! Cafe</string>
+    <string name="app_name">We Care</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

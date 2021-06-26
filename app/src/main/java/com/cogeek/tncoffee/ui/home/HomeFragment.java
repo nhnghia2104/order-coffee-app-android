@@ -136,10 +136,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful()) {
-                    saleProductList.clear();
                     List<Product> responseList = response.body();
-                    saleProductList.addAll(responseList);
-                    adapterSaleItem.notifyDataSetChanged();
+                    if (!responseList.equals(saleProductList)) {
+                        saleProductList.clear();
+                        saleProductList.addAll(responseList);
+                        adapterSaleItem.notifyDataSetChanged();
+                    }
                     Log.i("Sale product", "received");
                 }
             }
@@ -163,10 +165,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful()) {
-                    topProductList.clear();
                     List<Product> responseList = response.body();
-                    topProductList.addAll(responseList);
-                    adapterTopItem.notifyDataSetChanged();
+                    if (!responseList.equals(topProductList)) {
+                        topProductList.clear();
+                        topProductList.addAll(responseList);
+                        adapterTopItem.notifyDataSetChanged();
+                    }
                     Log.i("Top product", "received");
                 }
             }

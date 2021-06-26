@@ -56,7 +56,7 @@ public class UserAddressAdapter extends RecyclerView.Adapter<UserAddressAdapter.
 
     @Override
     public int getItemCount() {
-        return userAddress.getAddressList().size();
+        return userAddress.getAddressList() != null ? userAddress.getAddressList().size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

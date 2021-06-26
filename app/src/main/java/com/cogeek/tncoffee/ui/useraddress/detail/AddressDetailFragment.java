@@ -105,6 +105,10 @@ public class AddressDetailFragment extends Fragment {
                     String address = txtAddress.getText().toString();
                     Address newAddress = new Address(name, "", city, address, phone);
                     UserAddress userAddress = user.getUserAddress();
+                    if (userAddress == null) {
+                        userAddress = new UserAddress();
+                        userAddress.setDefaultIndex(0);
+                    }
                     userAddress.getAddressList().add(newAddress);
                     user.setUserAddress(userAddress);
 
