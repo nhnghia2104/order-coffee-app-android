@@ -1,5 +1,5 @@
 # online-store-android
-This is my course project at University
+This is my course project at the University
 
 #
 <p>Login / Create account</p>
