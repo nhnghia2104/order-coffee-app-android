@@ -1,4 +1,4 @@
-# online-store-android
+# WeCare
 This is my course project at the University
 
 #
